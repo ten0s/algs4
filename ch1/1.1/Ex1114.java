@@ -1,5 +1,4 @@
 import edu.princeton.cs.algs4.*;
-import java.lang.Math.*;
 
 // $ make run CLASS=Ex1114 ARGS=255
 

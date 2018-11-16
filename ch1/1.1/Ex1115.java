@@ -1,5 +1,4 @@
 import edu.princeton.cs.algs4.*;
-import java.lang.Math.*;
 
 // $ make test CLASS=Ex1115
 
@@ -19,9 +18,5 @@ public class Ex1115 {
         }
 
         return hist;
-    }
-
-    public static void main(String[] args) {
-        StdOut.println("Hello");
     }
 }
