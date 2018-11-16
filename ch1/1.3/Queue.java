@@ -11,6 +11,23 @@ public class Queue<Item> implements Iterable<Item> {
     Node last;
     int size;
 
+    public Queue() {}
+
+    public Queue(Queue<Item> q) {
+        /*
+        Book's hint:
+        for (int i = 0; i < q.size(); i++) {
+            Item item = q.dequeue();
+            q.enqueue(item);
+            this.enqueue(item);
+        }
+        */
+        // more effective
+        for (Item item : q) {
+            this.enqueue(item);
+        }
+    }
+
     public boolean isEmpty() {
         return size == 0;
     }

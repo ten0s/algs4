@@ -17,6 +17,24 @@ public class BagTest {
     }
 
     @Test
+    public void copyContructor() {
+        Bag<String> b1 = new Bag<>();
+        b1.add("1");
+        b1.add("2");
+        b1.add("3");
+        Bag<String> b2 = new Bag<>(b1);
+        // check both bags have the same items
+        String[] a1 = b1.toArray(new String[b1.size()]);
+        String[] a2 = b2.toArray(new String[b2.size()]);
+        assertArrayEquals(a1, a2);
+        // check both bags are indeed independent
+        b1.add("4");
+        assertEquals(4, b1.size());
+        b2.remove("2");
+        assertEquals(2, b2.size());
+    }
+
+    @Test
     public void checkNotEmpty() {
         Bag<String> b = new Bag<>();
         b.add("1");

@@ -17,6 +17,25 @@ public class QueueTest {
     }
 
     @Test
+    public void copyContructor() {
+        Queue<String> q1 = new Queue<>();
+        q1.enqueue("1");
+        q1.enqueue("2");
+        q1.enqueue("3");
+        // call copy constructor
+        Queue<String> q2 = new Queue<>(q1);
+        // check both queues have the same items
+        String[] a1 = q1.toArray(new String[q1.size()]);
+        String[] a2 = q2.toArray(new String[q2.size()]);
+        assertArrayEquals(a1, a2);
+        // check both queues are indeed independent
+        q1.enqueue("4");
+        assertEquals(4, q1.size());
+        q2.dequeue();
+        assertEquals(2, q2.size());
+    }
+
+    @Test
     public void checkNotEmpty() {
         Queue<String> q = new Queue<>();
         q.enqueue("1");

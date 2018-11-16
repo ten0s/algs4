@@ -16,6 +16,24 @@ public class StackTest {
     }
 
     @Test
+    public void copyContructor() {
+        Stack<String> s1 = new Stack<>();
+        s1.push("1");
+        s1.push("2");
+        s1.push("3");
+        Stack<String> s2 = new Stack<>(s1);
+        // check both stacks have the same items
+        String[] a1 = s1.toArray(new String[s1.size()]);
+        String[] a2 = s2.toArray(new String[s2.size()]);
+        assertArrayEquals(a1, a2);
+        // check both stacks are indeed independent
+        s1.push("4");
+        assertEquals(4, s1.size());
+        s2.pop();
+        assertEquals(2, s2.size());
+    }
+
+    @Test
     public void checkNonEmpty() {
         Stack<String> s = new Stack<>();
         s.push("1");

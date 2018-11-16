@@ -11,6 +11,25 @@ public class Bag<Item extends Comparable> implements Iterable<Item> {
     private Node first;
     private int size;
 
+    public Bag() {}
+
+    public Bag(Bag<Item> b) {
+        // one-pass copy, grow the list to the right
+        Node last = null;
+        for (Item item : b) {
+            Node oldlast = last;
+            last = new Node();
+            last.item = item;
+            if (oldlast != null) {
+                oldlast.next = last;
+            }
+            if (first == null) {
+                first = last;
+            }
+            size++;
+        }
+    }
+
     /**
      * API
      */

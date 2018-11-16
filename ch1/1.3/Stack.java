@@ -10,6 +10,25 @@ public class Stack<Item> implements Iterable<Item> {
     Node first;
     int size;
 
+    public Stack() {}
+
+    public Stack(Stack<Item> s) {
+        // one-pass copy, grow the list to the right
+        Node last = null;
+        for (Item item : s) {
+            Node oldlast = last;
+            last = new Node();
+            last.item = item;
+            if (oldlast != null) {
+                oldlast.next = last;
+            }
+            if (first == null) {
+                first = last;
+            }
+            size++;
+        }
+    }
+
     public boolean isEmpty() {
         return size == 0;
     }
