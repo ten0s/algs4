@@ -13,17 +13,17 @@ public class Queue<Item> implements Iterable<Item> {
 
     public Queue() {}
 
-    public Queue(Queue<Item> q) {
+    public Queue(Queue<Item> queue) {
         /*
         Book's hint:
-        for (int i = 0; i < q.size(); i++) {
-            Item item = q.dequeue();
-            q.enqueue(item);
+        for (int i = 0; i < queue.size(); i++) {
+            Item item = queue.dequeue();
+            queue.enqueue(item);
             this.enqueue(item);
         }
         */
         // more effective
-        for (Item item : q) {
+        for (Item item : queue) {
             this.enqueue(item);
         }
     }
@@ -60,6 +60,12 @@ public class Queue<Item> implements Iterable<Item> {
         }
         size--;
         return item;
+    }
+
+    public void concat(Queue<Item> queue) {
+        for (Item item : queue) {
+            this.enqueue(item);
+        }
     }
 
     @SuppressWarnings("unchecked")

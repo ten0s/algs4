@@ -13,21 +13,9 @@ public class Bag<Item extends Comparable> implements Iterable<Item> {
 
     public Bag() {}
 
-    public Bag(Bag<Item> b) {
-        // one-pass copy, grow the list to the right
-        Node last = null;
-        for (Item item : b) {
-            Node oldlast = last;
-            last = new Node();
-            last.item = item;
-            if (oldlast != null) {
-                oldlast.next = last;
-            }
-            if (first == null) {
-                first = last;
-            }
-            size++;
-        }
+    public Bag(Bag<Item> bag) {
+        // grow the list to the right
+        enqueue(/*Node last = */null, bag);
     }
 
     /**
@@ -169,6 +157,37 @@ public class Bag<Item extends Comparable> implements Iterable<Item> {
             curr = next;
         }
         first = prev;
+    }
+
+    public void concat(Bag<Item> bag) {
+        // find the last node
+        Node last;
+        if (first == null) {
+            last = null;
+        } else {
+            last = first;
+            while (last.next != null) {
+                last = last.next;
+            }
+        }
+        // grow the list to the right
+        enqueue(last, bag);
+    }
+
+    private void enqueue(Node last, Bag<Item> bag) {
+        // grow the list to the right
+        for (Item item : bag) {
+            Node oldlast = last;
+            last = new Node();
+            last.item = item;
+            if (oldlast != null) {
+                oldlast.next = last;
+            }
+            if (first == null) {
+                first = last;
+            }
+            size++;
+        }
     }
 
     @SuppressWarnings("unchecked")

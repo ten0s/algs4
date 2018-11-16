@@ -319,6 +319,33 @@ public class BagTest {
     }
 
     @Test
+    public void concatToEmpty() {
+        Bag<String> b1 = new Bag<>();
+        Bag<String> b2 = new Bag<>();
+        b2.add("4");
+        b2.add("5");
+        b2.add("6");
+        b1.concat(b2);
+        String[] a1 = b1.toArray(new String[b1.size()]);
+        assertArrayEquals(new String[] {"6", "5", "4"}, a1);
+    }
+
+    @Test
+    public void concatToNotEmpty() {
+        Bag<String> b1 = new Bag<>();
+        b1.add("1");
+        b1.add("2");
+        b1.add("3");
+        Bag<String> b2 = new Bag<>();
+        b2.add("4");
+        b2.add("5");
+        b2.add("6");
+        b1.concat(b2);
+        String[] a1 = b1.toArray(new String[b1.size()]);
+        assertArrayEquals(new String[] {"3", "2", "1", "6", "5", "4"}, a1);
+    }
+
+    @Test
     public void iteratorEmpty() {
         Bag<String> b = new Bag<>();
         for (String j : b) {}

@@ -79,6 +79,33 @@ public class StackTest {
     }
 
     @Test
+    public void concatToEmpty() {
+        Stack<String> s1 = new Stack<>();
+        Stack<String> s2 = new Stack<>();
+        s2.push("4");
+        s2.push("5");
+        s2.push("6");
+        s1.concat(s2);
+        String[] a1 = s1.toArray(new String[s1.size()]);
+        assertArrayEquals(new String[] {"6", "5", "4"}, a1);
+    }
+
+    @Test
+    public void concatToNotEmpty() {
+        Stack<String> s1 = new Stack<>();
+        s1.push("1");
+        s1.push("2");
+        s1.push("3");
+        Stack<String> s2 = new Stack<>();
+        s2.push("4");
+        s2.push("5");
+        s2.push("6");
+        s1.concat(s2);
+        String[] a1 = s1.toArray(new String[s1.size()]);
+        assertArrayEquals(new String[] {"3", "2", "1", "6", "5", "4"}, a1);
+    }
+
+    @Test
     public void iteratorEmpty() {
         Stack<String> s = new Stack<>();
         for (String j : s) {}

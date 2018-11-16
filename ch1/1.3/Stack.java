@@ -12,21 +12,9 @@ public class Stack<Item> implements Iterable<Item> {
 
     public Stack() {}
 
-    public Stack(Stack<Item> s) {
-        // one-pass copy, grow the list to the right
-        Node last = null;
-        for (Item item : s) {
-            Node oldlast = last;
-            last = new Node();
-            last.item = item;
-            if (oldlast != null) {
-                oldlast.next = last;
-            }
-            if (first == null) {
-                first = last;
-            }
-            size++;
-        }
+    public Stack(Stack<Item> stack) {
+        // grow the list to the right
+        enqueue(/*Node last = */null, stack);
     }
 
     public boolean isEmpty() {
@@ -62,6 +50,37 @@ public class Stack<Item> implements Iterable<Item> {
         }
 
         return first.item;
+    }
+
+    public void concat(Stack<Item> stack) {
+        // find the last node
+        Node last;
+        if (first == null) {
+            last = null;
+        } else {
+            last = first;
+            while (last.next != null) {
+                last = last.next;
+            }
+        }
+        // grow the list to the right
+        enqueue(last, stack);
+    }
+
+    private void enqueue(Node last, Stack<Item> stack) {
+        // grow the list to the right
+        for (Item item : stack) {
+            Node oldlast = last;
+            last = new Node();
+            last.item = item;
+            if (oldlast != null) {
+                oldlast.next = last;
+            }
+            if (first == null) {
+                first = last;
+            }
+            size++;
+        }
     }
 
     @SuppressWarnings("unchecked")

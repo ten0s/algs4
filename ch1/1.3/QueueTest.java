@@ -88,6 +88,22 @@ public class QueueTest {
     public void dequeueFromEmpty() {
         Queue<String> q = new Queue<>();
         q.dequeue();
+
+    }
+
+    @Test
+    public void concat() {
+        Queue<String> q1 = new Queue<>();
+        q1.enqueue("1");
+        q1.enqueue("2");
+        q1.enqueue("3");
+        Queue<String> q2 = new Queue<>();
+        q2.enqueue("4");
+        q2.enqueue("5");
+        q2.enqueue("6");
+        q1.concat(q2);
+        String[] a1 = q1.toArray(new String[q1.size()]);
+        assertArrayEquals(new String[] {"1", "2", "3", "4", "5", "6"}, a1);
     }
 
     @Test
