@@ -1,0 +1,34 @@
+import java.util.Iterator;
+
+public class CLASS<Item> implements Iterable<Item> {
+
+    @SuppressWarnings("unchecked")
+    public Item[] toArray(Item[] a) {
+        int i = 0;
+        for (Item e : this) {
+            a[i++] = e;
+        }
+        return a;
+    }
+
+    /*
+     * Iterator
+     */
+    public Iterator<Item> iterator() {
+        return new ForwardIterator();
+    }
+
+    private class ForwardIterator implements Iterator<Item> {
+
+        public boolean hasNext() {
+            return false;
+        }
+
+        public Item next() {
+            return null;
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+    }
