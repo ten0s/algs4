@@ -13,6 +13,7 @@ public class ThreeSum {
     // Do not instantiate.
     private ThreeSum() { }
 
+    // O(n^3)
     public static int count(int[] a) {
         int n = a.length;
         int count = 0;

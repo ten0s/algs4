@@ -22,6 +22,7 @@ public class ThreeSumFast {
     // Do not instantiate.
     private ThreeSumFast() { }
 
+    // O(n^2*lg(n))
     public static int count(int[] a) {
         int n = a.length;
 

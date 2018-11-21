@@ -18,6 +18,7 @@ public class ThreeSumFaster {
     // Do not instantiate.
     private ThreeSumFaster() { }
 
+    // O(n^2)
     public static int count(int[] a) {
         // O(n*lg(n))
         Arrays.sort(a);
