@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 
+// Ex. 1.5.16
+
 // $ make run CLASS=QuickFindPlot < ../../data/mediumUF.txt
 
 public class QuickFindPlot {

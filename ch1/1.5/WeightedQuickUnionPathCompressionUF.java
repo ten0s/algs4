@@ -12,7 +12,7 @@ import java.util.Arrays;
 // 6 1
 // 2 components
 
-public class WeightedQuickUnionPathCompressionUF {
+public class WeightedQuickUnionPathCompressionUF implements UnionFind {
     private int[] id;
     private int[] sz;
     private int count;
@@ -30,6 +30,14 @@ public class WeightedQuickUnionPathCompressionUF {
     public String toString() {
         return "id: " + Arrays.toString(id) + "\n" +
                "sz: " + Arrays.toString(sz);
+    }
+
+    public int cost() {
+        throw new UnsupportedOperationException();
+    }
+
+    public void clearCost() {
+        throw new UnsupportedOperationException();
     }
 
     public int count() {
