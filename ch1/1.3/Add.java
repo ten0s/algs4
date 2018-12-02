@@ -1,22 +1,3 @@
-// https://www.tutorialspoint.com/jdb/jdb_quick_guide.htm
-// http://pages.cs.wisc.edu/~horwitz/jdb/jdb.html
-// help
-// stop in <Class.Method>
-// stop at <Class:Line>
-// clear <Class.Method>
-// clear <Class:Line>
-// run
-// list
-// list <Line>
-// list <Method>
-// step
-// step up
-// next
-// print VAR
-// dump ?
-// locals
-// cont
-// exit or quit
 public class Add {
    public int addition(int x, int y)
    {
