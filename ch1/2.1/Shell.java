@@ -1,17 +1,19 @@
 import edu.princeton.cs.algs4.*;
 
-// $ make run CLASS=Selection
+// $ make run CLASS=Shell
 
-class Selection {
+class Shell {
     public static <T extends Comparable<T>> void sort(T[] a) {
         int n = a.length;
-        for (int i = 0; i < n; i++) {
-            int min = i;
-            for (int j = i+1; j < n; j++) {
-                if (less(a[j], a[min]))
-                    min = j;
+        int h = 1;
+        while (h < n/3) h = 3*h + 1;
+        while (h >= 1) {
+            for (int i = h; i < n; i++) {
+                for (int j = i; j >= h && less(a[j], a[j-h]); j -= h) {
+                    swap(a, j, j-h);
+                }
             }
-            swap(a, i, min);
+            h /= 3;
         }
         assert isSorted(a);
     }

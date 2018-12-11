@@ -6,11 +6,11 @@ class Insertion {
     public static <T extends Comparable<T>> void sort(T[] a) {
         int n = a.length;
         for (int i = 1; i < n; i++) {
-            int min = i;
             for (int j = i; j > 0 && less(a[j], a[j-1]); j--) {
                 swap(a, j, j-1);
             }
         }
+        assert isSorted(a);
     }
 
     private static <T extends Comparable<T>> boolean less(T v, T w) {
