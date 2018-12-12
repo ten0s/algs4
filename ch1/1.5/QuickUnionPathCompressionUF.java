@@ -45,8 +45,16 @@ public class QuickUnionPathCompressionUF implements UnionFind {
     }
 
     public int find(int p) {
+        // https://en.wikipedia.org/wiki/Disjoint-set_data_structure#Path_compression
+        /*
+        // Path compression (every node on the path points to the root)
+        if (p != id[p]) {
+            id[p] = find(id[p]);
+            p = id[p];
+        }
+        */
+        // Path halving (every other node on the path points to its grandparent)
         while (p != id[p]) {
-            // path compression
             id[p] = id[id[p]];
             p = id[p];
         }
