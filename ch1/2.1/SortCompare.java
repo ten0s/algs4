@@ -8,6 +8,8 @@ public class SortCompare {
         if (alg.equals("Selection")) Selection.sort(a);
         if (alg.equals("Insertion")) Insertion.sort(a);
         if (alg.equals("Shell"))     Shell.sort(a);
+        if (alg.equals("MergeTD"))   MergeTD.sort(a);
+        if (alg.equals("MergeBU"))   MergeBU.sort(a);
         return timer.elapsedTime();
     }
 
