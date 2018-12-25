@@ -77,7 +77,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> implements ST<Key, 
     }
 
     private Node put(Key key, Value val, Node h) {
-        if (h == null) return new Node(key, val);
+        if (h == null) return new Node(key, val, RED);
         int cmp = key.compareTo(h.key);
         if      (cmp < 0) h.left  = put(key, val, h.left);
         else if (cmp > 0) h.right = put(key, val, h.right);
@@ -85,7 +85,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> implements ST<Key, 
 
         if (!isRed(h.left) && isRed(h.right))     h = rotateLeft(h);
         if ( isRed(h.left) && isRed(h.left.left)) h = rotateRight(h);
-        if ( isRed(h.left) && isRef(h.right))     flipColors(h);
+        if ( isRed(h.left) && isRed(h.right))     flipColors(h);
 
         h.size = 1 + size(h.left) + size(h.right);
         return h;

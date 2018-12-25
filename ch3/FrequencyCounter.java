@@ -7,9 +7,19 @@ import edu.princeton.cs.algs4.*;
 // user	0m20.920s
 // sys	0m0.756s
 
+// $ time make run CLASS=FrequencyCounter ARGS="RedBlackBST 10" < ../data/leipzig1M.txt
+// Exception in thread "main" java.lang.AssertionError
+//	at RedBlackBST.flipColors(RedBlackBST.java:54)
+//	at RedBlackBST.put(RedBlackBST.java:88)
+//	at RedBlackBST.put(RedBlackBST.java:76)
+//	at RedBlackBST.put(RedBlackBST.java:5)
+//	at FrequencyCounter.main(FrequencyCounter.java:25)
+//make: *** [run] Error 1
+
 public class FrequencyCounter {
     private static ST<String, Integer> makeST(String name) {
         if (name.equals("BST")) return new BST<String, Integer>();
+        if (name.equals("RedBlackBST")) return new RedBlackBST<String, Integer>();
         throw new IllegalArgumentException("Unknown ST: " + name);
     }
 
