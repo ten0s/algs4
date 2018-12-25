@@ -58,9 +58,15 @@ public class BST<Key extends Comparable<Key>, Value> implements ST<Key, Value> {
             if (x.left == null) return x.right;
             if (x.right == null) return x.left;
             Node t = x;
-            x = min(t.right);
-            x.right = deleteMin(t.right);
-            x.left = t.left;
+            if (Math.random() < 0.5) {
+                x = max(t.left);
+                x.left = deleteMax(t.left);
+                x.right = t.right;
+            } else {
+                x = min(t.right);
+                x.right = deleteMin(t.right);
+                x.left = t.left;
+            }
         }
         x.size = 1 + size(x.left) + size(x.right);
         return x;
