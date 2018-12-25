@@ -2,23 +2,64 @@ import java.util.NoSuchElementException;
 import java.util.Collections;
 import java.util.Iterator;
 
-public class BST<Key extends Comparable<Key>, Value> implements ST<Key, Value> {
+public class RedBlackBST<Key extends Comparable<Key>, Value> implements ST<Key, Value> {
+    private static final boolean RED   = true;
+    private static final boolean BLACK = false;
+
     private class Node {
         Key key;
         Value val;
         Node left;
         Node right;
         int size;
+        boolean color;
 
-        public Node(Key key, Value val) {
+        public Node(Key key, Value val, boolean color) {
             this.key = key;
             this.val = val;
             this.size = 1;
+            this.color = color;
         }
     }
 
     private Node root;
 
+    private boolean isRed(Node x) {
+        // null links are black
+        if (x == null) return false;
+        return x.color == RED;
+    }
+
+    private Node rotateLeft(Node h) {
+        assert isRed(h.right);
+        Node x = h.right;
+        h.right = x.left;
+        x.left = h;
+        x.color = h.color;
+        h.color = RED;
+        return x;
+    }
+
+    private Node rotateRight(Node h) {
+        assert isRed(h.left);
+        Node x = h.left;
+        h.left = x.right;
+        x.right = h;
+        x.color = h.color;
+        h.color = RED;
+        return x;
+    }
+
+    private void flipColors(Node h) {
+        assert !isRed(h);
+        assert isRed(h.left);
+        assert isRed(h.right);
+        h.color = RED;
+        h.left.color = BLACK;
+        h.right.color = BLACK;
+    }
+
+    // same as for BST
     public Value get(Key key) {
         return get(key, root);
     }
@@ -35,14 +76,19 @@ public class BST<Key extends Comparable<Key>, Value> implements ST<Key, Value> {
         root = put(key, val, root);
     }
 
-    private Node put(Key key, Value val, Node x) {
-        if (x == null) return new Node(key, val);
-        int cmp = key.compareTo(x.key);
-        if      (cmp < 0) x.left  = put(key, val, x.left);
-        else if (cmp > 0) x.right = put(key, val, x.right);
-        else              x.val = val;
-        x.size = 1 + size(x.left) + size(x.right);
-        return x;
+    private Node put(Key key, Value val, Node h) {
+        if (h == null) return new Node(key, val);
+        int cmp = key.compareTo(h.key);
+        if      (cmp < 0) h.left  = put(key, val, h.left);
+        else if (cmp > 0) h.right = put(key, val, h.right);
+        else              h.val = val;
+
+        if (!isRed(h.left) && isRed(h.right))     h = rotateLeft(h);
+        if ( isRed(h.left) && isRed(h.left.left)) h = rotateRight(h);
+        if ( isRed(h.left) && isRef(h.right))     flipColors(h);
+
+        h.size = 1 + size(h.left) + size(h.right);
+        return h;
     }
 
     public void delete(Key key) {
@@ -133,6 +179,7 @@ public class BST<Key extends Comparable<Key>, Value> implements ST<Key, Value> {
         return x;
     }
 
+    // same as for BST
     public Key select(int k) {
         if (k < 0 || k >= size())
             throw new IllegalArgumentException();
@@ -147,6 +194,7 @@ public class BST<Key extends Comparable<Key>, Value> implements ST<Key, Value> {
         else            return x;
     }
 
+    // same as for BST
     public int rank(Key key) {
         return rank(key, root);
     }
@@ -159,6 +207,7 @@ public class BST<Key extends Comparable<Key>, Value> implements ST<Key, Value> {
         else              return size(x.left);
     }
 
+    // same as for BST
     public Key floor(Key key) {
         Node x = floor(key, root);
         if (x == null) throw new NoSuchElementException();
@@ -175,6 +224,7 @@ public class BST<Key extends Comparable<Key>, Value> implements ST<Key, Value> {
         else           return x;
     }
 
+    // same as for BST
     public Key ceiling(Key key) {
         Node x = ceiling(key, root);
         if (x == null) throw new NoSuchElementException();
@@ -191,6 +241,7 @@ public class BST<Key extends Comparable<Key>, Value> implements ST<Key, Value> {
         else           return x;
     }
 
+    // same as for BST
     public Iterable<Key> keys() {
         if (isEmpty())
             return new Iterable<Key>() {
@@ -201,6 +252,7 @@ public class BST<Key extends Comparable<Key>, Value> implements ST<Key, Value> {
         return keys(min(), max());
     }
 
+    // same as for BST
     public Iterable<Key> keys(Key lo, Key hi) {
         Queue<Key> queue = new Queue<>();
         keys(queue, lo, hi, root);
