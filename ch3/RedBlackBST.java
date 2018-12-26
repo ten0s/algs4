@@ -74,6 +74,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> implements ST<Key, 
 
     public void put(Key key, Value val) {
         root = put(key, val, root);
+        root.color = BLACK;
     }
 
     private Node put(Key key, Value val, Node h) {

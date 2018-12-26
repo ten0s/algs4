@@ -8,13 +8,11 @@ import edu.princeton.cs.algs4.*;
 // sys	0m0.756s
 
 // $ time make run CLASS=FrequencyCounter ARGS="RedBlackBST 10" < ../data/leipzig1M.txt
-// Exception in thread "main" java.lang.AssertionError
-//	at RedBlackBST.flipColors(RedBlackBST.java:54)
-//	at RedBlackBST.put(RedBlackBST.java:88)
-//	at RedBlackBST.put(RedBlackBST.java:76)
-//	at RedBlackBST.put(RedBlackBST.java:5)
-//	at FrequencyCounter.main(FrequencyCounter.java:25)
-//make: *** [run] Error 1
+// government 24763
+
+// real	0m19.178s
+// user	0m21.188s
+// sys	0m0.704s
 
 public class FrequencyCounter {
     private static ST<String, Integer> makeST(String name) {
