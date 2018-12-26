@@ -37,6 +37,8 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> implements ST<Key, 
         x.left = h;
         x.color = h.color;
         h.color = RED;
+        x.size = h.size;
+        h.size = 1 + size(h.left) + size(h.right);
         return x;
     }
 
@@ -47,6 +49,8 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> implements ST<Key, 
         x.right = h;
         x.color = h.color;
         h.color = RED;
+        x.size = h.size;
+        h.size = 1 + size(h.left) + size(h.right);
         return x;
     }
 
