@@ -1,6 +1,8 @@
 import java.lang.reflect.Array;
 import java.util.Iterator;
 
+import edu.princeton.cs.algs4.*;
+
 public class HashTable<Key , Value> implements ST<Key, Value> {
     private class Node {
         Key key;
@@ -105,5 +107,47 @@ public class HashTable<Key , Value> implements ST<Key, Value> {
             }
         }
         return queue;
+    }
+
+    public static void main(String[] args) {
+        int minLen = Integer.parseInt(args[0]);
+        HashTable<String, Integer> t = new HashTable<>();
+        while (!StdIn.isEmpty()) {
+            String word = StdIn.readString();
+            if (word.length() >= minLen) {
+                Integer value = t.get(word);
+                if (value == null) t.put(word, 1);
+                else               t.put(word, value + 1);
+            }
+        }
+
+        Integer maxVal = 0;
+        String maxWord = "";
+        Integer val;
+        for (String word : t.keys()) {
+            val = t.get(word);
+            if (val > maxVal) {
+                maxVal = val;
+                maxWord = word;
+            }
+        }
+        StdOut.println(maxWord + " " + maxVal);
+        StdOut.println("size: " + t.n);
+        StdOut.println("buckets: " + t.m);
+        int minSize = Integer.MAX_VALUE, maxSize = 0;
+        int empty = 0;
+        for (int i = 0; i < t.m; i++) {
+            int size = 0;
+            for (HashTable<String, Integer>.Node x = t.a[i]; x != null; x = x.next) {
+                size++;
+            }
+            if (size < minSize) minSize = size;
+            if (size > maxSize) maxSize = size;
+            if (size == 0) empty++;
+        }
+        StdOut.println("min bucket size: " + minSize);
+        StdOut.println("max bucket size: " + maxSize);
+        StdOut.println("avg bucket size: " + t.n / t.m);
+        StdOut.println("empty buckets: " + empty);
     }
 }
