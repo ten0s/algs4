@@ -14,10 +14,18 @@ import edu.princeton.cs.algs4.*;
 // user	0m21.188s
 // sys	0m0.704s
 
+// $ time make run CLASS=FrequencyCounter ARGS="HashTable 10" < ../data/leipzig1M.txt
+// government 24763
+
+// real	0m17.345s
+// user	0m19.680s
+// sys	0m0.416s
+
 public class FrequencyCounter {
     private static ST<String, Integer> makeST(String name) {
         if (name.equals("BST")) return new BST<String, Integer>();
         if (name.equals("RedBlackBST")) return new RedBlackBST<String, Integer>();
+        if (name.equals("HashTable")) return new HashTable<String, Integer>();
         throw new IllegalArgumentException("Unknown ST: " + name);
     }
 
