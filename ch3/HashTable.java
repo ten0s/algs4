@@ -3,7 +3,34 @@ import java.util.Iterator;
 
 import edu.princeton.cs.algs4.*;
 
+// time make run CLASS=HashTable ARGS=10 < ../data/tale.txt
+// monseigneur 101
+// size: 2257
+// buckets: 557
+// min bucket size: 0
+// max bucket size: 12
+// avg bucket size: 4
+// empty buckets: 10
+//     x
+//    xx
+//    xx
+//    xxx
+//   xxxx
+//   xxxxx
+//   xxxxx
+//   xxxxx
+//  xxxxxx
+//  xxxxxxx
+//  xxxxxxx
+// xxxxxxxxx
+// xxxxxxxxxxxxx
+//
+// real	0m1.548s
+// user	0m3.324s
+// sys	0m0.176s
+
 public class HashTable<Key , Value> implements ST<Key, Value> {
+    private final static int MIN_CAPACITY = 31;
     private class Node {
         Key key;
         Value val;
@@ -21,7 +48,7 @@ public class HashTable<Key , Value> implements ST<Key, Value> {
     private int n;
 
     public HashTable() {
-        this(31);
+        this(MIN_CAPACITY);
     }
 
     @SuppressWarnings("unchecked")
@@ -84,7 +111,7 @@ public class HashTable<Key , Value> implements ST<Key, Value> {
                 }
             }
         }
-        if (n > 0 && n <= 2*m) resize(Prime.nextPrime(m/2));
+        if (n <= 2*m) resize(Math.max(MIN_CAPACITY, Prime.nextPrime(m/2)));
     }
 
     public boolean contains(Key key) {
@@ -132,13 +159,28 @@ public class HashTable<Key , Value> implements ST<Key, Value> {
             }
         }
         StdOut.println(maxWord + " " + maxVal);
+        stat(t);
+
+        HashTable<Integer, Integer> t2 = new HashTable<>();
+        for (int i = 0; i < 10000; i++) {
+            t2.put(i, i);
+        }
+        stat(t2);
+        for (int i = 0; i < 10000; i++) {
+            t2.delete(i);
+        }
+        stat(t2);
+    }
+
+    private static void stat(HashTable<?, ?> t) {
         StdOut.println("size: " + t.n);
         StdOut.println("buckets: " + t.m);
-        int minSize = Integer.MAX_VALUE, maxSize = 0;
+        int minSize = Integer.MAX_VALUE;
+        int maxSize = 0;
         int empty = 0;
         for (int i = 0; i < t.m; i++) {
             int size = 0;
-            for (HashTable<String, Integer>.Node x = t.a[i]; x != null; x = x.next) {
+            for (HashTable<?, ?>.Node x = t.a[i]; x != null; x = x.next) {
                 size++;
             }
             if (size < minSize) minSize = size;
@@ -149,5 +191,15 @@ public class HashTable<Key , Value> implements ST<Key, Value> {
         StdOut.println("max bucket size: " + maxSize);
         StdOut.println("avg bucket size: " + t.n / t.m);
         StdOut.println("empty buckets: " + empty);
+
+        int[] freq = new int[maxSize+1];
+        for (int i = 0; i < t.m; i++) {
+            int size = 0;
+            for (HashTable<?, ?>.Node x = t.a[i]; x != null; x = x.next) {
+                size++;
+            }
+            freq[size] += 1;
+        }
+        Histogram.print(freq, maxSize);
     }
 }
