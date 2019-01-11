@@ -56,9 +56,13 @@ public class Graph {
 
     public String toDot() {
         String s = "graph {\n";
+        HashSet<String> set = new HashSet<>();
         for (int v = 0; v < V; v++) {
             for (int w : adj(v)) {
-                s += "  " + v + " -- " + w + ";\n";
+                if (!set.contains(w + "-" + v)) {
+                    s += "  " + v + " -- " + w + ";\n";
+                    set.add(v + "-" + w);
+                }
             }
         }
         s += "}\n";
@@ -66,8 +70,15 @@ public class Graph {
     }
 
     public static void main(String[] args) {
-        In in = new In(args[0]);
-        Graph g = new Graph(in);
-        StdOut.println(g);
+        if (args.length == 0) {
+            StdOut.println("usage: java Graph <file> [dot | text]");
+            return;
+        }
+        Graph g = new Graph(new In(args[0]));
+        if (args.length == 2 && args[1].equals("dot")) {
+            StdOut.println(g.toDot());
+        } else {
+            StdOut.println(g);
+        }
     }
 }
