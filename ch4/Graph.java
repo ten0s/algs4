@@ -1,5 +1,7 @@
 import edu.princeton.cs.algs4.*;
 
+// $ make run CLASS=Graph ARGS="../data/tinyCG.txt dot" | dot -Tpng > tinyCG.png ; open tinyCG.png
+
 public class Graph {
     private final int V;        // number of vertices
     private int E;              // number of edges
