@@ -1,5 +1,7 @@
 import edu.princeton.cs.algs4.*;
 
+// $ make compile CLASS=SymbolGraph
+
 // $ java SymbolGraph ../data/routes.txt " "
 // JFK
 //   ORD
@@ -48,14 +50,14 @@ import edu.princeton.cs.algs4.*;
 // $ dot -Tpng movies.dot > movies.png ; open movies.png
 
 public class SymbolGraph {
-    private HashMap<String, Integer> st;
-    private String[] keys;
-    private Graph G;
+    private HashMap<String, Integer> st; // name -> index
+    private String[] keys;               // index -> name
+    private Graph graph;                 // underlying graph
 
     public SymbolGraph(String filename, String separator) {
         st = new HashMap<>();
         In in = new In(filename);
-        while (in.hasNextLine()) {
+        while (!in.isEmpty()) {
             String[] a = in.readLine().split(separator);
             for (int i = 0; i < a.length; i++) {
                 if (!st.contains(a[i])) {
@@ -67,13 +69,13 @@ public class SymbolGraph {
         for (String name : st.keys()) {
             keys[st.get(name)] = name;
         }
-        G = new Graph(st.size());
+        graph = new Graph(st.size());
         in = new In(filename);
-        while (in.hasNextLine()) {
+        while (!in.isEmpty()) {
             String[] a = in.readLine().split(separator);
             int v = st.get(a[0]);
             for (int i = 1; i < a.length; i++) {
-                G.addEdge(v, st.get(a[i]));
+                graph.addEdge(v, st.get(a[i]));
             }
         }
     }
@@ -91,15 +93,15 @@ public class SymbolGraph {
     }
 
     public Graph graph() {
-        return G;
+        return graph;
     }
 
     public void printDot() {
         StdOut.println("graph {");
         HashSet<String> set = new HashSet<>();
-        for (int v = 0; v < G.V(); v++) {
+        for (int v = 0; v < graph.V(); v++) {
             StdOut.println("  " + v + " [label=\"" + nameOf(v) + "\"];");
-            for (int w : G.adj(v)) {
+            for (int w : graph.adj(v)) {
                 if (!set.contains(w + "-" + v)) {
                     StdOut.println("  " + v + " -- " + w + ";");
                     set.add(v + "-" + w);
@@ -118,10 +120,10 @@ public class SymbolGraph {
         String separator = args[1];
         SymbolGraph sg = new SymbolGraph(filename, separator);
         if (args.length == 2) {
-            Graph G = sg.graph();
+            Graph graph = sg.graph();
             while (StdIn.hasNextLine()) {
                 String s = StdIn.readLine();
-                for (int v : G.adj(sg.indexOf(s))) {
+                for (int v : graph.adj(sg.indexOf(s))) {
                     StdOut.println("   " + sg.nameOf(v));
                 }
             }
