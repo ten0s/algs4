@@ -1,57 +1,58 @@
 import edu.princeton.cs.algs4.*;
 
-// $ make compile CLASS=SymbolGraph
+// $ make compile CLASS=SymbolDigraph
 
-// $ java SymbolGraph ../data/routes.txt " "
+// $ java SymbolDigraph ../data/routes.txt " "
 // JFK
 //   ORD
 //   ATL
 //   MCO
 // LAX
-//   LAS
+// LAS
 //   PHX
+//   LAX
 // ^-D
 
-// $ java SymbolGraph ../data/routes.txt " " dot
-// graph {
+// $ java SymbolDigraph ../data/routes.txt " " dot
+// digraph {
 //   0 [label="JFK"];
-//   0 -- 2;
-//   0 -- 7;
-//   0 -- 1;
+//   0 -> 2;
+//   0 -> 7;
+//   0 -> 1;
 //   1 [label="MCO"];
-//   1 -- 4;
-//   1 -- 7;
 //   2 [label="ORD"];
-//   2 -- 7;
-//   2 -- 6;
-//   2 -- 5;
-//   2 -- 4;
-//   2 -- 3;
+//   2 -> 7;
+//   2 -> 6;
+//   2 -> 5;
+//   2 -> 4;
+//   2 -> 3;
 //   3 [label="DEN"];
-//   3 -- 9;
-//   3 -- 6;
+//   3 -> 9;
+//   3 -> 6;
 //   4 [label="HOU"];
-//   4 -- 5;
-//   4 -- 7;
+//   4 -> 1;
 //   5 [label="DFW"];
-//   5 -- 6;
+//   5 -> 4;
+//   5 -> 6;
 //   6 [label="PHX"];
-//   6 -- 9;
-//   6 -- 8;
+//   6 -> 8;
 //   7 [label="ATL"];
+//   7 -> 1;
+//   7 -> 4;
 //   8 [label="LAX"];
-//   8 -- 9;
 //   9 [label="LAS"];
+//   9 -> 6;
+//   9 -> 8;
 // }
 
-// $ java SymbolGraph ../data/routes.txt " " dot | circo -Tpng > routes.png ; open routes.png
+// $ java SymbolDigraph ../data/routes.txt " " dot | circo -Tpng > routes.png ; open routes.png
 
-public class SymbolGraph {
+public class SymbolDigraph {
     private HashMap<String, Integer> st; // name -> index
     private String[] keys;               // index -> name
-    private Graph graph;                 // underlying graph
+    private Digraph digraph;             // underlying digraph
 
-    public SymbolGraph(String filename, String separator) {
+    public SymbolDigraph(String filename, String separator) {
         st = new HashMap<>();
         In in = new In(filename);
         while (!in.isEmpty()) {
@@ -66,13 +67,13 @@ public class SymbolGraph {
         for (String name : st.keys()) {
             keys[st.get(name)] = name;
         }
-        graph = new Graph(st.size());
+        digraph = new Digraph(st.size());
         in = new In(filename);
         while (!in.isEmpty()) {
             String[] a = in.readLine().split(separator);
             int v = st.get(a[0]);
             for (int i = 1; i < a.length; i++) {
-                graph.addEdge(v, st.get(a[i]));
+                digraph.addEdge(v, st.get(a[i]));
             }
         }
     }
@@ -89,18 +90,18 @@ public class SymbolGraph {
         return keys[v];
     }
 
-    public Graph graph() {
-        return graph;
+    public Digraph digraph() {
+        return digraph;
     }
 
     public void printDot() {
-        StdOut.println("graph {");
+        StdOut.println("digraph {");
         HashSet<String> set = new HashSet<>();
-        for (int v = 0; v < graph.V(); v++) {
+        for (int v = 0; v < digraph.V(); v++) {
             StdOut.println("  " + v + " [label=\"" + nameOf(v) + "\"];");
-            for (int w : graph.adj(v)) {
+            for (int w : digraph.adj(v)) {
                 if (!set.contains(w + "-" + v)) {
-                    StdOut.println("  " + v + " -- " + w + ";");
+                    StdOut.println("  " + v + " -> " + w + ";");
                     set.add(v + "-" + w);
                 }
             }
@@ -110,17 +111,17 @@ public class SymbolGraph {
 
     public static void main(String[] args) {
         if (args.length != 2 && args.length != 3) {
-            StdOut.println("usage: java SymbolGraph <filename> <separator> [dot]");
+            StdOut.println("usage: java SymbolDigraph <filename> <separator> [dot]");
             return;
         }
         String filename = args[0];
         String separator = args[1];
-        SymbolGraph sg = new SymbolGraph(filename, separator);
+        SymbolDigraph sg = new SymbolDigraph(filename, separator);
         if (args.length == 2) {
-            Graph graph = sg.graph();
+            Digraph digraph = sg.digraph();
             while (StdIn.hasNextLine()) {
                 String s = StdIn.readLine();
-                for (int v : graph.adj(sg.indexOf(s))) {
+                for (int v : digraph.adj(sg.indexOf(s))) {
                     StdOut.println("   " + sg.nameOf(v));
                 }
             }
