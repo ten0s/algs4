@@ -70,6 +70,7 @@ public class Digraph {
         HashSet<Integer> nodes = new HashSet<>();
         for (int v = 0; v < V; v++) {
             for (int w : adj(v)) {
+                nodes.add(v);
                 nodes.add(w);
                 s += "  " + v + " -> " + w + ";\n";
             }
