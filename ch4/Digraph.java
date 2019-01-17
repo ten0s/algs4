@@ -67,13 +67,16 @@ public class Digraph {
 
     public String toDot() {
         String s = "digraph {\n";
-        HashSet<String> set = new HashSet<>();
+        HashSet<Integer> nodes = new HashSet<>();
         for (int v = 0; v < V; v++) {
             for (int w : adj(v)) {
-                if (!set.contains(w + "-" + v)) {
-                    s += "  " + v + " -> " + w + ";\n";
-                    set.add(v + "-" + w);
-                }
+                nodes.add(w);
+                s += "  " + v + " -> " + w + ";\n";
+            }
+        }
+        for (int v = 0; v < V; v++) {
+            if (!nodes.contains(v)) {
+                s += "  " + v + ";\n";
             }
         }
         s += "}\n";

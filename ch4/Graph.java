@@ -58,13 +58,20 @@ public class Graph {
 
     public String toDot() {
         String s = "graph {\n";
-        HashSet<String> set = new HashSet<>();
+        HashSet<Integer> nodes = new HashSet<>();
+        HashSet<String> pairs = new HashSet<>();
         for (int v = 0; v < V; v++) {
             for (int w : adj(v)) {
-                if (!set.contains(w + "-" + v)) {
+                nodes.add(w);
+                if (!pairs.contains(w + "-" + v)) {
                     s += "  " + v + " -- " + w + ";\n";
-                    set.add(v + "-" + w);
+                    pairs.add(v + "-" + w);
                 }
+            }
+        }
+        for (int v = 0; v < V; v++) {
+            if (!nodes.contains(v)) {
+                s += "  " + v + ";\n";
             }
         }
         s += "}\n";

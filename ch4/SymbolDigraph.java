@@ -96,14 +96,10 @@ public class SymbolDigraph {
 
     public void printDot() {
         StdOut.println("digraph {");
-        HashSet<String> set = new HashSet<>();
         for (int v = 0; v < digraph.V(); v++) {
             StdOut.println("  " + v + " [label=\"" + nameOf(v) + "\"];");
             for (int w : digraph.adj(v)) {
-                if (!set.contains(w + "-" + v)) {
-                    StdOut.println("  " + v + " -> " + w + ";");
-                    set.add(v + "-" + w);
-                }
+                StdOut.println("  " + v + " -> " + w + ";");
             }
         }
         StdOut.println("}");
