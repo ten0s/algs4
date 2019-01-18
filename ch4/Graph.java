@@ -80,14 +80,14 @@ public class Graph {
 
     public static void main(String[] args) {
         if (args.length == 0) {
-            StdOut.println("usage: java Graph <file> [dot | text]");
+            StdOut.println("usage: java Graph <file> [<text> | dot]");
             return;
         }
-        Graph g = new Graph(new In(args[0]));
-        if (args.length == 2 && args[1].equals("dot")) {
-            StdOut.println(g.toDot());
+        Graph G = new Graph(new In(args[0]));
+        if (args.length > 1 && args[1].equals("dot")) {
+            StdOut.println(G.toDot());
         } else {
-            StdOut.println(g);
+            StdOut.println(G);
         }
     }
 }

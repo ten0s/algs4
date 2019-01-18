@@ -1,6 +1,6 @@
 import edu.princeton.cs.algs4.*;
 
-// $ make run CLASS=Digraph ARGS="../data/tinyCG.txt dot" | dot -Tpng > tinyCG.png ; open tinyCG.png
+// $ make run CLASS=Digraph ARGS="../data/tinyCG.txt dir dot" | dot -Tpng > tinyCG.png ; open tinyCG.png
 
 public class Digraph {
     private final int V;        // number of vertices
@@ -86,14 +86,17 @@ public class Digraph {
 
     public static void main(String[] args) {
         if (args.length == 0) {
-            StdOut.println("usage: java Digraph <file> [dot | text]");
+            StdOut.println("usage: java Graph <file> [<dir> | rev] [<text> | dot]");
             return;
         }
-        Digraph g = new Digraph(new In(args[0]));
-        if (args.length == 2 && args[1].equals("dot")) {
-            StdOut.println(g.toDot());
+        Digraph G = new Digraph(new In(args[0]));
+        if (args.length > 1 && args[1].equals("rev")) {
+            G = G.reverse();
+        }
+        if (args.length > 2 && args[2].equals("dot")) {
+            StdOut.println(G.toDot());
         } else {
-            StdOut.println(g);
+            StdOut.println(G);
         }
     }
 }
