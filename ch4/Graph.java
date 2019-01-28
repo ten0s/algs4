@@ -48,7 +48,7 @@ public class Graph {
         String s = V + " vertices, " + E + " edges\n";
         for (int v = 0; v < V; v++) {
             s += v + ": ";
-            for (int w : adj(v)) {
+            for (int w : adj[v]) {
                 s += w + " ";
             }
             s += "\n";
@@ -61,7 +61,7 @@ public class Graph {
         HashSet<Integer> nodes = new HashSet<>();
         HashSet<String> pairs = new HashSet<>();
         for (int v = 0; v < V; v++) {
-            for (int w : adj(v)) {
+            for (int w : adj[v]) {
                 nodes.add(w);
                 if (!pairs.contains(w + "-" + v)) {
                     s += "  " + v + " -- " + w + ";\n";

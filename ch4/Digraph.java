@@ -46,7 +46,7 @@ public class Digraph {
     public Digraph reverse() {
         Digraph R = new Digraph(V);
         for (int v = 0; v < V; v++) {
-            for (int w : adj(v)) {
+            for (int w : adj[v]) {
                 R.addEdge(w, v);
             }
         }
@@ -57,7 +57,7 @@ public class Digraph {
         String s = V + " vertices, " + E + " edges\n";
         for (int v = 0; v < V; v++) {
             s += v + ": ";
-            for (int w : adj(v)) {
+            for (int w : adj[v]) {
                 s += w + " ";
             }
             s += "\n";
@@ -69,7 +69,7 @@ public class Digraph {
         String s = "digraph {\n";
         HashSet<Integer> nodes = new HashSet<>();
         for (int v = 0; v < V; v++) {
-            for (int w : adj(v)) {
+            for (int w : adj[v]) {
                 nodes.add(v);
                 nodes.add(w);
                 s += "  " + v + " -> " + w + ";\n";
@@ -86,14 +86,14 @@ public class Digraph {
 
     public static void main(String[] args) {
         if (args.length == 0) {
-            StdOut.println("usage: java Graph <file> [<dir> | rev] [<text> | dot]");
+            StdOut.println("usage: java Digraph <file> [<text> | dot] [<dir> | rev]");
             return;
         }
         Digraph G = new Digraph(new In(args[0]));
-        if (args.length > 1 && args[1].equals("rev")) {
+        if (args.length > 2 && args[2].equals("rev")) {
             G = G.reverse();
         }
-        if (args.length > 2 && args[2].equals("dot")) {
+        if (args.length > 1 && args[1].equals("dot")) {
             StdOut.println(G.toDot());
         } else {
             StdOut.println(G);
