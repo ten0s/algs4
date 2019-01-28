@@ -24,9 +24,10 @@ public class KruskalMST {
         while (!pq.isEmpty() && mst.size() < G.V() - 1) {
             Edge e = pq.delMin();
             int v = e.either(), w = e.other(v);
-            if (uf.connected(v, w)) continue;
-            uf.union(v, w);
-            mst.enqueue(e);
+            if (!uf.connected(v, w)) {
+                uf.union(v, w);
+                mst.enqueue(e);
+            }
         }
     }
 
