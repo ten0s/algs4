@@ -19,7 +19,7 @@ public abstract class PQ<Key extends Comparable<Key>> {
     }
 
     protected Key delete() {
-        checkEmpty();
+        ensureNotEmpty();
         Key v = pq[1];
         pq[1] = pq[n];
         pq[n] = null;
@@ -30,7 +30,7 @@ public abstract class PQ<Key extends Comparable<Key>> {
     }
 
     protected Key top() {
-        checkEmpty();
+        ensureNotEmpty();
         return pq[1];
     }
 
@@ -79,7 +79,7 @@ public abstract class PQ<Key extends Comparable<Key>> {
         pq = pq2;
     }
 
-    private void checkEmpty() {
+    private void ensureNotEmpty() {
         if (isEmpty()) {
             throw new NoSuchElementException();
         }

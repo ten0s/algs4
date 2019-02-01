@@ -9,15 +9,15 @@ public class MinPQ<Key extends Comparable<Key>> extends PQ<Key> {
     }
 
     public static void main(String[] args) {
-        MinPQ<Integer> pq2 = new MinPQ<>();
-        pq2.insert(1);
-        pq2.insert(3);
-        pq2.insert(5);
-        pq2.insert(2);
-        pq2.insert(4);
-        pq2.insert(6);
-        while (!pq2.isEmpty()) {
-            System.out.println(pq2.delMin());
+        MinPQ<Integer> pq = new MinPQ<>();
+        pq.insert(1);
+        pq.insert(3);
+        pq.insert(5);
+        pq.insert(2);
+        pq.insert(4);
+        pq.insert(6);
+        while (!pq.isEmpty()) {
+            System.out.println(pq.delMin());
         }
     }
 }
