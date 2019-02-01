@@ -1,5 +1,3 @@
-import edu.princeton.cs.algs4.*;
-
 public class IndexMaxPQ<Key extends Comparable<Key>> extends IndexPQ<Key> {
     public IndexMaxPQ(int maxN) { super(maxN); }
     public int delMax() { return delete(); }
