@@ -73,7 +73,7 @@ abstract class PQ<Key extends Comparable<Key>> {
     }
 
     @SuppressWarnings("unchecked")
-        private void resize(int capacity) {
+    private void resize(int capacity) {
         Key[] pq2 = (Key[]) new Comparable[capacity];
         int m = Math.min(n, pq.length-1);
         for (int i = 1; i <= m; i++) {
