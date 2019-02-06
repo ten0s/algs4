@@ -20,6 +20,9 @@ import edu.princeton.cs.algs4.*;
 // 0 to 6 (0.95): 0->2 0.26000 2->3 0.17000 3->6 0.52000
 // 0 to 7 (0.16): 0->7 0.16000
 
+// $ make run CLASS=LazyDijkstraSP ARGS="../data/largeEWD.txt 0 sum"
+// Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+
 public class LazyDijkstraSP {
     private final double INFINITY = Double.POSITIVE_INFINITY;
     private DirectedEdge[] edgeTo;

@@ -20,6 +20,9 @@ import edu.princeton.cs.algs4.*;
 // 0 to 6 (0.95): 0->2 0.26000 2->3 0.17000 3->6 0.52000
 // 0 to 7 (0.16): 0->7 0.16000
 
+// $ make run CLASS=DijkstraSP ARGS="../data/largeEWD.txt 0 sum"
+// 568310.4639856056
+
 public class DijkstraSP {
     private final double INFINITY = Double.POSITIVE_INFINITY;
     private DirectedEdge[] edgeTo;
