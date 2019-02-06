@@ -72,8 +72,8 @@ public class DijkstraSP {
     }
 
     public static void main(String[] args) {
-        if (args.length != 2) {
-            StdOut.println("usage: java DijkstraSP <file> <source>");
+        if (args.length == 0) {
+            StdOut.println("usage: java DijkstraSP <file> <source> [<path> | sum]");
             return;
         }
 
@@ -81,15 +81,23 @@ public class DijkstraSP {
         int s = Integer.parseInt(args[1]);
 
         DijkstraSP sp = new DijkstraSP(G, s);
-        for (int t = 0; t < G.V(); t++) {
-            StdOut.print(s + " to " + t);
-            StdOut.printf(" (%4.2f): ", sp.distTo(t));
-            if (sp.hasPathTo(t)) {
-                for (DirectedEdge e : sp.pathTo(t)) {
-                    StdOut.print(e + " ");
-                }
+        if (args.length > 2 && args[2].equals("sum")) {
+            double sum = 0.0;
+            for (int v = 0; v < G.V(); v++) {
+                sum += sp.distTo[v];
             }
-            StdOut.println();
+            StdOut.println(sum);
+        } else {
+            for (int t = 0; t < G.V(); t++) {
+                StdOut.print(s + " to " + t);
+                StdOut.printf(" (%4.2f): ", sp.distTo(t));
+                if (sp.hasPathTo(t)) {
+                    for (DirectedEdge e : sp.pathTo(t)) {
+                        StdOut.print(e + " ");
+                    }
+            }
+                StdOut.println();
+            }
         }
     }
 }

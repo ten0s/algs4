@@ -72,24 +72,32 @@ public class LazyDijkstraSP {
     }
 
     public static void main(String[] args) {
-        if (args.length != 2) {
-            StdOut.println("usage: java LazyDijkstraSP <file> <source>");
+        if (args.length == 0) {
+            StdOut.println("usage: java LazyDijkstraSP <file> <source> [<path> | sum]");
             return;
         }
 
         EdgeWeightedDigraph G = new EdgeWeightedDigraph(new In(args[0]));
         int s = Integer.parseInt(args[1]);
 
-        DijkstraSP sp = new DijkstraSP(G, s);
-        for (int t = 0; t < G.V(); t++) {
-            StdOut.print(s + " to " + t);
-            StdOut.printf(" (%4.2f): ", sp.distTo(t));
-            if (sp.hasPathTo(t)) {
-                for (DirectedEdge e : sp.pathTo(t)) {
-                    StdOut.print(e + " ");
-                }
+        LazyDijkstraSP sp = new LazyDijkstraSP(G, s);
+        if (args.length > 2 && args[2].equals("sum")) {
+            double sum = 0.0;
+            for (int v = 0; v < G.V(); v++) {
+                sum += sp.distTo[v];
             }
-            StdOut.println();
+            StdOut.println(sum);
+        } else {
+            for (int t = 0; t < G.V(); t++) {
+                StdOut.print(s + " to " + t);
+                StdOut.printf(" (%4.2f): ", sp.distTo(t));
+                if (sp.hasPathTo(t)) {
+                    for (DirectedEdge e : sp.pathTo(t)) {
+                        StdOut.print(e + " ");
+                    }
+            }
+                StdOut.println();
+            }
         }
     }
 }
