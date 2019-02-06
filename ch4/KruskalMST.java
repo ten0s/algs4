@@ -10,6 +10,9 @@ import edu.princeton.cs.algs4.*;
 // 6-2 0.40000
 // 1.81000
 
+// $ make run CLASS=KruskalMST ARGS="../data/largeEWG.txt weight"
+// Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+
 public class KruskalMST {
     private Queue<Edge> mst;
 
@@ -45,14 +48,19 @@ public class KruskalMST {
 
     public static void main(String[] args) {
         if (args.length == 0) {
-            StdOut.println("usage: java KruskalMST <file>");
+            StdOut.println("usage: java KruskalMST <file> [<edges> | weight]");
             return;
         }
         EdgeWeightedGraph G = new EdgeWeightedGraph(new In(args[0]));
         KruskalMST mst = new KruskalMST(G);
-        for (Edge e : mst.edges()) {
-            StdOut.println(e);
+
+        if (args.length > 1 && args[1].equals("weight")) {
+            StdOut.printf("%.5f\n", mst.weight());
+        } else {
+            for (Edge e : mst.edges()) {
+                StdOut.println(e);
+            }
+            StdOut.printf("%.5f\n", mst.weight());
         }
-        StdOut.printf("%.5f\n", mst.weight());
     }
 }
