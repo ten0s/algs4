@@ -23,6 +23,10 @@ public class DigraphTopologicalSort {
         if (!cycleFinder.hasCycle()) {
             DigraphOrders orders = new DigraphOrders(G);
             order = orders.reversedPostOrder();
+        } else {
+            throw new IllegalArgumentException(
+                "\nCycle detected: " + GraphUtil.pathToString(cycleFinder.cycle())
+            );
         }
     }
 

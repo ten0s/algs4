@@ -6,6 +6,10 @@ public class EdgeWeightedDigraphTopologicalSort {
         if (!cycleFinder.hasCycle()) {
             EdgeWeightedDigraphOrders orders = new EdgeWeightedDigraphOrders(G);
             order = orders.reversedPostOrder();
+        } else {
+            throw new IllegalArgumentException(
+                "\nCycle detected: " + GraphUtil.pathToString(cycleFinder.cycle())
+            );
         }
     }
 
