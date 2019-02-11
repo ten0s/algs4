@@ -1,12 +1,12 @@
 public class EdgeWeightedDigraphCycle {
     private boolean[] marked;
-    private int[] edgeTo;
+    private DirectedEdge[] edgeTo;
     private boolean[] onStack;
-    private Stack<Integer> cycle;
+    private Stack<DirectedEdge> cycle;
 
     public EdgeWeightedDigraphCycle(EdgeWeightedDigraph G) {
         marked = new boolean[G.V()];
-        edgeTo = new int[G.V()];
+        edgeTo = new DirectedEdge[G.V()];
         onStack = new boolean[G.V()];
         for (int v = 0; v < G.V(); v++) {
             if (!marked[v]) {
@@ -23,15 +23,16 @@ public class EdgeWeightedDigraphCycle {
             if (hasCycle()) return;
             int w = e.to();
             if (!marked[w]) {
-                edgeTo[w] = v;
+                edgeTo[w] = e;
                 dfs(G, w);
             } else if (onStack[w]) {
                 cycle = new Stack<>();
-                for (int x = v; x != w; x = edgeTo[x]) {
-                    cycle.push(x);
+                DirectedEdge f = e;
+                while (f.from() != w) {
+                    f = edgeTo[f.from()];
+                    cycle.push(f);
                 }
-                cycle.push(w);
-                cycle.push(v);
+                cycle.push(e);
             }
         }
         onStack[v] = false;
@@ -41,7 +42,7 @@ public class EdgeWeightedDigraphCycle {
         return cycle != null;
     }
 
-    public Iterable<Integer> cycle() {
+    public Iterable<DirectedEdge> cycle() {
         return cycle;
     }
 
