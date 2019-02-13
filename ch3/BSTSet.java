@@ -2,45 +2,44 @@ import java.util.NoSuchElementException;
 import java.util.Collections;
 import java.util.Iterator;
 
-public class BST<Key extends Comparable<Key>, Value> implements ST<Key, Value> {
+import edu.princeton.cs.algs4.*;
+
+public class BSTSet<Key extends Comparable<Key>> implements SET<Key> {
     private class Node {
         Key key;
-        Value val;
         Node left;
         Node right;
         int size;
 
-        public Node(Key key, Value val) {
+        public Node(Key key) {
             this.key = key;
-            this.val = val;
             this.size = 1;
         }
     }
 
     private Node root;
 
-    public Value get(Key key) {
-        return get(key, root);
+    public boolean contains(Key key) {
+        return contains(key, root);
     }
 
-    private Value get(Key key, Node x) {
-        if (x == null) return null;
+    private boolean contains(Key key, Node x) {
+        if (x == null) return false;
         int cmp = key.compareTo(x.key);
-        if      (cmp < 0) return get(key, x.left);
-        else if (cmp > 0) return get(key, x.right);
-        else              return x.val;
+        if      (cmp < 0) return contains(key, x.left);
+        else if (cmp > 0) return contains(key, x.right);
+        else              return true;
     }
 
-    public void put(Key key, Value val) {
-        root = put(key, val, root);
+    public void add(Key key) {
+        root = add(key, root);
     }
 
-    private Node put(Key key, Value val, Node x) {
-        if (x == null) return new Node(key, val);
+    private Node add(Key key, Node x) {
+        if (x == null) return new Node(key);
         int cmp = key.compareTo(x.key);
-        if      (cmp < 0) x.left  = put(key, val, x.left);
-        else if (cmp > 0) x.right = put(key, val, x.right);
-        else              x.val = val;
+        if      (cmp < 0) x.left  = add(key, x.left);
+        else if (cmp > 0) x.right = add(key, x.right);
         x.size = 1 + size(x.left) + size(x.right);
         return x;
     }
@@ -70,10 +69,6 @@ public class BST<Key extends Comparable<Key>, Value> implements ST<Key, Value> {
         }
         x.size = 1 + size(x.left) + size(x.right);
         return x;
-    }
-
-    public boolean contains(Key key) {
-        return get(key) != null;
     }
 
     public boolean isEmpty() {
@@ -191,20 +186,14 @@ public class BST<Key extends Comparable<Key>, Value> implements ST<Key, Value> {
         else           return x;
     }
 
-    public Iterable<Key> keys() {
-        if (isEmpty())
-            return new Iterable<Key>() {
-                public Iterator<Key> iterator() {
-                    return Collections.emptyIterator();
-                }
-            };
-        return keys(min(), max());
-    }
-
-    public Iterable<Key> keys(Key lo, Key hi) {
-        Queue<Key> queue = new Queue<>();
-        keys(queue, lo, hi, root);
-        return queue;
+    public Iterator<Key> iterator() {
+        if (isEmpty()) {
+            return Collections.emptyIterator();
+        } else {
+            Queue<Key> queue = new Queue<>();
+            keys(queue, min(), max(), root);
+            return queue.iterator();
+        }
     }
 
     private void keys(Queue<Key> queue, Key lo, Key hi, Node x) {
@@ -219,5 +208,62 @@ public class BST<Key extends Comparable<Key>, Value> implements ST<Key, Value> {
     private void checkEmpty() {
         if (isEmpty())
             throw new NoSuchElementException();
+    }
+
+    public String toDot() {
+        // https://eli.thegreenplace.net/2009/11/23/visualizing-binary-trees-with-graphviz
+        StringBuilder sb = new StringBuilder();
+        sb.append("digraph {\n");
+        if (root == null) {
+            sb.append("\n");
+        } else if (root.left == null && root.right == null) {
+            sb.append("    " + root.key + "\n");
+        } else {
+            toDotAux(root, new Counter(), sb);
+        }
+        sb.append("}\n");
+        return sb.toString();
+    }
+
+    private class Counter {
+        public int value;
+    }
+
+    private void toDotNull(Key key, Counter nullcount, StringBuilder sb) {
+        sb.append("    null" + nullcount.value + " [shape=point];\n");
+        sb.append("    " + key + " -> null" + nullcount.value + ";\n");
+    }
+
+    private void toDotAux(Node node, Counter nullcount, StringBuilder sb) {
+        if (node.left != null) {
+            sb.append("    " + node.key + " -> " + node.left.key + ";\n");
+            toDotAux(node.left, nullcount, sb);
+        } else {
+            nullcount.value++;
+            toDotNull(node.key, nullcount, sb);
+        }
+
+        if (node.right != null) {
+            sb.append("    " + node.key + " -> " + node.right.key + ";\n");
+            toDotAux(node.right, nullcount, sb);
+        } else {
+            nullcount.value++;
+            toDotNull(node.key, nullcount, sb);
+        }
+    }
+
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            StdOut.println("usage: javac BSTSet <file>");
+            return;
+        }
+        In in = new In(args[0]);
+        in.readInt();
+        BSTSet<Integer> tree = new BSTSet<>();
+        while (!in.isEmpty()) {
+            int key = in.readInt();
+            tree.add(key);
+        }
+        StdOut.println(tree.toDot());
     }
 }
