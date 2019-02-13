@@ -71,7 +71,7 @@ public class EdgeWeightedGraph {
         for (Edge e : edges()) {
             int v = e.either(), w = e.other(v);
             double weight = e.weight();
-            s += v + " -- " + w + " [label=\"" + weight + "\"];\n";
+            s += "  " + v + " -- " + w + " [label=\"" + weight + "\"];\n";
         }
         s += "}\n";
         return s;
