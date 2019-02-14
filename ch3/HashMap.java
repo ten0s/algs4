@@ -29,6 +29,54 @@ empty buckets: 10
 xxxxxxxxx
 xxxxxxxxxxxxx
 
+$ make run CLASS=HashMap ARGS="maxword 1 ../data/tinyTale.txt dot"
+the 10
+digraph {
+  rankdir=LR;
+  node [shape=record];
+  array [label="<0> 0|<1> 1|<2> 2|<3> 3|<4> 4|<5> 5|<6> 6|<7> 7|<8> 8|<9> 9|<10> 10|<11> 11|<12> 12|<13> 13|<14> 14|<15> 15|<16> 16|<17> 17|<18> 18|<19> 19|<20> 20|<21> 21|<22> 22|<23> 23|<24> 24|<25> 25|<26> 26|<27> 27|<28> 28|<29> 29|<30> 30"];
+  array:7 -> node7_0:head;
+  node7_0 [label="{<head> belief | 1 | <next>}"];
+  array:8 -> node8_0:head;
+  node8_0 [label="{<head> hope | 1 | <next>}"];
+  node8_0:next -> node8_1:head;
+  node8_1 [label="{<head> spring | 1 | <next>}"];
+  node8_1:next -> node8_2:head;
+  node8_2 [label="{<head> age | 2 | <next>}"];
+  node8_2:next -> node8_3:head;
+  node8_3 [label="{<head> the | 10 | <next>}"];
+  array:9 -> node9_0:head;
+  node9_0 [label="{<head> of | 10 | <next>}"];
+  array:11 -> node11_0:head;
+  node11_0 [label="{<head> epoch | 2 | <next>}"];
+  array:13 -> node13_0:head;
+  node13_0 [label="{<head> darkness | 1 | <next>}"];
+  array:14 -> node14_0:head;
+  node14_0 [label="{<head> wisdom | 1 | <next>}"];
+  array:15 -> node15_0:head;
+  node15_0 [label="{<head> season | 2 | <next>}"];
+  array:19 -> node19_0:head;
+  node19_0 [label="{<head> winter | 1 | <next>}"];
+  node19_0:next -> node19_1:head;
+  node19_1 [label="{<head> incredulity | 1 | <next>}"];
+  array:22 -> node22_0:head;
+  node22_0 [label="{<head> times | 2 | <next>}"];
+  node22_0:next -> node22_1:head;
+  node22_1 [label="{<head> was | 10 | <next>}"];
+  array:23 -> node23_0:head;
+  node23_0 [label="{<head> light | 1 | <next>}"];
+  node23_0:next -> node23_1:head;
+  node23_1 [label="{<head> worst | 1 | <next>}"];
+  node23_1:next -> node23_2:head;
+  node23_2 [label="{<head> best | 1 | <next>}"];
+  node23_2:next -> node23_3:head;
+  node23_3 [label="{<head> it | 10 | <next>}"];
+  array:29 -> node29_0:head;
+  node29_0 [label="{<head> foolishness | 1 | <next>}"];
+  array:30 -> node30_0:head;
+  node30_0 [label="{<head> despair | 1 | <next>}"];
+}
+
 $ make run CLASS=HashMap ARGS="dot map.txt"
 digraph {
   rankdir=LR;
