@@ -46,7 +46,7 @@ import edu.princeton.cs.algs4.*;
 //   0 -> 11;
 // }
 
-public class BSTMap<Key extends Comparable<Key>, Value> implements ST<Key, Value> {
+public class BSTMap<Key extends Comparable<Key>, Value> implements MAP<Key, Value> {
     private class Node {
         Key key;
         Value val;
