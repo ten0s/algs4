@@ -4,41 +4,43 @@ import java.util.Iterator;
 
 import edu.princeton.cs.algs4.*;
 
-// $ cat set.txt
-// 4 2 6 1 3 5 7
+/*
+$ cat set.txt
+4 2 6 1 3 5 7
 
-// $ make run CLASS=BSTSet ARGS=set.txt
-// digraph {
-//   3 [shape=point];
-//   4 [shape=point];
-//   2 [label="1"];
-//   2 -> 3;
-//   2 -> 4;
-//   7 [shape=point];
-//   8 [shape=point];
-//   6 [label="3"];
-//   6 -> 7;
-//   6 -> 8;
-//   1 [label="2"];
-//   1 -> 2;
-//   1 -> 6;
-//   13 [shape=point];
-//   14 [shape=point];
-//   12 [label="5"];
-//   12 -> 13;
-//   12 -> 14;
-//   17 [shape=point];
-//   18 [shape=point];
-//   16 [label="7"];
-//   16 -> 17;
-//   16 -> 18;
-//   11 [label="6"];
-//   11 -> 12;
-//   11 -> 16;
-//   0 [label="4"];
-//   0 -> 1;
-//   0 -> 11;
-// }
+$ make run CLASS=BSTSet ARGS=set.txt
+digraph {
+  3 [shape=point];
+  4 [shape=point];
+  2 [label="1"];
+  2 -> 3;
+  2 -> 4;
+  7 [shape=point];
+  8 [shape=point];
+  6 [label="3"];
+  6 -> 7;
+  6 -> 8;
+  1 [label="2"];
+  1 -> 2;
+  1 -> 6;
+  13 [shape=point];
+  14 [shape=point];
+  12 [label="5"];
+  12 -> 13;
+  12 -> 14;
+  17 [shape=point];
+  18 [shape=point];
+  16 [label="7"];
+  16 -> 17;
+  16 -> 18;
+  11 [label="6"];
+  11 -> 12;
+  11 -> 16;
+  0 [label="4"];
+  0 -> 1;
+  0 -> 11;
+}
+*/
 
 public class BSTSet<Key extends Comparable<Key>> implements SET<Key> {
     private class Node {

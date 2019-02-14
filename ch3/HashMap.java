@@ -3,51 +3,53 @@ import java.util.Iterator;
 
 import edu.princeton.cs.algs4.*;
 
-// make run CLASS=HashMap "ARGS=maxword 10 ../data/tale.txt"
-// monseigneur 101
+/*
+$ make run CLASS=HashMap "ARGS=maxword 10 ../data/tale.txt"
+monseigneur 101
 
-// $ make run CLASS=HashMap "ARGS=maxword 10 ../data/tale.txt stat"
-// monseigneur 101
-// size: 2257
-// buckets: 557
-// min bucket size: 0
-// max bucket size: 12
-// avg bucket size: 4
-// empty buckets: 10
-//     x
-//    xx
-//    xx
-//    xxx
-//   xxxx
-//   xxxxx
-//   xxxxx
-//   xxxxx
-//  xxxxxx
-//  xxxxxxx
-//  xxxxxxx
-// xxxxxxxxx
-// xxxxxxxxxxxxx
+$ make run CLASS=HashMap "ARGS=maxword 10 ../data/tale.txt stat"
+monseigneur 101
+size: 2257
+buckets: 557
+min bucket size: 0
+max bucket size: 12
+avg bucket size: 4
+empty buckets: 10
+    x
+   xx
+   xx
+   xxx
+  xxxx
+  xxxxx
+  xxxxx
+  xxxxx
+ xxxxxx
+ xxxxxxx
+ xxxxxxx
+xxxxxxxxx
+xxxxxxxxxxxxx
 
-// $ make run CLASS=HashMap ARGS="dot map.txt"
-// digraph {
-//   rankdir=LR;
-//   node [shape=record];
-//   array [label="<0> 0|<1> 1|<2> 2|<3> 3|<4> 4|<5> 5|<6> 6|<7> 7|<8> 8|<9> 9|<10> 10|<11> 11|<12> 12|<13> 13|<14> 14|<15> 15|<16> 16|<17> 17|<18> 18|<19> 19|<20> 20|<21> 21|<22> 22|<23> 23|<24> 24|<25> 25|<26> 26|<27> 27|<28> 28|<29> 29|<30> 30"];
-//   array:1 -> node1_0:head;
-//   node1_0 [label="{<head> 1 | one | <next>}"];
-//   array:2 -> node2_0:head;
-//   node2_0 [label="{<head> 2 | two | <next>}"];
-//   array:3 -> node3_0:head;
-//   node3_0 [label="{<head> 3 | three | <next>}"];
-//   array:4 -> node4_0:head;
-//   node4_0 [label="{<head> 4 | four | <next>}"];
-//   array:5 -> node5_0:head;
-//   node5_0 [label="{<head> 5 | five | <next>}"];
-//   array:6 -> node6_0:head;
-//   node6_0 [label="{<head> 6 | six | <next>}"];
-//   array:7 -> node7_0:head;
-//   node7_0 [label="{<head> 7 | seven | <next>}"];
-// }
+$ make run CLASS=HashMap ARGS="dot map.txt"
+digraph {
+  rankdir=LR;
+  node [shape=record];
+  array [label="<0> 0|<1> 1|<2> 2|<3> 3|<4> 4|<5> 5|<6> 6|<7> 7|<8> 8|<9> 9|<10> 10|<11> 11|<12> 12|<13>|<14> 14|<15> 15|<16> 16|<17> 17|<18> 18|<19> 19|<20> 20|<21> 21|<22> 22|<23> 23|<24> 24|<25> 25|<26> 267> 27|<28> 28|<29> 29|<30> 30"];
+  array:1 -> node1_0:head;
+  node1_0 [label="{<head> 1 | one | <next>}"];
+  array:2 -> node2_0:head;
+  node2_0 [label="{<head> 2 | two | <next>}"];
+  array:3 -> node3_0:head;
+  node3_0 [label="{<head> 3 | three | <next>}"];
+  array:4 -> node4_0:head;
+  node4_0 [label="{<head> 4 | four | <next>}"];
+  array:5 -> node5_0:head;
+  node5_0 [label="{<head> 5 | five | <next>}"];
+  array:6 -> node6_0:head;
+  node6_0 [label="{<head> 6 | six | <next>}"];
+  array:7 -> node7_0:head;
+  node7_0 [label="{<head> 7 | seven | <next>}"];
+}
+*/
 
 public class HashMap<Key , Value> implements MAP<Key, Value> {
     private final static int MIN_CAPACITY = 31;

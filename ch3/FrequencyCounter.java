@@ -1,25 +1,27 @@
 import edu.princeton.cs.algs4.*;
 
-// $ time make run CLASS=FrequencyCounter ARGS="BST 10" < ../data/leipzig1M.txt
-// government 24763
-//
-// real	0m18.866s
-// user	0m20.920s
-// sys	0m0.756s
+/*
+$ time make run CLASS=FrequencyCounter ARGS="BST 10" < ../data/leipzig1M.txt
+government 24763
 
-// $ time make run CLASS=FrequencyCounter ARGS="RedBlackBST 10" < ../data/leipzig1M.txt
-// government 24763
+real	0m18.866s
+user	0m20.920s
+sys	0m0.756s
 
-// real	0m19.178s
-// user	0m21.188s
-// sys	0m0.704s
+$ time make run CLASS=FrequencyCounter ARGS="RedBlackBST 10" < ../data/leipzig1M.txt
+government 24763
 
-// $ time make run CLASS=FrequencyCounter ARGS="HashTable 10" < ../data/leipzig1M.txt
-// government 24763
+real	0m19.178s
+user	0m21.188s
+sys	0m0.704s
 
-// real	0m17.345s
-// user	0m19.680s
-// sys	0m0.416s
+$ time make run CLASS=FrequencyCounter ARGS="HashTable 10" < ../data/leipzig1M.txt
+government 24763
+
+real	0m17.345s
+user	0m19.680s
+sys	0m0.416s
+*/
 
 public class FrequencyCounter {
     private static ST<String, Integer> makeST(String name) {

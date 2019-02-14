@@ -1,16 +1,18 @@
 import edu.princeton.cs.algs4.*;
 
-// $ make run CLASS=DijkstraSP ARGS="../data/tinyEWD.txt 0 6"
-// 0 to 6 (1.51): 0->2 0.26000 2->7 0.34000 7->3 0.39000 3->6 0.52000
+/*
+$ make run CLASS=DijkstraSP ARGS="../data/tinyEWD.txt 0 6"
+0 to 6 (1.51): 0->2 0.26000 2->7 0.34000 7->3 0.39000 3->6 0.52000
 
-// $ make run CLASS=DijkstraSP ARGS="../data/tinyEWD.txt 0 6 dist"
-// 1.51
+$ make run CLASS=DijkstraSP ARGS="../data/tinyEWD.txt 0 6 dist"
+1.51
 
-// $ make run CLASS=DijkstraSP ARGS="../data/tinyEWG.txt 0 6"
-// 0 to 6 (0.95): 0->2 0.26000 2->3 0.17000 3->6 0.52000
+$ make run CLASS=DijkstraSP ARGS="../data/tinyEWG.txt 0 6"
+0 to 6 (0.95): 0->2 0.26000 2->3 0.17000 3->6 0.52000
 
-// $ make run CLASS=DijkstraSP ARGS="../data/largeEWD.txt 0 999812 dist"
-// 0.54
+$ make run CLASS=DijkstraSP ARGS="../data/largeEWD.txt 0 999812 dist"
+0.54
+*/
 
 public class DijkstraSP {
     private final double INFINITY = Double.POSITIVE_INFINITY;

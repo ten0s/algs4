@@ -3,13 +3,15 @@ import java.util.Collections;
 
 import edu.princeton.cs.algs4.*;
 
-// $ make run CLASS=DepthFirstPaths ARGS="../data/tinyCG.txt 0"
-// 0 to 0: 0
-// 0 to 1: 0-2-1
-// 0 to 2: 0-2
-// 0 to 3: 0-2-3
-// 0 to 4: 0-2-3-4
-// 0 to 5: 0-2-3-5
+/*
+$ make run CLASS=DepthFirstPaths ARGS="../data/tinyCG.txt 0"
+0 to 0: 0
+0 to 1: 0-2-1
+0 to 2: 0-2
+0 to 3: 0-2-3
+0 to 4: 0-2-3-4
+0 to 5: 0-2-3-5
+*/
 
 public class DepthFirstPaths {
     private boolean[] marked;

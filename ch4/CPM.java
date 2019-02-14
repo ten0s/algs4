@@ -1,20 +1,22 @@
 import edu.princeton.cs.algs4.*;
 
-// $ make run CLASS=CPM < ../data/jobsPC.txt
-// ...
-// job   start  finish
-// -------------------
-//   0    -0.0    41.0
-//   1    41.0    92.0
-//   2   123.0   173.0
-//   3    91.0   127.0
-//   4    70.0   108.0
-//   5    -0.0    45.0
-//   6    70.0    91.0
-//   7    41.0    73.0
-//   8    91.0   123.0
-//   9    41.0    70.0
-// Finish time:   173.0
+/*
+$ make run CLASS=CPM < ../data/jobsPC.txt
+...
+job   start  finish
+-------------------
+  0    -0.0    41.0
+  1    41.0    92.0
+  2   123.0   173.0
+  3    91.0   127.0
+  4    70.0   108.0
+  5    -0.0    45.0
+  6    70.0    91.0
+  7    41.0    73.0
+  8    91.0   123.0
+  9    41.0    70.0
+Finish time:   173.0
+*/
 
 public class CPM {
     public static void main(String[] args) {

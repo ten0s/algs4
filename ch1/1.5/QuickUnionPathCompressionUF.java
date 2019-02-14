@@ -1,16 +1,18 @@
 import edu.princeton.cs.algs4.*;
 import java.util.Arrays;
 
-// $ make run CLASS=QuickUnionPathCompressionUF < ../../data/tinyUF.txt
-// 4 3
-// 3 8
-// 6 5
-// 9 4
-// 2 1
-// 5 0
-// 7 2
-// 6 1
-// 2 components
+/*
+$ make run CLASS=QuickUnionPathCompressionUF < ../../data/tinyUF.txt
+4 3
+3 8
+6 5
+9 4
+2 1
+5 0
+7 2
+6 1
+2 components
+*/
 
 public class QuickUnionPathCompressionUF implements UnionFind {
     private int[] id;

@@ -1,19 +1,21 @@
 import edu.princeton.cs.algs4.*;
 
-// $ make run CLASS=DigraphTopologicalSort ARGS="../data/jobs.txt /"
-// Calculus
-// Linear Algebra
-// Introduction to CS
-// Advanced Programming
-// Algorithms
-// Theoretical CS
-// Artificial Intelligence
-// Robotics
-// Machine Learning
-// Neural Networks
-// Databases
-// Scientific Computing
-// Computational Biology
+/*
+$ make run CLASS=DigraphTopologicalSort ARGS="../data/jobs.txt /"
+Calculus
+Linear Algebra
+Introduction to CS
+Advanced Programming
+Algorithms
+Theoretical CS
+Artificial Intelligence
+Robotics
+Machine Learning
+Neural Networks
+Databases
+Scientific Computing
+Computational Biology
+*/
 
 public class DigraphTopologicalSort {
     private Iterable<Integer> order;

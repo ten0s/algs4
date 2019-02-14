@@ -1,9 +1,11 @@
 import edu.princeton.cs.algs4.*;
 
-// $ make run CLASS=Arbitrage < ../data/rates.txt
-// 1000.00000 CAD =  995.00000 USD
-//  995.00000 USD =  737.29500 EUR
-//  737.29500 EUR = 1007.14497 CAD
+/*
+$ make run CLASS=Arbitrage < ../data/rates.txt
+1000.00000 CAD =  995.00000 USD
+ 995.00000 USD =  737.29500 EUR
+ 737.29500 EUR = 1007.14497 CAD
+*/
 
 public class Arbitrage {
     public static void main(String[] args) {

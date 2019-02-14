@@ -4,47 +4,49 @@ import java.util.Iterator;
 
 import edu.princeton.cs.algs4.*;
 
-// $ cat map.txt
-// 4 four
-// 2 two
-// 6 six
-// 1 one
-// 3 three
-// 5 five
-// 7 seven
+/*
+$ cat map.txt
+4 four
+2 two
+6 six
+1 one
+3 three
+5 five
+7 seven
 
-// $ make run CLASS=BSTMap ARGS=map.txt
-// digraph {
-//   3 [shape=point];
-//   4 [shape=point];
-//   2 [label="1/one"];
-//   2 -> 3;
-//   2 -> 4;
-//   7 [shape=point];
-//   8 [shape=point];
-//   6 [label="3/three"];
-//   6 -> 7;
-//   6 -> 8;
-//   1 [label="2/two"];
-//   1 -> 2;
-//   1 -> 6;
-//   13 [shape=point];
-//   14 [shape=point];
-//   12 [label="5/five"];
-//   12 -> 13;
-//   12 -> 14;
-//   17 [shape=point];
-//   18 [shape=point];
-//   16 [label="7/seven"];
-//   16 -> 17;
-//   16 -> 18;
-//   11 [label="6/six"];
-//   11 -> 12;
-//   11 -> 16;
-//   0 [label="4/four"];
-//   0 -> 1;
-//   0 -> 11;
-// }
+$ make run CLASS=BSTMap ARGS=map.txt
+digraph {
+  3 [shape=point];
+  4 [shape=point];
+  2 [label="1/one"];
+  2 -> 3;
+  2 -> 4;
+  7 [shape=point];
+  8 [shape=point];
+  6 [label="3/three"];
+  6 -> 7;
+  6 -> 8;
+  1 [label="2/two"];
+  1 -> 2;
+  1 -> 6;
+  13 [shape=point];
+  14 [shape=point];
+  12 [label="5/five"];
+  12 -> 13;
+  12 -> 14;
+  17 [shape=point];
+  18 [shape=point];
+  16 [label="7/seven"];
+  16 -> 17;
+  16 -> 18;
+  11 [label="6/six"];
+  11 -> 12;
+  11 -> 16;
+  0 [label="4/four"];
+  0 -> 1;
+  0 -> 11;
+}
+*/
 
 public class BSTMap<Key extends Comparable<Key>, Value> implements MAP<Key, Value> {
     private class Node {

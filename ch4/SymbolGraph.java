@@ -1,50 +1,52 @@
 import edu.princeton.cs.algs4.*;
 
-// $ make compile CLASS=SymbolGraph
+/*
+$ make compile CLASS=SymbolGraph
 
-// $ java SymbolGraph ../data/routes.txt " "
-// JFK
-//   ORD
-//   ATL
-//   MCO
-// LAX
-//   LAS
-//   PHX
-// ^-D
+$ java SymbolGraph ../data/routes.txt " "
+JFK
+  ORD
+  ATL
+  MCO
+LAX
+  LAS
+  PHX
+^-D
 
-// $ java SymbolGraph ../data/routes.txt " " dot
-// graph {
-//   0 [label="JFK"];
-//   0 -- 2;
-//   0 -- 7;
-//   0 -- 1;
-//   1 [label="MCO"];
-//   1 -- 4;
-//   1 -- 7;
-//   2 [label="ORD"];
-//   2 -- 7;
-//   2 -- 6;
-//   2 -- 5;
-//   2 -- 4;
-//   2 -- 3;
-//   3 [label="DEN"];
-//   3 -- 9;
-//   3 -- 6;
-//   4 [label="HOU"];
-//   4 -- 5;
-//   4 -- 7;
-//   5 [label="DFW"];
-//   5 -- 6;
-//   6 [label="PHX"];
-//   6 -- 9;
-//   6 -- 8;
-//   7 [label="ATL"];
-//   8 [label="LAX"];
-//   8 -- 9;
-//   9 [label="LAS"];
-// }
+$ java SymbolGraph ../data/routes.txt " " dot
+graph {
+  0 [label="JFK"];
+  0 -- 2;
+  0 -- 7;
+  0 -- 1;
+  1 [label="MCO"];
+  1 -- 4;
+  1 -- 7;
+  2 [label="ORD"];
+  2 -- 7;
+  2 -- 6;
+  2 -- 5;
+  2 -- 4;
+  2 -- 3;
+  3 [label="DEN"];
+  3 -- 9;
+  3 -- 6;
+  4 [label="HOU"];
+  4 -- 5;
+  4 -- 7;
+  5 [label="DFW"];
+  5 -- 6;
+  6 [label="PHX"];
+  6 -- 9;
+  6 -- 8;
+  7 [label="ATL"];
+  8 [label="LAX"];
+  8 -- 9;
+  9 [label="LAS"];
+}
 
-// $ java SymbolGraph ../data/routes.txt " " dot | circo -Tpng > routes.png ; open routes.png
+$ java SymbolGraph ../data/routes.txt " " dot | circo -Tpng > routes.png ; open routes.png
+*/
 
 public class SymbolGraph {
     private HashMap<String, Integer> st; // name -> index

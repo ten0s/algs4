@@ -1,37 +1,39 @@
 import edu.princeton.cs.algs4.*;
 
-// $ make run CLASS=KruskalMST ARGS="../data/tinyEWG.txt"
-// 0-7 0.16000
-// 2-3 0.17000
-// 1-7 0.19000
-// 0-2 0.26000
-// 5-7 0.28000
-// 4-5 0.35000
-// 6-2 0.40000
-// 1.81000
+/*
+$ make run CLASS=KruskalMST ARGS="../data/tinyEWG.txt"
+0-7 0.16000
+2-3 0.17000
+1-7 0.19000
+0-2 0.26000
+5-7 0.28000
+4-5 0.35000
+6-2 0.40000
+1.81000
 
-// $ make run CLASS=KruskalMST ARGS="../data/tinyEWG.txt dot"
-// graph {
-//   5 -- 7 [label="0.28", penwidth=3.0];
-//   4 -- 5 [label="0.35", penwidth=3.0];
-//   4 -- 7 [label="0.37"];
-//   6 -- 4 [label="0.93"];
-//   3 -- 6 [label="0.52"];
-//   2 -- 3 [label="0.17", penwidth=3.0];
-//   2 -- 7 [label="0.34"];
-//   6 -- 2 [label="0.4", penwidth=3.0];
-//   1 -- 5 [label="0.32"];
-//   1 -- 7 [label="0.19", penwidth=3.0];
-//   1 -- 2 [label="0.36"];
-//   1 -- 3 [label="0.29"];
-//   0 -- 7 [label="0.16", penwidth=3.0];
-//   0 -- 4 [label="0.38"];
-//   0 -- 2 [label="0.26", penwidth=3.0];
-//   6 -- 0 [label="0.58"];
-// }
+$ make run CLASS=KruskalMST ARGS="../data/tinyEWG.txt dot"
+graph {
+  5 -- 7 [label="0.28", penwidth=3.0];
+  4 -- 5 [label="0.35", penwidth=3.0];
+  4 -- 7 [label="0.37"];
+  6 -- 4 [label="0.93"];
+  3 -- 6 [label="0.52"];
+  2 -- 3 [label="0.17", penwidth=3.0];
+  2 -- 7 [label="0.34"];
+  6 -- 2 [label="0.4", penwidth=3.0];
+  1 -- 5 [label="0.32"];
+  1 -- 7 [label="0.19", penwidth=3.0];
+  1 -- 2 [label="0.36"];
+  1 -- 3 [label="0.29"];
+  0 -- 7 [label="0.16", penwidth=3.0];
+  0 -- 4 [label="0.38"];
+  0 -- 2 [label="0.26", penwidth=3.0];
+  6 -- 0 [label="0.58"];
+}
 
-// $ make run CLASS=KruskalMST ARGS="../data/largeEWG.txt weight"
-// Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+$ make run CLASS=KruskalMST ARGS="../data/largeEWG.txt weight"
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+*/
 
 public class KruskalMST {
     private EdgeWeightedGraph G;

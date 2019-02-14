@@ -1,19 +1,21 @@
 import edu.princeton.cs.algs4.*;
 
-// $ make run CLASS=Digraph ARGS="../data/tinyCG.txt dot"
-// digraph {
-//   0 -> 2;
-//   0 -> 1;
-//   0 -> 5;
-//   1 -> 2;
-//   2 -> 3;
-//   2 -> 4;
-//   3 -> 5;
-//   3 -> 4;
-//   // {rank=same 0 1 2 3 4 5};
-// }
+/*
+$ make run CLASS=Digraph ARGS="../data/tinyCG.txt dot"
+digraph {
+  0 -> 2;
+  0 -> 1;
+  0 -> 5;
+  1 -> 2;
+  2 -> 3;
+  2 -> 4;
+  3 -> 5;
+  3 -> 4;
+  // {rank=same 0 1 2 3 4 5};
+}
 
-// $ make run CLASS=Digraph ARGS="../data/tinyCG.txt dot dir" | dot -Tpng > tinyCG.png ; open tinyCG.png
+$ make run CLASS=Digraph ARGS="../data/tinyCG.txt dot dir" | dot -Tpng > tinyCG.png ; open tinyCG.png
+*/
 
 public class Digraph {
     private final int V;        // number of vertices
