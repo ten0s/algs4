@@ -229,9 +229,9 @@ public class BSTSet<Key extends Comparable<Key>> implements SET<Key> {
         public int value;
     }
 
-    private void toDotNull(Key key, Counter nullcount, StringBuilder sb) {
+    private void toDotNull(Node node, Counter nullcount, StringBuilder sb) {
         sb.append("    null" + nullcount.value + " [shape=point];\n");
-        sb.append("    " + key + " -> null" + nullcount.value + ";\n");
+        sb.append("    " + node.key + " -> null" + nullcount.value + ";\n");
     }
 
     private void toDotAux(Node node, Counter nullcount, StringBuilder sb) {
@@ -240,7 +240,7 @@ public class BSTSet<Key extends Comparable<Key>> implements SET<Key> {
             toDotAux(node.left, nullcount, sb);
         } else {
             nullcount.value++;
-            toDotNull(node.key, nullcount, sb);
+            toDotNull(node, nullcount, sb);
         }
 
         if (node.right != null) {
@@ -248,7 +248,7 @@ public class BSTSet<Key extends Comparable<Key>> implements SET<Key> {
             toDotAux(node.right, nullcount, sb);
         } else {
             nullcount.value++;
-            toDotNull(node.key, nullcount, sb);
+            toDotNull(node, nullcount, sb);
         }
     }
 
