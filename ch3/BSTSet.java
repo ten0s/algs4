@@ -4,6 +4,42 @@ import java.util.Iterator;
 
 import edu.princeton.cs.algs4.*;
 
+// $ cat set.txt
+// 4 2 6 1 3 5 7
+
+// $ make run CLASS=BSTSet ARGS=set.txt
+// digraph {
+//   3 [shape=point];
+//   4 [shape=point];
+//   2 [label="1"];
+//   2 -> 3;
+//   2 -> 4;
+//   7 [shape=point];
+//   8 [shape=point];
+//   6 [label="3"];
+//   6 -> 7;
+//   6 -> 8;
+//   1 [label="2"];
+//   1 -> 2;
+//   1 -> 6;
+//   13 [shape=point];
+//   14 [shape=point];
+//   12 [label="5"];
+//   12 -> 13;
+//   12 -> 14;
+//   17 [shape=point];
+//   18 [shape=point];
+//   16 [label="7"];
+//   16 -> 17;
+//   16 -> 18;
+//   11 [label="6"];
+//   11 -> 12;
+//   11 -> 16;
+//   0 [label="4"];
+//   0 -> 1;
+//   0 -> 11;
+// }
+
 public class BSTSet<Key extends Comparable<Key>> implements SET<Key> {
     private class Node {
         Key key;
@@ -211,45 +247,27 @@ public class BSTSet<Key extends Comparable<Key>> implements SET<Key> {
     }
 
     public String toDot() {
+        // credits
+        // https://gist.github.com/kstwrt/8591183
         // https://eli.thegreenplace.net/2009/11/23/visualizing-binary-trees-with-graphviz
         StringBuilder sb = new StringBuilder();
         sb.append("digraph {\n");
-        if (root == null) {
-            sb.append("\n");
-        } else if (root.left == null && root.right == null) {
-            sb.append("    " + root.key + "\n");
-        } else {
-            toDotAux(root, new Counter(), sb);
-        }
+        toDot(root, 0, sb);
         sb.append("}\n");
         return sb.toString();
     }
 
-    private class Counter {
-        public int value;
-    }
-
-    private void toDotNull(Node node, Counter nullcount, StringBuilder sb) {
-        sb.append("    null" + nullcount.value + " [shape=point];\n");
-        sb.append("    " + node.key + " -> null" + nullcount.value + ";\n");
-    }
-
-    private void toDotAux(Node node, Counter nullcount, StringBuilder sb) {
-        if (node.left != null) {
-            sb.append("    " + node.key + " -> " + node.left.key + ";\n");
-            toDotAux(node.left, nullcount, sb);
-        } else {
-            nullcount.value++;
-            toDotNull(node, nullcount, sb);
+    private int toDot(Node node, int id, StringBuilder sb) {
+        if (node == null) {
+            sb.append("  " + id + " [shape=point];\n");
+            return id+1;
         }
-
-        if (node.right != null) {
-            sb.append("    " + node.key + " -> " + node.right.key + ";\n");
-            toDotAux(node.right, nullcount, sb);
-        } else {
-            nullcount.value++;
-            toDotNull(node, nullcount, sb);
-        }
+        int id2 = toDot(node.left, id+1, sb);
+        int id3 = toDot(node.right, id2, sb);
+        sb.append("  " + id + " [label=\"" + node.key + "\"];\n");
+        sb.append("  " + id + " -> " + (id+1) + ";\n");
+        sb.append("  " + id + " -> " + id2  + ";\n");
+        return id3+1;
     }
 
     public static void main(String[] args) {
@@ -258,7 +276,6 @@ public class BSTSet<Key extends Comparable<Key>> implements SET<Key> {
             return;
         }
         In in = new In(args[0]);
-        in.readInt();
         BSTSet<Integer> tree = new BSTSet<>();
         while (!in.isEmpty()) {
             int key = in.readInt();
