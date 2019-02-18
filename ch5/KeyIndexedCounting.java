@@ -2,50 +2,27 @@ import edu.princeton.cs.algs4.*;
 
 /*
 $ make run CLASS=KeyIndexedCounting <<EOF
-4
-3
-3 Anderson
-2 Jones
-1 Smith
+6
+3 1 4 0 5 2 5 4 3 2 1 0 0 1 2 3 4 5
 EOF
-1 Smith
-2 Jones
-3 Anderson
+0 0 0 1 1 1 2 2 2 3 3 3 4 4 4 5 5 5
 */
 
-class Item {
-    private int key;
-    private String val;
-
-    public Item(int key, String val) {
-        this.key = key;
-        this.val = val;
-    }
-
-    public int key() {
-        return key;
-    }
-
-    public String val() {
-        return val;
-    }
-}
-
 public class KeyIndexedCounting {
-    public static Item[] sort(Item[] a, int R) {
+    public static int[] sort(int[] a, int R) {
         int N = a.length;
-        Item[] aux = new Item[N];
+        int[] aux = new int[N];
 
         int[] count = new int[R+1];
 
         for (int i = 0; i < N; i++)
-            count[a[i].key()+1]++;
+            count[a[i]+1]++;
 
         for (int r = 0; r < R; r++)
             count[r+1] += count[r];
 
         for (int i = 0; i < N; i++)
-            aux[count[a[i].key()]++] = a[i];
+            aux[count[a[i]]++] = a[i];
 
         for (int i = 0; i < N; i++)
             a[i] = aux[i];
@@ -55,19 +32,14 @@ public class KeyIndexedCounting {
 
     public static void main(String[] args) {
         int R = StdIn.readInt();
-        int N = StdIn.readInt();
-        Item[] items = new Item[N];
+        int[] a = StdIn.readAllInts();
+        int N = a.length;
+
+        sort(a, R);
 
         for (int i = 0; i < N; i++) {
-            int key = StdIn.readInt();
-            String val = StdIn.readString();
-            items[i] = new Item(key, val);
+            StdOut.print(a[i] + " ");
         }
-
-        sort(items, R);
-
-        for (int i = 0; i < N; i++) {
-            StdOut.println(items[i].key() + " " + items[i].val());
-        }
+        StdOut.println();
     }
 }
