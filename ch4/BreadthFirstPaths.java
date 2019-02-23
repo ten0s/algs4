@@ -4,13 +4,17 @@ import java.util.Collections;
 import edu.princeton.cs.algs4.*;
 
 /*
-$ make run CLASS=BreadthFirstPaths ARGS="../data/tinyCG.txt 0"
-0 to 0: 0
-0 to 1: 0-1
-0 to 2: 0-2
-0 to 3: 0-2-3
-0 to 4: 0-2-4
-0 to 5: 0-5
+#+BEGIN_SRC sh :results output
+make run CLASS=BreadthFirstPaths ARGS="../data/tinyCG.txt 0"
+#+END_SRC
+
+#+RESULTS:
+: 0 to 0: 0
+: 0 to 1: 0-1
+: 0 to 2: 0-2
+: 0 to 3: 0-2-3
+: 0 to 4: 0-2-4
+: 0 to 5: 0-5
 */
 
 public class BreadthFirstPaths {

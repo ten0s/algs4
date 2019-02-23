@@ -1,7 +1,12 @@
 import edu.princeton.cs.algs4.*;
 
 /*
-$ make run CLASS=CPM < ../data/jobsPC.txt
+#+BEGIN_SRC sh :results output
+make run CLASS=CPM < ../data/jobsPC.txt
+#+END_SRC
+
+#+RESULTS:
+
 ...
 job   start  finish
 -------------------

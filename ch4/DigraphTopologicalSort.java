@@ -1,7 +1,12 @@
 import edu.princeton.cs.algs4.*;
 
 /*
-$ make run CLASS=DigraphTopologicalSort ARGS="../data/jobs.txt /"
+#+BEGIN_SRC sh :results output drawer
+make run CLASS=DigraphTopologicalSort ARGS="../data/jobs.txt /"
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
 Calculus
 Linear Algebra
 Introduction to CS
@@ -15,6 +20,7 @@ Neural Networks
 Databases
 Scientific Computing
 Computational Biology
+:END:
 */
 
 public class DigraphTopologicalSort {

@@ -1,16 +1,20 @@
 import edu.princeton.cs.algs4.*;
 
 /*
-$ make run CLASS=KeyIndexedCountingItems <<EOF
+#+BEGIN_SRC sh :results output
+make run CLASS=KeyIndexedCountingItems <<EOF
 4
 3
 3 Anderson
 2 Jones
 1 Smith
 EOF
-1 Smith
-2 Jones
-3 Anderson
+#+END_SRC
+
+#+RESULTS:
+: 1 Smith
+: 2 Jones
+: 3 Anderson
 */
 
 class Item {

@@ -1,20 +1,37 @@
 import edu.princeton.cs.algs4.*;
 
 /*
-$ make compile CLASS=SymbolDigraph
+#+BEGIN_SRC sh :results output
+make compile CLASS=SymbolDigraph
+#+END_SRC
 
-$ java SymbolDigraph ../data/routes.txt " "
+#+RESULTS:
+
+#+BEGIN_SRC sh :results output
+java SymbolDigraph ../data/routes.txt " " <<EOF
 JFK
-  ORD
-  ATL
-  MCO
 LAX
 LAS
-  PHX
-  LAX
-^-D
+EOF
+#+END_SRC
 
-$ java SymbolDigraph ../data/routes.txt " " dot
+#+RESULTS:
+: JFK
+:    ORD
+:    ATL
+:    MCO
+: LAX
+: LAS
+:    PHX
+:    LAX
+
+#+NAME: diroutes
+#+BEGIN_SRC sh :results output
+java SymbolDigraph ../data/routes.txt " " dot
+#+END_SRC
+
+#+RESULTS: diroutes
+#+begin_example
 digraph {
   0 [label="JFK"];
   0 -> 2;
@@ -45,8 +62,15 @@ digraph {
   9 -> 6;
   9 -> 8;
 }
+#+end_example
 
-$ java SymbolDigraph ../data/routes.txt " " dot | circo -Tpng > routes.png ; open routes.png
+#+BEGIN_SRC dot :file diroutes.png :var desc=diroutes
+$desc
+#+END_SRC
+
+#+RESULTS:
+[[file:diroutes.png]]
+
 */
 
 public class SymbolDigraph {
@@ -119,6 +143,7 @@ public class SymbolDigraph {
             Digraph digraph = sg.digraph();
             while (StdIn.hasNextLine()) {
                 String s = StdIn.readLine();
+                StdOut.println(s);
                 for (int v : digraph.adj(sg.indexOf(s))) {
                     StdOut.println("   " + sg.nameOf(v));
                 }

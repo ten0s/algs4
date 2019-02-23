@@ -3,7 +3,7 @@ import edu.princeton.cs.algs4.*;
 /*
 M-x org-babel-execute-src-block-maybe
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :results output drawer
 make run CLASS=StringLCD <<EOF
 4PGC938
 2IYE230
@@ -22,19 +22,21 @@ EOF
 #+END_SRC
 
 #+RESULTS:
-| 1ICK750 |
-| 1ICK750 |
-| 1OHV845 |
-| 1OHV845 |
-| 1OHV845 |
-| 2IYE230 |
-| 2RLA629 |
-| 2RLA629 |
-| 3ATW723 |
-| 3CI0720 |
-| 3CI0720 |
-| 4JZY524 |
-| 4PGC938 |
+:RESULTS:
+1ICK750
+1ICK750
+1OHV845
+1OHV845
+1OHV845
+2IYE230
+2RLA629
+2RLA629
+3ATW723
+3CI0720
+3CI0720
+4JZY524
+4PGC938
+:END:
 */
 
 public class StringLCD {

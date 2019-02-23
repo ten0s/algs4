@@ -1,7 +1,13 @@
 import edu.princeton.cs.algs4.*;
 
 /*
-$ make run CLASS=Digraph ARGS="../data/tinyCG.txt dot"
+#+NAME: tiny_cg
+#+BEGIN_SRC sh :results output drawer
+make run CLASS=Digraph ARGS="../data/tinyCG.txt dot"
+#+END_SRC
+
+#+RESULTS: tiny_cg
+:RESULTS:
 digraph {
   0 -> 2;
   0 -> 1;
@@ -14,7 +20,15 @@ digraph {
   // {rank=same 0 1 2 3 4 5};
 }
 
-$ make run CLASS=Digraph ARGS="../data/tinyCG.txt dot dir" | dot -Tpng > tinyCG.png ; open tinyCG.png
+:END:
+
+#+BEGIN_SRC dot :file tinyCG.png :var dotdesc=tiny_cg
+$dotdesc
+#+END_SRC
+
+#+RESULTS:
+[[file:tinyCG.png]]
+
 */
 
 public class Digraph {

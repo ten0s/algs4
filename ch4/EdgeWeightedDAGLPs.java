@@ -2,18 +2,26 @@ import java.util.Iterator;
 import edu.princeton.cs.algs4.*;
 
 /*
-$ make run CLASS=EdgeWeightedDAGLPs ARGS="../data/tinyEWDAG.txt 5"
-5 to 0 (2.44): 5->1 0.32000 1->3 0.29000 3->6 0.52000 6->4 0.93000 4->0 0.38000
-5 to 1 (0.32): 5->1 0.32000
-5 to 2 (2.77): 5->1 0.32000 1->3 0.29000 3->6 0.52000 6->4 0.93000 4->7 0.37000 7->2 0.34000
-5 to 3 (0.61): 5->1 0.32000 1->3 0.29000
-5 to 4 (2.06): 5->1 0.32000 1->3 0.29000 3->6 0.52000 6->4 0.93000
-5 to 5 (-0.00):
-5 to 6 (1.13): 5->1 0.32000 1->3 0.29000 3->6 0.52000
-5 to 7 (2.43): 5->1 0.32000 1->3 0.29000 3->6 0.52000 6->4 0.93000 4->7 0.37000
+#+BEGIN_SRC sh :results output
+make run CLASS=EdgeWeightedDAGLPs ARGS="../data/tinyEWDAG.txt 5"
+#+END_SRC
 
-$ make run CLASS=EdgeWeightedDAGLPs ARGS="../data/tinyEWDAG.txt 5 sum"
-4.04
+#+RESULTS:
+: 5 to 0 (2.44): 5->1 0.32000 1->3 0.29000 3->6 0.52000 6->4 0.93000 4->0 0.38000
+: 5 to 1 (0.32): 5->1 0.32000
+: 5 to 2 (2.77): 5->1 0.32000 1->3 0.29000 3->6 0.52000 6->4 0.93000 4->7 0.37000 7->2 0.34000
+: 5 to 3 (0.61): 5->1 0.32000 1->3 0.29000
+: 5 to 4 (2.06): 5->1 0.32000 1->3 0.29000 3->6 0.52000 6->4 0.93000
+: 5 to 5 (-0.00):
+: 5 to 6 (1.13): 5->1 0.32000 1->3 0.29000 3->6 0.52000
+: 5 to 7 (2.43): 5->1 0.32000 1->3 0.29000 3->6 0.52000 6->4 0.93000 4->7 0.37000
+
+#+BEGIN_SRC sh :results output
+make run CLASS=EdgeWeightedDAGLPs ARGS="../data/tinyEWDAG.txt 5 sum"
+#+END_SRC
+
+#+RESULTS:
+: 11.759999999999998
 */
 
 public class EdgeWeightedDAGLPs {

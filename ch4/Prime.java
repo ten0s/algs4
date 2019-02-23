@@ -1,3 +1,20 @@
+/*
+#+BEGIN_SRC sh :results output
+make run CLASS=Prime 2>&1
+#+END_SRC
+
+#+RESULTS:
+: usage: java Prime <INT>
+
+#+BEGIN_SRC sh :results output
+make run CLASS=Prime ARGS="18"
+#+END_SRC
+
+#+RESULTS:
+: isPrime: false
+: nextPrime: 19
+*/
+
 public class Prime {
     public static boolean isPrime(int n) {
         if (n < 2) return false;

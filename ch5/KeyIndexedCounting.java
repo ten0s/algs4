@@ -1,11 +1,15 @@
 import edu.princeton.cs.algs4.*;
 
 /*
-$ make run CLASS=KeyIndexedCounting <<EOF
+#+BEGIN_SRC sh :results output
+make run CLASS=KeyIndexedCounting <<EOF
 6
 3 1 4 0 5 2 5 4 3 2 1 0 0 1 2 3 4 5
 EOF
-0 0 0 1 1 1 2 2 2 3 3 3 4 4 4 5 5 5
+#+END_SRC
+
+#+RESULTS:
+: 0 0 0 1 1 1 2 2 2 3 3 3 4 4 4 5 5 5
 */
 
 public class KeyIndexedCounting {

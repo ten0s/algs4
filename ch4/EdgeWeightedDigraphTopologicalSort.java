@@ -8,7 +8,7 @@ public class EdgeWeightedDigraphTopologicalSort {
             order = orders.reversedPostOrder();
         } else {
             throw new IllegalArgumentException(
-                "\nCycle detected: " + GraphUtil.pathToString(cycleFinder.cycle())
+                "\nCycle detected: " + GraphUtil.directedWeightedPathToString(cycleFinder.cycle())
             );
         }
     }

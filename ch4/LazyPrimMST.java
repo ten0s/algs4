@@ -1,17 +1,26 @@
 import edu.princeton.cs.algs4.*;
 
 /*
-$ make run CLASS=LazyPrimMST ARGS="../data/tinyEWG.txt"
-0-7 0.16000
-2-3 0.17000
-1-7 0.19000
-0-2 0.26000
-5-7 0.28000
-4-5 0.35000
-6-2 0.40000
-1.81000
+#+BEGIN_SRC sh :results output
+make run CLASS=LazyPrimMST ARGS="../data/tinyEWG.txt"
+#+END_SRC
 
-$ make run CLASS=LazyPrimMST ARGS="../data/tinyEWG.txt dot"
+#+RESULTS:
+: 0-7 0.16000
+: 2-3 0.17000
+: 1-7 0.19000
+: 0-2 0.26000
+: 5-7 0.28000
+: 4-5 0.35000
+: 6-2 0.40000
+: 1.81000
+
+#+BEGIN_SRC sh :results output drawer
+make run CLASS=LazyPrimMST ARGS="../data/tinyEWG.txt dot"
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
 graph {
   5 -- 7 [label="0.28", penwidth=3.0];
   4 -- 5 [label="0.35", penwidth=3.0];
@@ -31,8 +40,12 @@ graph {
   6 -- 0 [label="0.58"];
 }
 
-$ make run CLASS=LazyPrimMST ARGS="../data/largeEWG.txt weight"
-647.66307
+:END:
+
+NB: Will take 5+ mins
+#+BEGIN_SRC sh :results output
+make run CLASS=LazyPrimMST ARGS="../data/largeEWG.txt weight"
+#+END_SRC
 */
 
 public class LazyPrimMST {

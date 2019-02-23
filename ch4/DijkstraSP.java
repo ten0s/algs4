@@ -1,17 +1,31 @@
 import edu.princeton.cs.algs4.*;
 
 /*
-$ make run CLASS=DijkstraSP ARGS="../data/tinyEWD.txt 0 6"
-0 to 6 (1.51): 0->2 0.26000 2->7 0.34000 7->3 0.39000 3->6 0.52000
+#+BEGIN_SRC sh :results output
+make run CLASS=DijkstraSP ARGS="../data/tinyEWD.txt 0 6"
+#+END_SRC
 
-$ make run CLASS=DijkstraSP ARGS="../data/tinyEWD.txt 0 6 dist"
-1.51
+#+RESULTS:
+: 0 to 6 (1.51): 0->2 0.26000 2->7 0.34000 7->3 0.39000 3->6 0.52000
 
-$ make run CLASS=DijkstraSP ARGS="../data/tinyEWG.txt 0 6"
-0 to 6 (0.95): 0->2 0.26000 2->3 0.17000 3->6 0.52000
+#+BEGIN_SRC sh :results output
+make run CLASS=DijkstraSP ARGS="../data/tinyEWD.txt 0 6 dist"
+#+END_SRC
 
-$ make run CLASS=DijkstraSP ARGS="../data/largeEWD.txt 0 999812 dist"
-0.54
+#+RESULTS:
+: 1.51
+
+#+BEGIN_SRC sh :results output
+make run CLASS=DijkstraSP ARGS="../data/tinyEWG.txt 0 6"
+#+END_SRC
+
+#+RESULTS:
+: 0 to 6 (0.95): 0->2 0.26000 2->3 0.17000 3->6 0.52000
+
+NB: Will take 5+ mins
+#+BEGIN_SRC sh :results output
+make run CLASS=DijkstraSP ARGS="../data/largeEWD.txt 0 999812 dist"
+#+END_SRC
 */
 
 public class DijkstraSP {

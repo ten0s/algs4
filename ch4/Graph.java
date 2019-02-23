@@ -1,6 +1,19 @@
 import edu.princeton.cs.algs4.*;
 
-// $ make run CLASS=Graph ARGS="../data/tinyCG.txt dot" | dot -Tpng > tinyCG.png ; open tinyCG.png
+/*
+#+NAME: tiny_cg
+#+BEGIN_SRC sh :results output drawer
+make run CLASS=Graph ARGS="../data/tinyCG.txt dot"
+#+END_SRC
+
+#+BEGIN_SRC dot :file tinyCG.png :var dotdesc=tiny_cg
+$dotdesc
+#+END_SRC
+
+#+RESULTS:
+[[file:tinyCG.png]]
+
+*/
 
 public class Graph {
     private final int V;        // number of vertices

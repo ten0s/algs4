@@ -1,20 +1,31 @@
 import edu.princeton.cs.algs4.*;
 
 /*
-$ make run CLASS=EdgeWeightedDAGSPs ARGS="../data/tinyEWDAG.txt 5"
-5 to 0 (0.73): 5->4 0.35000 4->0 0.38000
-5 to 1 (0.32): 5->1 0.32000
-5 to 2 (0.62): 5->7 0.28000 7->2 0.34000
-5 to 3 (0.61): 5->1 0.32000 1->3 0.29000
-5 to 4 (0.35): 5->4 0.35000
-5 to 5 (0.00):
-5 to 6 (1.13): 5->1 0.32000 1->3 0.29000 3->6 0.52000
-5 to 7 (0.28): 5->7 0.28000
+#+BEGIN_SRC sh :results output
+make run CLASS=EdgeWeightedDAGSPs ARGS="../data/tinyEWDAG.txt 5"
+#+END_SRC
 
-$ make run CLASS=EdgeWeightedDAGSPs ARGS="../data/tinyEWDAG.txt 5 sum"
+#+RESULTS:
+: 5 to 0 (0.73): 5->4 0.35000 4->0 0.38000
+: 5 to 1 (0.32): 5->1 0.32000
+: 5 to 2 (0.62): 5->7 0.28000 7->2 0.34000
+: 5 to 3 (0.61): 5->1 0.32000 1->3 0.29000
+: 5 to 4 (0.35): 5->4 0.35000
+: 5 to 5 (0.00):
+: 5 to 6 (1.13): 5->1 0.32000 1->3 0.29000 3->6 0.52000
+: 5 to 7 (0.28): 5->7 0.28000
+
+#+BEGIN_SRC sh :results output
+make run CLASS=EdgeWeightedDAGSPs ARGS="../data/tinyEWDAG.txt 5 sum"
+#+END_SRC
 4.04
+
+#+BEGIN_SRC sh :results output
 make run CLASS=DijkstraSPs ARGS="../data/tinyEWDAG.txt 5 sum"
-4.04
+#+END_SRC
+
+#+RESULTS:
+: 4.04
 */
 
 public class EdgeWeightedDAGSPs {

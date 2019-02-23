@@ -1,27 +1,38 @@
 import edu.princeton.cs.algs4.*;
 
 /*
-$ make run CLASS=LazyDijkstraSPs ARGS="../data/tinyEWD.txt 0"
-0 to 0 (0.00):
-0 to 1 (1.05): 0->4 0.38000 4->5 0.35000 5->1 0.32000
-0 to 2 (0.26): 0->2 0.26000
-0 to 3 (0.99): 0->2 0.26000 2->7 0.34000 7->3 0.39000
-0 to 4 (0.38): 0->4 0.38000
-0 to 5 (0.73): 0->4 0.38000 4->5 0.35000
-0 to 6 (1.51): 0->2 0.26000 2->7 0.34000 7->3 0.39000 3->6 0.52000
-0 to 7 (0.60): 0->2 0.26000 2->7 0.34000
+#+BEGIN_SRC sh :results output
+make run CLASS=LazyDijkstraSPs ARGS="../data/tinyEWD.txt 0"
+#+END_SRC
 
-$ make run CLASS=LazyDijkstraSPs ARGS="../data/tinyEWG.txt 0"
-0 to 0 (0.00):
-0 to 1 (Infinity):
-0 to 2 (0.26): 0->2 0.26000
-0 to 3 (0.43): 0->2 0.26000 2->3 0.17000
-0 to 4 (0.38): 0->4 0.38000
-0 to 5 (0.73): 0->4 0.38000 4->5 0.35000
-0 to 6 (0.95): 0->2 0.26000 2->3 0.17000 3->6 0.52000
-0 to 7 (0.16): 0->7 0.16000
+#+RESULTS:
+: 0 to 0 (0.00):
+: 0 to 1 (1.05): 0->4 0.38000 4->5 0.35000 5->1 0.32000
+: 0 to 2 (0.26): 0->2 0.26000
+: 0 to 3 (0.99): 0->2 0.26000 2->7 0.34000 7->3 0.39000
+: 0 to 4 (0.38): 0->4 0.38000
+: 0 to 5 (0.73): 0->4 0.38000 4->5 0.35000
+: 0 to 6 (1.51): 0->2 0.26000 2->7 0.34000 7->3 0.39000 3->6 0.52000
+: 0 to 7 (0.60): 0->2 0.26000 2->7 0.34000
 
-$ make run CLASS=LazyDijkstraSPs ARGS="../data/largeEWD.txt 0 sum"
+#+BEGIN_SRC sh :results output
+make run CLASS=LazyDijkstraSPs ARGS="../data/tinyEWG.txt 0"
+#+END_SRC
+
+#+RESULTS:
+: 0 to 0 (0.00):
+: 0 to 1 (Infinity):
+: 0 to 2 (0.26): 0->2 0.26000
+: 0 to 3 (0.43): 0->2 0.26000 2->3 0.17000
+: 0 to 4 (0.38): 0->4 0.38000
+: 0 to 5 (0.73): 0->4 0.38000 4->5 0.35000
+: 0 to 6 (0.95): 0->2 0.26000 2->3 0.17000 3->6 0.52000
+: 0 to 7 (0.16): 0->7 0.16000
+
+NB: Will take 5+ mins
+#+BEGIN_SRC sh :results output
+make run CLASS=LazyDijkstraSPs ARGS="../data/largeEWD.txt 0 sum"
+#+END_SRC
 Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
 */
 

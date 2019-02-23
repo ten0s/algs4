@@ -1,19 +1,36 @@
 import edu.princeton.cs.algs4.*;
 
 /*
-$ make compile CLASS=SymbolGraph
+#+BEGIN_SRC sh :results output
+make compile CLASS=SymbolGraph
+#+END_SRC
 
-$ java SymbolGraph ../data/routes.txt " "
+#+RESULTS:
+
+#+BEGIN_SRC sh :results output drawer
+java SymbolGraph ../data/routes.txt " " <<EOF
 JFK
-  ORD
-  ATL
-  MCO
 LAX
-  LAS
-  PHX
-^-D
+EOF
+#+END_SRC
 
-$ java SymbolGraph ../data/routes.txt " " dot
+#+RESULTS:
+:RESULTS:
+JFK
+   ORD
+   ATL
+   MCO
+LAX
+   LAS
+   PHX
+:END:
+
+#+BEGIN_SRC sh :results output
+java SymbolGraph ../data/routes.txt " " dot
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
 graph {
   0 [label="JFK"];
   0 -- 2;
@@ -44,8 +61,20 @@ graph {
   8 -- 9;
   9 [label="LAS"];
 }
+#+end_example
 
-$ java SymbolGraph ../data/routes.txt " " dot | circo -Tpng > routes.png ; open routes.png
+#+NAME: graph
+#+BEGIN_SRC sh :results output
+java SymbolGraph ../data/routes.txt " " dot
+#+END_SRC
+
+#+BEGIN_SRC dot :file routes.png :var desc=graph
+$desc
+#+END_SRC
+
+#+RESULTS:
+[[file:routes.png]]
+
 */
 
 public class SymbolGraph {
@@ -122,6 +151,7 @@ public class SymbolGraph {
             Graph graph = sg.graph();
             while (StdIn.hasNextLine()) {
                 String s = StdIn.readLine();
+                StdOut.println(s);
                 for (int v : graph.adj(sg.indexOf(s))) {
                     StdOut.println("   " + sg.nameOf(v));
                 }
