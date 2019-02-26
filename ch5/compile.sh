@@ -6,7 +6,7 @@ if [[ $# -ne 1 ]]; then
 fi
 
 if [[ -f "${1}.java" ]]; then
-    javac -cp . "${1}.java" -g
+    javac -Xlint:unchecked -cp . "${1}.java" -g
 else
     echo "${1}.java not found"
     exit 1
