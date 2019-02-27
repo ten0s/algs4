@@ -196,18 +196,18 @@ public class TrieMap<Value> implements MAP<String, Value> {
         return x;
     }
 
-    public void delete(String key) {
-        root = delete(root, key, 0);
+    public void remove(String key) {
+        root = remove(root, key, 0);
     }
 
-    private Node delete(Node x, String key, int d) {
+    private Node remove(Node x, String key, int d) {
         if (x == null) return null;
         if (d == key.length()) {
             if (x.val != null) size--;
             x.val = null;
         } else {
             char c = key.charAt(d);
-            x.next[c] = delete(x.next[c], key, d+1);
+            x.next[c] = remove(x.next[c], key, d+1);
         }
         if (x.val != null) return x;
 

@@ -193,18 +193,18 @@ public class TrieSet {
         return x;
     }
 
-    public void delete(String key) {
-        root = delete(root, key, 0);
+    public void remove(String key) {
+        root = remove(root, key, 0);
     }
 
-    private Node delete(Node x, String key, int d) {
+    private Node remove(Node x, String key, int d) {
         if (x == null) return null;
         if (d == key.length()) {
             if (x.end) size--;
             x.end = false;
         } else {
             char c = key.charAt(d);
-            x.next[c] = delete(x.next[c], key, d+1);
+            x.next[c] = remove(x.next[c], key, d+1);
         }
         if (x.end) return x;
 
