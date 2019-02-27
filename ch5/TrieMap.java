@@ -144,7 +144,7 @@ $src
 
 */
 
-public class TrieMap<Value> implements MAP<String, Value> {
+public class TrieMap<Value> {
     private final static int R = 256; // extended ASCII
     private Node root = new Node();
     private int size;
@@ -304,16 +304,18 @@ public class TrieMap<Value> implements MAP<String, Value> {
     public static void main(String[] args) {
         if (args.length == 0) {
             StdOut.println("usage: java TrieMap <file> <<EOF");
-            StdOut.println("dot | size | lpo <prefix> | kwp <prefix> | ktm <pattern>");
+            StdOut.println("dot | size |");
+            StdOut.println("get <key> | put <key> <val> | remove <key> |");
+            StdOut.println("lpo <prefix> | kwp <prefix> | ktm <pattern>");
             StdOut.println("EOF");
             return;
 
         }
         In in = new In(args[0]);
-        TrieMap<Integer> trie = new TrieMap<>();
+        TrieMap<String> trie = new TrieMap<>();
         while (!in.isEmpty()) {
             String key = in.readString();
-            trie.put(key, trie.size());
+            trie.put(key, "" + trie.size());
         }
         while (!StdIn.isEmpty()) {
             String cmd = StdIn.readString();
@@ -321,16 +323,29 @@ public class TrieMap<Value> implements MAP<String, Value> {
                 StdOut.println(trie.toDot());
             } else if (cmd.equals("size")) {
                 StdOut.println(trie.size());
+            } else if (cmd.equals("get")) {
+                String key = StdIn.readString();
+                StdOut.println(trie.get(key));
+            } else if (cmd.equals("put")) {
+                String key = StdIn.readString();
+                String val = StdIn.readString();
+                trie.put(key, val);
+            } else if (cmd.equals("remove")) {
+                String key = StdIn.readString();
+                trie.remove(key);
             } else if (cmd.equals("lpo")) {
                 String prefix = StdIn.readString();
+                if (prefix.equals("\"\"") || prefix.equals("''")) prefix = "";
                 StdOut.println(trie.longestPrefixOf(prefix));
             } else if (cmd.equals("kwp")) {
                 String prefix = StdIn.readString();
+                if (prefix.equals("\"\"") || prefix.equals("''")) prefix = "";
                 for (String s : trie.keysWithPrefix(prefix)) {
                     StdOut.println(s);
                 }
             } else if (cmd.equals("ktm")) {
                 String pattern = StdIn.readString();
+                if (pattern.equals("\"\"") || pattern.equals("''")) pattern = "";
                 for (String s : trie.keysThatMatch(pattern)) {
                     StdOut.println(s);
                 }
