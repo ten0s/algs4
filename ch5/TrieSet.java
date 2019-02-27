@@ -264,7 +264,7 @@ public class TrieSet {
     public String toDot() {
         StringBuilder sb = new StringBuilder();
         sb.append("graph {\n");
-        sb.append("  0 [label=\" \"];\n");
+        sb.append("  0 [" + label("") + "];\n");
         toDot(root, 0, 1, sb);
         sb.append("}\n");
         return sb.toString();
@@ -274,12 +274,7 @@ public class TrieSet {
         if (x == null) return id;
         for (char c = 0; c < R; c++) {
             if (x.next[c] != null) {
-                sb.append(
-                    "  " + id +
-                    " [" +
-                    charLabel(c) +
-                    (x.next[c].end ? " " + valLabel('t') : "") +
-                    "];\n");
+                sb.append("  " + id + " " + attrs(label(c), xlabel(x.next[c].end)) + ";\n");
                 sb.append("  " + pid + " -- " + id + ";\n");
                 id = toDot(x.next[c], id, id+1, sb);
             }
@@ -287,12 +282,20 @@ public class TrieSet {
         return id;
     }
 
-    private String charLabel(char c) {
-        return "label=\"" + Character.toString(c) + "\"";
+    private String attrs(String label, String xlabel) {
+        return "[" + label + (xlabel.equals("") ? "" : " " + xlabel) + "]";
     }
 
-    private String valLabel(Object val) {
-        return "xlabel=\"" + val + "\"";
+    private String label(Object o) {
+        return "label=\"" + o + "\"";
+    }
+
+    private String xlabel(boolean v) {
+        if (v) {
+            return "xlabel=\"t\"";
+        } else {
+            return "";
+        }
     }
 
     public static void main(String[] args) {
