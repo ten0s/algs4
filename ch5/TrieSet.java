@@ -1,5 +1,7 @@
 import java.util.Deque;
 import java.util.ArrayDeque;
+import java.util.Collections;
+import java.util.Iterator;
 
 import edu.princeton.cs.algs4.*;
 
@@ -12,7 +14,7 @@ wc -l /usr/share/dict/words
 : 99171 /usr/share/dict/words
 
 #+BEGIN_SRC sh
-make run CLASS=TrieST ARGS=/usr/share/dict/words <<EOF
+make run CLASS=TrieSet ARGS=/usr/share/dict/words <<EOF
 size
 EOF
 #+END_SRC
@@ -21,7 +23,7 @@ EOF
 : 99171
 
 #+BEGIN_SRC sh
-make run CLASS=TrieST ARGS=/usr/share/dict/words <<EOF
+make run CLASS=TrieSet ARGS=/usr/share/dict/words <<EOF
 kwp shell
 EOF
 #+END_SRC
@@ -43,7 +45,7 @@ EOF
 | shells      |
 
 #+BEGIN_SRC sh
-make run CLASS=TrieST ARGS=/usr/share/dict/words <<EOF
+make run CLASS=TrieSet ARGS=/usr/share/dict/words <<EOF
 ktm sh.ll
 EOF
 #+END_SRC
@@ -55,7 +57,7 @@ EOF
 
 #+NAME: trie
 #+BEGIN_SRC sh :results output drawer
-make run CLASS=TrieST ARGS=../data/shells.txt <<EOF
+make run CLASS=TrieSet ARGS=../data/shells.txt <<EOF
 dot
 EOF
 #+END_SRC
@@ -134,23 +136,23 @@ graph {
 
 :END:
 
-#+BEGIN_SRC dot :file trie.png :var src=trie
+#+BEGIN_SRC dot :file trieset.png :var src=trie
 $src
 #+END_SRC
 
 #+RESULTS:
-[[file:trie.png]]
+[[file:trieset.png]]
 
 
 */
 
-public class TrieST<Value> {
+public class TrieSet {
     private final static int R = 256; // extended ASCII
     private Node root = new Node();
     private int size;
 
     private static class Node {
-        Object val;
+        boolean end;
         Node[] next = new Node[R];
     }
 
@@ -163,14 +165,9 @@ public class TrieST<Value> {
     }
 
     public boolean contains(String key) {
-        return get(key) != null;
-    }
-
-    @SuppressWarnings("unchecked")
-    public Value get(String key) {
         Node x = get(root, key, 0);
-        if (x == null) return null;
-        return (Value) x.val;
+        if (x == null) return false;
+        return x.end;
     }
 
     private Node get(Node x, String key, int d) {
@@ -180,19 +177,19 @@ public class TrieST<Value> {
         return get(x.next[c], key, d+1);
     }
 
-    public void put(String key, Value val) {
-        root = put(root, key, val, 0);
+    public void add(String key) {
+        root = add(root, key, 0);
     }
 
-    private Node put(Node x, String key, Value val, int d) {
+    private Node add(Node x, String key, int d) {
         if (x == null) x = new Node();
         if (d == key.length()) {
-            if (x.val == null) size++;
-            x.val = val;
+            if (!x.end) size++;
+            x.end = true;
             return x;
         }
         char c = key.charAt(d);
-        x.next[c] = put(x.next[c], key, val, d+1);
+        x.next[c] = add(x.next[c], key, d+1);
         return x;
     }
 
@@ -203,13 +200,13 @@ public class TrieST<Value> {
     private Node delete(Node x, String key, int d) {
         if (x == null) return null;
         if (d == key.length()) {
-            if (x.val != null) size--;
-            x.val = null;
+            if (x.end) size--;
+            x.end = false;
         } else {
             char c = key.charAt(d);
             x.next[c] = delete(x.next[c], key, d+1);
         }
-        if (x.val != null) return x;
+        if (x.end) return x;
 
         for (char c = 0; c < R; c++)
             if (x.next[c] != null) return x;
@@ -228,7 +225,7 @@ public class TrieST<Value> {
 
     private void collect(Node x, String prefix, Deque<String> queue) {
         if (x == null) return;
-        if (x.val != null) queue.add(prefix);
+        if (x.end) queue.add(prefix);
         for (char c = 0; c < R; c++)
             collect(x.next[c], prefix + c, queue);
     }
@@ -242,7 +239,7 @@ public class TrieST<Value> {
     private void collect(Node x, String prefix, String pattern, Deque<String> queue) {
         if (x == null) return;
         int d = prefix.length();
-        if (d == pattern.length() && x.val != null) queue.add(prefix);
+        if (d == pattern.length() && x.end) queue.add(prefix);
         if (d == pattern.length()) return;
 
         char next = pattern.charAt(d);
@@ -258,7 +255,7 @@ public class TrieST<Value> {
 
     private int search(Node x, String s, int d, int length) {
         if (x == null) return length;
-        if (x.val != null) length = d;
+        if (x.end) length = d;
         if (d == s.length()) return length;
         char c = s.charAt(d);
         return search(x.next[c], s, d+1, length);
@@ -281,7 +278,7 @@ public class TrieST<Value> {
                     "  " + id +
                     " [" +
                     charLabel(c) +
-                    (x.next[c].val != null ? " " + valLabel(x.next[c].val) : "") +
+                    (x.next[c].end ? " " + valLabel('t') : "") +
                     "];\n");
                 sb.append("  " + pid + " -- " + id + ";\n");
                 id = toDot(x.next[c], id, id+1, sb);
@@ -300,17 +297,17 @@ public class TrieST<Value> {
 
     public static void main(String[] args) {
         if (args.length == 0) {
-            StdOut.println("usage: java TrieST <file> <<EOF");
+            StdOut.println("usage: java TrieSet <file> <<EOF");
             StdOut.println("dot | size | lpo <prefix> | kwp <prefix> | ktm <pattern>");
             StdOut.println("EOF");
             return;
 
         }
         In in = new In(args[0]);
-        TrieST<Integer> trie = new TrieST<>();
+        TrieSet trie = new TrieSet();
         while (!in.isEmpty()) {
             String key = in.readString();
-            trie.put(key, trie.size());
+            trie.add(key);
         }
         while (!StdIn.isEmpty()) {
             String cmd = StdIn.readString();
