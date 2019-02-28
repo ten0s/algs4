@@ -21,7 +21,7 @@ make run CLASS=QuickUnionPathCompressionUF < ../../data/tinyUF.txt
 2 components
 id: [1, 1, 1, 8, 8, 0, 1, 1, 8, 8]
 digraph {
-  rankdir="BT"
+  rankdir=BT
   0 -> 1
   2 -> 1
   3 -> 8
@@ -58,7 +58,7 @@ public class QuickUnionPathCompressionUF implements UnionFind {
         StringBuilder sb = new StringBuilder();
         Deque<Integer> roots = new ArrayDeque<>();
         sb.append("digraph {\n");
-        sb.append("  rankdir=\"BT\"\n");
+        sb.append("  rankdir=BT\n");
         for (int i = 0; i < id.length; i++) {
             if (i != id[i]) {
                 sb.append("  " + i + " -> " + id[i] + "\n");

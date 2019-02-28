@@ -67,7 +67,7 @@ public class UnionFind {
         StringBuilder sb = new StringBuilder();
         Deque<Integer> roots = new ArrayDeque<>();
         sb.append("digraph {\n");
-        sb.append("  rankdir=\"BT\"\n");
+        sb.append("  rankdir=BT\n");
         for (int i = 0; i < parent.length; i++) {
             if (i != parent[i]) {
                 sb.append("  " + i + " -> " + parent[i] + "\n");

@@ -22,7 +22,7 @@ make run CLASS=WeightedQuickUnionPathCompressionUF < ../../data/tinyUF.txt
 id: [6, 6, 6, 4, 4, 6, 6, 6, 4, 4]
 sz: [1, 1, 3, 1, 4, 1, 6, 1, 1, 1]
 digraph {
-  rankdir="BT"
+  rankdir=BT
   0 -> 6
   1 -> 6
   2 -> 6
@@ -61,7 +61,7 @@ public class WeightedQuickUnionPathCompressionUF implements UnionFind {
         StringBuilder sb = new StringBuilder();
         Deque<Integer> roots = new ArrayDeque<>();
         sb.append("digraph {\n");
-        sb.append("  rankdir=\"BT\"\n");
+        sb.append("  rankdir=BT\n");
         for (int i = 0; i < id.length; i++) {
             if (i != id[i]) {
                 sb.append("  " + i + " -> " + id[i] + "\n");
