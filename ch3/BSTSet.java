@@ -5,10 +5,33 @@ import java.util.Iterator;
 import edu.princeton.cs.algs4.*;
 
 /*
-$ cat set.txt
-4 2 6 1 3 5 7
+#+BEGIN_SRC sh
+cat > set-cmds.txt << EOF
+add 4
+add 2
+add 6
+add 1
+add 3
+add 5
+add 7
+EOF
+#+END_SRC
 
-$ make run CLASS=BSTSet ARGS=set.txt
+#+RESULTS:
+
+#+BEGIN_SRC sh :results output
+(cat set-cmds.txt; echo height) | make run CLASS=BSTSet
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+#+BEGIN_SRC sh :results output drawer
+(cat set-cmds.txt; echo dot) | make run CLASS=BSTSet
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
 digraph {
   3 [shape=point];
   4 [shape=point];
@@ -40,6 +63,9 @@ digraph {
   0 -> 1;
   0 -> 11;
 }
+
+:END:
+
 */
 
 public class BSTSet<Key extends Comparable<Key>> implements SET<Key> {
@@ -109,6 +135,27 @@ public class BSTSet<Key extends Comparable<Key>> implements SET<Key> {
         return x;
     }
 
+    public void deleteBuggy(Key key) {
+        root = deleteBuggy(key, root);
+    }
+
+    private Node deleteBuggy(Key key, Node x) {
+        if (x == null) return null;
+        int cmp = key.compareTo(x.key);
+        if      (cmp < 0) x.left = deleteBuggy(key, x.left);
+        else if (cmp > 0) x.right = deleteBuggy(key, x.right);
+        else {
+            if (x.left == null) return x.right;
+            if (x.right == null) return x.left;
+            Node t = x;
+            x = max(t.left);
+            x.left = deleteMax(t.left);
+            x.right = t.right;
+        }
+        x.size = 1 + size(x.left) + size(x.right);
+        return x;
+    }
+
     public boolean isEmpty() {
         return size() == 0;
     }
@@ -120,6 +167,15 @@ public class BSTSet<Key extends Comparable<Key>> implements SET<Key> {
     private int size(Node x) {
         if (x == null) return 0;
         return x.size;
+    }
+
+    public int height() {
+        return height(root);
+    }
+
+    private int height(Node x) {
+        if (x == null) return 0;
+        return 1 + Math.max(height(x.left), height(x.right));
     }
 
     public Key min() {
@@ -176,7 +232,7 @@ public class BSTSet<Key extends Comparable<Key>> implements SET<Key> {
         if (x == null) return null;
         int t = size(x.left);
         if      (t > k) return select(k, x.left);
-        else if (t < k) return select(k, x.right);
+        else if (t < k) return select(k-t-1, x.right);
         else            return x;
     }
 
@@ -248,6 +304,10 @@ public class BSTSet<Key extends Comparable<Key>> implements SET<Key> {
             throw new NoSuchElementException();
     }
 
+    public void clear() {
+        root = null;
+    }
+
     public String toDot() {
         // credits
         // https://gist.github.com/kstwrt/8591183
@@ -273,16 +333,29 @@ public class BSTSet<Key extends Comparable<Key>> implements SET<Key> {
     }
 
     public static void main(String[] args) {
-        if (args.length == 0) {
-            StdOut.println("usage: javac BSTSet <file>");
+        if (args.length != 0) {
+            StdOut.println("usage: java BSTSet <<EOF");
+            StdOut.println("add <key> | rm <key> | rm-buggy <key> |");
+            StdOut.println("dot | size | height");
+            StdOut.println("EOF");
             return;
         }
-        In in = new In(args[0]);
-        BSTSet<Integer> tree = new BSTSet<>();
-        while (!in.isEmpty()) {
-            int key = in.readInt();
-            tree.add(key);
+        BSTSet<String> tree = new BSTSet<>();
+        while (!StdIn.isEmpty()) {
+            String cmd = StdIn.readString();
+            if (cmd.equals("dot")) {
+                StdOut.println(tree.toDot());
+            } else if (cmd.equals("size")) {
+                StdOut.println(tree.size());
+            } else if (cmd.equals("height")) {
+                StdOut.println(tree.height());
+            } else if (cmd.equals("add")) {
+                tree.add(StdIn.readString());
+            } else if (cmd.equals("rm")) {
+                tree.delete(StdIn.readString());
+            } else if (cmd.equals("rm-buggy")) {
+                tree.deleteBuggy(StdIn.readString());
+            }
         }
-        StdOut.println(tree.toDot());
     }
 }

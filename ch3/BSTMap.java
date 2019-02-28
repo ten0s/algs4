@@ -189,7 +189,7 @@ public class BSTMap<Key extends Comparable<Key>, Value> implements MAP<Key, Valu
         if (x == null) return null;
         int t = size(x.left);
         if      (t > k) return select(k, x.left);
-        else if (t < k) return select(k, x.right);
+        else if (t < k) return select(k-t-1, x.right);
         else            return x;
     }
 
