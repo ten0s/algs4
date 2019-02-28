@@ -1,11 +1,20 @@
 import edu.princeton.cs.algs4.*;
 
 /*
-#+BEGIN_SRC sh
-make run CLASS=HibbardTest ARGS=100
+#+BEGIN_SRC sh :results output
+make run CLASS=HibbardTest ARGS=10000
 #+END_SRC
 
 #+RESULTS:
+: before
+: tree1 height: 31
+: tree2 height: 31
+: after
+: tree1 height: 22
+: tree2 height: 65
+: info
+: log2(10000) = 13
+: sqrt(10000) = 100
 
 */
 
@@ -29,6 +38,9 @@ public class HibbardTest {
             tree1.add(a[i]);
             tree2.add(a[i]);
         }
+        StdOut.println("before");
+        StdOut.println("tree1 height: " + tree1.height());
+        StdOut.println("tree2 height: " + tree2.height());
 
         for (int i = 0; i < N*N; i++) {
             int j = StdRandom.uniform(N);
@@ -38,10 +50,13 @@ public class HibbardTest {
             tree1.add(k);
             tree2.add(k);
         }
-        StdOut.println("log2(" + N + ") = " + (int) (Math.log(N)/Math.log(2)));
-        StdOut.println("sqrt(" + N + ") = " + (int) Math.sqrt(N));
+        StdOut.println("after");
         StdOut.println("tree1 height: " + tree1.height());
         StdOut.println("tree2 height: " + tree2.height());
+        StdOut.println("info");
+        StdOut.println("log2(" + N + ") = " + (int) (Math.log(N)/Math.log(2)));
+        StdOut.println("sqrt(" + N + ") = " + (int) Math.sqrt(N));
+
         /*
         String file1 = "hibbard-1-" + N + ".dot";
         String file2 = "hibbard-2-" + N + ".dot";
