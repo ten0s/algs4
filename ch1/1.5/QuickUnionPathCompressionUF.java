@@ -1,8 +1,15 @@
 import edu.princeton.cs.algs4.*;
 import java.util.Arrays;
+import java.util.Deque;
+import java.util.ArrayDeque;
 
 /*
-$ make run CLASS=QuickUnionPathCompressionUF < ../../data/tinyUF.txt
+#+BEGIN_SRC sh :results output drawer
+make run CLASS=QuickUnionPathCompressionUF < ../../data/tinyUF.txt
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
 4 3
 3 8
 6 5
@@ -12,6 +19,23 @@ $ make run CLASS=QuickUnionPathCompressionUF < ../../data/tinyUF.txt
 7 2
 6 1
 2 components
+id: [1, 1, 1, 8, 8, 0, 1, 1, 8, 8]
+digraph {
+  rankdir="BT"
+  0 -> 1
+  2 -> 1
+  3 -> 8
+  4 -> 8
+  5 -> 0
+  6 -> 1
+  7 -> 1
+  9 -> 8
+  {rank=same 1 8}
+}
+
+:END:
+
+
 */
 
 public class QuickUnionPathCompressionUF implements UnionFind {
@@ -28,6 +52,23 @@ public class QuickUnionPathCompressionUF implements UnionFind {
 
     public String toString() {
         return "id: " + Arrays.toString(id);
+    }
+
+    public String toDot() {
+        StringBuilder sb = new StringBuilder();
+        Deque<Integer> roots = new ArrayDeque<>();
+        sb.append("digraph {\n");
+        sb.append("  rankdir=\"BT\"\n");
+        for (int i = 0; i < id.length; i++) {
+            if (i != id[i]) {
+                sb.append("  " + i + " -> " + id[i] + "\n");
+            } else {
+                roots.add(i);
+            }
+        }
+        sb.append("  {rank=same"); for (int r : roots) sb.append(" " + r); sb.append("}\n");
+        sb.append("}\n");
+        return sb.toString();
     }
 
     public int cost() {
@@ -83,5 +124,6 @@ public class QuickUnionPathCompressionUF implements UnionFind {
         }
         StdOut.println(uf.count + " components");
         StdOut.println(uf);
+        StdOut.println(uf.toDot());
     }
 }

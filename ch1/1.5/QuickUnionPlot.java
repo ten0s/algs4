@@ -5,7 +5,12 @@ import java.util.Collections;
 
 // Ex. 1.5.16
 
-// $ make run CLASS=QuickUnionPlot < ../../data/mediumUF.txt
+/*
+#+BEGIN_SRC sh :results silent
+make run CLASS=QuickUnionPlot < ../../data/mediumUF.txt
+#+END_SRC
+
+*/
 
 public class QuickUnionPlot {
     public static void main(String[] args) {

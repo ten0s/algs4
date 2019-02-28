@@ -2,7 +2,12 @@ import edu.princeton.cs.algs4.*;
 import java.util.Arrays;
 
 /*
-$ make run CLASS=QuickFindUF < ../../data/tinyUF.txt
+#+BEGIN_SRC sh :results output drawer
+make run CLASS=QuickFindUF < ../../data/tinyUF.txt
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
 4 3
 3 8
 6 5
@@ -12,6 +17,9 @@ $ make run CLASS=QuickFindUF < ../../data/tinyUF.txt
 7 2
 6 1
 2 components
+id: [1, 1, 1, 8, 8, 1, 1, 1, 8, 8]
+:END:
+
 */
 
 public class QuickFindUF implements UnionFind {

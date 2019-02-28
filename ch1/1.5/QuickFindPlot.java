@@ -5,7 +5,14 @@ import java.util.Collections;
 
 // Ex. 1.5.16
 
-// $ make run CLASS=QuickFindPlot < ../../data/mediumUF.txt
+/*
+#+BEGIN_SRC sh :results silent
+make run CLASS=QuickFindPlot < ../../data/mediumUF.txt
+#+END_SRC
+
+#+RESULTS:
+
+*/
 
 public class QuickFindPlot {
     public static void main(String[] args) {

@@ -1,8 +1,15 @@
 import edu.princeton.cs.algs4.*;
 import java.util.Arrays;
+import java.util.Deque;
+import java.util.ArrayDeque;
 
 /*
-$ make run CLASS=WeightedQuickUnionUF < ../../data/tinyUF.txt
+#+BEGIN_SRC sh :results output drawer
+make run CLASS=WeightedQuickUnionUF < ../../data/tinyUF.txt
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
 4 3
 3 8
 6 5
@@ -12,6 +19,23 @@ $ make run CLASS=WeightedQuickUnionUF < ../../data/tinyUF.txt
 7 2
 6 1
 2 components
+id: [6, 2, 6, 4, 4, 6, 6, 2, 4, 4]
+sz: [1, 1, 3, 1, 4, 1, 6, 1, 1, 1]
+digraph {
+  rankdir="BT"
+  0 -> 6
+  1 -> 2
+  2 -> 6
+  3 -> 4
+  5 -> 6
+  7 -> 2
+  8 -> 4
+  9 -> 4
+  {rank=same 4 6}
+}
+
+:END:
+
 */
 
 public class WeightedQuickUnionUF implements UnionFind {
@@ -32,6 +56,23 @@ public class WeightedQuickUnionUF implements UnionFind {
     public String toString() {
         return "id: " + Arrays.toString(id) + "\n" +
                "sz: " + Arrays.toString(sz);
+    }
+
+    public String toDot() {
+        StringBuilder sb = new StringBuilder();
+        Deque<Integer> roots = new ArrayDeque<>();
+        sb.append("digraph {\n");
+        sb.append("  rankdir=\"BT\"\n");
+        for (int i = 0; i < id.length; i++) {
+            if (i != id[i]) {
+                sb.append("  " + i + " -> " + id[i] + "\n");
+            } else {
+                roots.add(i);
+            }
+        }
+        sb.append("  {rank=same"); for (int r : roots) sb.append(" " + r); sb.append("}\n");
+        sb.append("}\n");
+        return sb.toString();
     }
 
     public int cost() {
@@ -78,5 +119,6 @@ public class WeightedQuickUnionUF implements UnionFind {
         }
         StdOut.println(uf.count + " components");
         StdOut.println(uf);
+        StdOut.println(uf.toDot());
     }
 }

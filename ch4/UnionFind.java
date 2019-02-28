@@ -1,5 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.ArrayDeque;
 
 public class UnionFind {
     private int[] parent;
@@ -59,5 +61,22 @@ public class UnionFind {
     // size of p's component
     public int size(int p) {
         return size[find(p)];
+    }
+
+    public String toDot() {
+        StringBuilder sb = new StringBuilder();
+        Deque<Integer> roots = new ArrayDeque<>();
+        sb.append("digraph {\n");
+        sb.append("  rankdir=\"BT\"\n");
+        for (int i = 0; i < parent.length; i++) {
+            if (i != parent[i]) {
+                sb.append("  " + i + " -> " + parent[i] + "\n");
+            } else {
+                roots.add(i);
+            }
+        }
+        sb.append("  {rank=same"); for (int r : roots) sb.append(" " + r); sb.append("}\n");
+        sb.append("}\n");
+        return sb.toString();
     }
 }
