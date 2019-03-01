@@ -286,7 +286,9 @@ public class BSTMap<Key extends Comparable<Key>, Value> implements MAP<Key, Valu
         int id2 = toDot(node.left, id+1, sb);
         int id3 = toDot(node.right, id2, sb);
         sb.append("  " + id + " [label=\"" + node.key + "/" + node.val + "\"];\n");
+        // link to left subtree
         sb.append("  " + id + " -> " + (id+1) + ";\n");
+        // link to right subtree
         sb.append("  " + id + " -> " + id2  + ";\n");
         return id3+1;
     }
