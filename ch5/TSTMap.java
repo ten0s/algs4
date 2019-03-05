@@ -207,18 +207,24 @@ public class TSTMap<Value> {
     }
 
     public Iterable<String> keys() {
-        return keysWithPrefix("");
+        Deque<String> queue = new ArrayDeque<>();
+        collect(root, "", root.val != null, queue);
+        return queue;
     }
 
     public Iterable<String> keysWithPrefix(String prefix) {
         Deque<String> queue = new ArrayDeque<>();
-        //collect(get(root, prefix, 0), prefix, queue);
+        Node x = get(root, prefix, 0);
+        collect(x, prefix.substring(0, prefix.length()-1), x.val != null, queue);
         return queue;
     }
 
-    private void collect(Node x, String prefix, Deque<String> queue) {
+    private void collect(Node x, String prefix, boolean add, Deque<String> queue) {
+        if (add) queue.add(prefix);
         if (x == null) return;
-        return;
+        collect(x.left , prefix, false, queue);
+        collect(x.mid  , prefix + x.c, x.val != null, queue);
+        collect(x.right, prefix, false, queue);
     }
 
     public Iterable<String> keysThatMatch(String pattern) {
@@ -303,7 +309,7 @@ public class TSTMap<Value> {
             StdOut.println("usage: java TSTMap <file> <<EOF");
             StdOut.println("dot | size |");
             StdOut.println("get <key> | put <key> <val> | remove <key> |");
-            StdOut.println("lpo <prefix> | kwp <prefix> | ktm <pattern>");
+            StdOut.println("lpo <prefix> | keys | kwp <prefix> | ktm <pattern>");
             StdOut.println("EOF");
             return;
 
@@ -335,6 +341,10 @@ public class TSTMap<Value> {
                 String prefix = StdIn.readString();
                 if (prefix.equals("\"\"") || prefix.equals("''")) prefix = "";
                 StdOut.println(trie.longestPrefixOf(prefix));
+            } else if (cmd.equals("keys")) {
+                for (String s : trie.keys()) {
+                    StdOut.println(s);
+                }
             } else if (cmd.equals("kwp")) {
                 String prefix = StdIn.readString();
                 if (prefix.equals("\"\"") || prefix.equals("''")) prefix = "";

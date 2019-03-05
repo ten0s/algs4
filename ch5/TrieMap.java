@@ -217,7 +217,10 @@ public class TrieMap<Value> {
     }
 
     public Iterable<String> keys() {
-        return keysWithPrefix("");
+        //return keysWithPrefix("");
+        Deque<String> queue = new ArrayDeque<>();
+        collect(root, "", queue);
+        return queue;
     }
 
     public Iterable<String> keysWithPrefix(String prefix) {
@@ -310,7 +313,7 @@ public class TrieMap<Value> {
             StdOut.println("usage: java TrieMap <file> <<EOF");
             StdOut.println("dot | size |");
             StdOut.println("get <key> | put <key> <val> | remove <key> |");
-            StdOut.println("lpo <prefix> | kwp <prefix> | ktm <pattern>");
+            StdOut.println("lpo <prefix> | keys | kwp <prefix> | ktm <pattern>");
             StdOut.println("EOF");
             return;
 
@@ -342,6 +345,10 @@ public class TrieMap<Value> {
                 String prefix = StdIn.readString();
                 if (prefix.equals("\"\"") || prefix.equals("''")) prefix = "";
                 StdOut.println(trie.longestPrefixOf(prefix));
+            } else if (cmd.equals("keys")) {
+                for (String s : trie.keys()) {
+                    StdOut.println(s);
+                }
             } else if (cmd.equals("kwp")) {
                 String prefix = StdIn.readString();
                 if (prefix.equals("\"\"") || prefix.equals("''")) prefix = "";
