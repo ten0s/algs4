@@ -83,10 +83,9 @@ public class KMP {
     public int search(String txt) {
         final int N = txt.length();
         int i, j;
-        for (i = 0, j = 0; i < N && j < M; i++) {
+        for (i = 0, j = 0; i < N && j < M; i++)
             j = dfa[txt.charAt(i)][j];
-            if (j == M) return i-M;
-        }
+        if (j == M) return i-M;
         return N;
     }
 
@@ -154,7 +153,7 @@ public class KMP {
         String pat = args[0];
         String txt = args[1];
         KMP kmp = new KMP(pat);
-        StdOut.println("text:   " + txt);
+        StdOut.println("text:    " + txt);
         int offset = kmp.search(txt);
         StdOut.print("pattern: ");
         for (int i = 0; i < offset; i++)
