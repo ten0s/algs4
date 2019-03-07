@@ -86,7 +86,7 @@ public class KMP {
         for (i = 0, j = 0; i < N && j < M; i++)
             j = dfa[txt.charAt(i)][j];
         if (j == M) return i-M;
-        return N;
+        else        return N;
     }
 
     public String dfaToDot() {
