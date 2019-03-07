@@ -65,22 +65,22 @@ EOF
 #+RESULTS: trie
 :RESULTS:
 graph {
-  0 [label=" "];
+  0 [label=""];
   1 [label="a"];
   0 -- 1;
   2 [label="r"];
   1 -- 2;
-  3 [label="e" xlabel="8"];
+  3 [label="e" xlabel="t"];
   2 -- 3;
   4 [label="b"];
   0 -- 4;
-  5 [label="y" xlabel="3"];
+  5 [label="y" xlabel="t"];
   4 -- 5;
   6 [label="s"];
   0 -- 6;
   7 [label="e"];
   6 -- 7;
-  8 [label="a" xlabel="5"];
+  8 [label="a" xlabel="t"];
   7 -- 8;
   9 [label="s"];
   8 -- 9;
@@ -92,29 +92,29 @@ graph {
   11 -- 12;
   13 [label="l"];
   12 -- 13;
-  14 [label="s" xlabel="10"];
+  14 [label="s" xlabel="t"];
   13 -- 14;
   15 [label="l"];
   7 -- 15;
   16 [label="l"];
   15 -- 16;
-  17 [label="s" xlabel="8"];
+  17 [label="s" xlabel="t"];
   16 -- 17;
   18 [label="h"];
   6 -- 18;
-  19 [label="e" xlabel="8"];
+  19 [label="e" xlabel="t"];
   18 -- 19;
   20 [label="l"];
   19 -- 20;
   21 [label="l"];
   20 -- 21;
-  22 [label="s" xlabel="7"];
+  22 [label="s" xlabel="t"];
   21 -- 22;
   23 [label="o"];
   18 -- 23;
   24 [label="r"];
   23 -- 24;
-  25 [label="e" xlabel="6"];
+  25 [label="e" xlabel="t"];
   24 -- 25;
   26 [label="u"];
   6 -- 26;
@@ -124,13 +124,13 @@ graph {
   27 -- 28;
   29 [label="l"];
   28 -- 29;
-  30 [label="y" xlabel="9"];
+  30 [label="y" xlabel="t"];
   29 -- 30;
   31 [label="t"];
   0 -- 31;
   32 [label="h"];
   31 -- 32;
-  33 [label="e" xlabel="7"];
+  33 [label="e" xlabel="t"];
   32 -- 33;
 }
 
