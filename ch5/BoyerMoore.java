@@ -55,20 +55,6 @@ public class BoyerMoore {
         return N;
     }
 
-    public static int search(String pat, String txt) {
-        int M = pat.length();
-        int N = txt.length();
-        for (int i = 0; i <= N-M; i++) {
-            int j;
-            for (j = 0; j < M; j++) {
-                if (txt.charAt(i+j) != pat.charAt(j))
-                    break;
-            }
-            if (j == M) return i;
-        }
-        return N;
-    }
-
     public static void main(String[] args) {
         if (args.length == 0) {
             StdOut.println("Usage: java BoyerMoore PATTERN TEXT");
@@ -76,8 +62,9 @@ public class BoyerMoore {
         }
         String pat = args[0];
         String txt = args[1];
+        BoyerMoore bm = new BoyerMoore(pat);
         StdOut.println("text:    " + txt);
-        int offset = search(pat, txt);
+        int offset = bm.search(txt);
         StdOut.print("pattern: ");
         for (int i = 0; i < offset; i++)
             StdOut.print(" ");
