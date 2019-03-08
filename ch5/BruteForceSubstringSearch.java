@@ -1,51 +1,55 @@
 import edu.princeton.cs.algs4.*;
 
 /*
-#+BEGIN_SRC sh :results output
-make run CLASS=BruteForceSubstringSearch ARGS=BruteForceSubstringSearch.java <<EOF
-return
-charAt
-EOF
+#+BEGIN_SRC sh :results output drawer
+make run CLASS=BruteForceSubstringSearch ARGS="abra aaabbbabracadabra"
 #+END_SRC
 
 #+RESULTS:
-: Found: 135
-: Found: 142
+:RESULTS:
+text:    aaabbbabracadabra
+pattern:       abra
+:END:
+
+#+BEGIN_SRC sh :results output drawer
+make run CLASS=BruteForceSubstringSearch ARGS="abrc aaabbbabracadabra"
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+text:    aaabbbabracadabra
+pattern:                  abrc
+:END:
 
 */
 
 public class BruteForceSubstringSearch {
     public static int search(String pat, String txt) {
-        int m = pat.length();
-        int n = txt.length();
-        for (int i = 0; i <= n-m; i++) {
+        int M = pat.length();
+        int N = txt.length();
+        for (int i = 0; i <= N-M; i++) {
             int j;
-            for (j = 0; j < m; j++) {
+            for (j = 0; j < M; j++) {
                 if (txt.charAt(i+j) != pat.charAt(j))
                     break;
             }
-            if (j == m) return i;
+            if (j == M) return i;
         }
-        return -1;
+        return N;
     }
 
     public static void main(String[] args) {
         if (args.length == 0) {
-            StdOut.println("Usage: java BruteForceSubstringSearch FILE <<EOF");
-            StdOut.println("PATTERN");
-            StdOut.println("EOF");
+            StdOut.println("Usage: java BruteForceSubstringSearch PATTERN TEXT");
             return;
         }
-        In in = new In(args[0]);
-        String txt = in.readAll();
-        while (!StdIn.isEmpty()) {
-            String pat = StdIn.readString();
-            int i = search(pat, txt);
-            if (i == -1) {
-                StdOut.println("Not found");
-            } else {
-                StdOut.println("Found: " + i);
-            }
-        }
+        String pat = args[0];
+        String txt = args[1];
+        StdOut.println("text:    " + txt);
+        int offset = search(pat, txt);
+        StdOut.print("pattern: ");
+        for (int i = 0; i < offset; i++)
+            StdOut.print(" ");
+        StdOut.println(pat);
     }
 }

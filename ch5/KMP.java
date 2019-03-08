@@ -36,7 +36,7 @@ make run CLASS=KMP ARGS="abrc aaabbbabracadabra"
 
 #+RESULTS:
 :RESULTS:
-text:   aaabbbabracadabra
+text:    aaabbbabracadabra
 pattern:                  abrc
 digraph {
   0 [label="0"]
@@ -150,6 +150,10 @@ public class KMP {
     }
 
     public static void main(String[] args) {
+        if (args.length == 0) {
+            StdOut.println("Usage: java KMP PATTERN TEXT");
+            return;
+        }
         String pat = args[0];
         String txt = args[1];
         KMP kmp = new KMP(pat);
