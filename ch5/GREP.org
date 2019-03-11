@@ -16,13 +16,13 @@ EOF
 : ABBBD
 
 #+NAME: re1
-#+BEGIN_SRC sh :results output drawer :exports both
+#+BEGIN_SRC sh :results output :exports both
 make run CLASS=GREP ARGS='(A(B*|C)*) dot' <<EOF
 EOF
 #+END_SRC
 
 #+RESULTS: re1
-:RESULTS:
+#+begin_example
 digraph {
   rankdir=LR;
   0 [label="(", xlabel="0", shape="circle"];
@@ -53,7 +53,7 @@ digraph {
   9 -> 10 [color="red"];
 }
 
-:END:
+#+end_example
 
 #+BEGIN_SRC dot :file re1.png :var src=re1 :exports results
 $src
