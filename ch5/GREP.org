@@ -55,7 +55,7 @@ digraph {
 
 :END:
 
-#+BEGIN_SRC dot :file re1.png :var src=re1 :exports result
+#+BEGIN_SRC dot :file re1.png :var src=re1 :exports results
 $src
 #+END_SRC
 
@@ -102,7 +102,7 @@ digraph {
 
 :END:
 
-#+BEGIN_SRC dot :file re2.png :var src=re2 :exports result
+#+BEGIN_SRC dot :file re2.png :var src=re2 :exports results
 $src
 #+END_SRC
 
@@ -148,7 +148,7 @@ digraph {
 
 :END:
 
-#+BEGIN_SRC dot :file re3.png :var src=re3 :exports result
+#+BEGIN_SRC dot :file re3.png :var src=re3 :exports results
 $src
 #+END_SRC
 
