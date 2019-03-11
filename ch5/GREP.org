@@ -63,13 +63,13 @@ $src
 [[file:re1.png]]
 
 #+NAME: re2
-#+BEGIN_SRC sh :results output drawer :exports both
+#+BEGIN_SRC sh :results output :exports both
 make run CLASS=GREP ARGS='((A*B|AC)D) dot' <<EOF
 EOF
 #+END_SRC
 
 #+RESULTS: re2
-:RESULTS:
+#+begin_example
 digraph {
   rankdir=LR;
   0 [label="(", xlabel="0", shape="circle"];
@@ -100,7 +100,7 @@ digraph {
   10 -> 11 [color="red"];
 }
 
-:END:
+#+end_example
 
 #+BEGIN_SRC dot :file re2.png :var src=re2 :exports results
 $src
@@ -110,13 +110,13 @@ $src
 [[file:re2.png]]
 
 #+NAME: re3
-#+BEGIN_SRC sh :results output drawer :exports both
+#+BEGIN_SRC sh :results output :exports both
 make run CLASS=GREP ARGS='((A|B|C)DE) dot' <<EOF
 EOF
 #+END_SRC
 
 #+RESULTS: re3
-:RESULTS:
+#+begin_example
 digraph {
   rankdir=LR;
   0 [label="(", xlabel="0", shape="circle"];
@@ -146,7 +146,7 @@ digraph {
   10 -> 11 [color="red"];
 }
 
-:END:
+#+end_example
 
 #+BEGIN_SRC dot :file re3.png :var src=re3 :exports results
 $src
