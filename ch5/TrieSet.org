@@ -1,0 +1,138 @@
+# -*- mode: org -*-
+
+#+BEGIN_SRC sh :exports both
+wc -l /usr/share/dict/words
+#+END_SRC
+
+#+RESULTS:
+: 99171 /usr/share/dict/words
+
+#+BEGIN_SRC sh :exports both
+make run CLASS=TrieSet ARGS=/usr/share/dict/words <<EOF
+size
+EOF
+#+END_SRC
+
+#+RESULTS:
+: 99171
+
+#+BEGIN_SRC sh :exports both
+make run CLASS=TrieSet ARGS=/usr/share/dict/words <<EOF
+kwp shell
+EOF
+#+END_SRC
+
+#+RESULTS:
+| shell       |
+| shell's     |
+| shellac     |
+| shellac's   |
+| shellacked  |
+| shellacking |
+| shellacs    |
+| shelled     |
+| sheller     |
+| shellfish   |
+| shellfish's |
+| shellfishes |
+| shelling    |
+| shells      |
+
+#+BEGIN_SRC sh :exports both
+make run CLASS=TrieSet ARGS=/usr/share/dict/words <<EOF
+ktm sh.ll
+EOF
+#+END_SRC
+
+#+RESULTS:
+| shall |
+| shell |
+| shill |
+
+#+NAME: trie
+#+BEGIN_SRC sh :results output :exports both
+make run CLASS=TrieSet ARGS=../data/shells.txt <<EOF
+dot
+EOF
+#+END_SRC
+
+#+RESULTS: trie
+#+begin_example
+graph {
+  0 [label="", shape="circle"];
+  1 [label="a", shape="circle"];
+  0 -- 1;
+  2 [label="r", shape="circle"];
+  1 -- 2;
+  3 [label="e", xlabel="t", shape="circle"];
+  2 -- 3;
+  4 [label="b", shape="circle"];
+  0 -- 4;
+  5 [label="y", xlabel="t", shape="circle"];
+  4 -- 5;
+  6 [label="s", shape="circle"];
+  0 -- 6;
+  7 [label="e", shape="circle"];
+  6 -- 7;
+  8 [label="a", xlabel="t", shape="circle"];
+  7 -- 8;
+  9 [label="s", shape="circle"];
+  8 -- 9;
+  10 [label="h", shape="circle"];
+  9 -- 10;
+  11 [label="e", shape="circle"];
+  10 -- 11;
+  12 [label="l", shape="circle"];
+  11 -- 12;
+  13 [label="l", shape="circle"];
+  12 -- 13;
+  14 [label="s", xlabel="t", shape="circle"];
+  13 -- 14;
+  15 [label="l", shape="circle"];
+  7 -- 15;
+  16 [label="l", shape="circle"];
+  15 -- 16;
+  17 [label="s", xlabel="t", shape="circle"];
+  16 -- 17;
+  18 [label="h", shape="circle"];
+  6 -- 18;
+  19 [label="e", xlabel="t", shape="circle"];
+  18 -- 19;
+  20 [label="l", shape="circle"];
+  19 -- 20;
+  21 [label="l", shape="circle"];
+  20 -- 21;
+  22 [label="s", xlabel="t", shape="circle"];
+  21 -- 22;
+  23 [label="o", shape="circle"];
+  18 -- 23;
+  24 [label="r", shape="circle"];
+  23 -- 24;
+  25 [label="e", xlabel="t", shape="circle"];
+  24 -- 25;
+  26 [label="u", shape="circle"];
+  6 -- 26;
+  27 [label="r", shape="circle"];
+  26 -- 27;
+  28 [label="e", shape="circle"];
+  27 -- 28;
+  29 [label="l", shape="circle"];
+  28 -- 29;
+  30 [label="y", xlabel="t", shape="circle"];
+  29 -- 30;
+  31 [label="t", shape="circle"];
+  0 -- 31;
+  32 [label="h", shape="circle"];
+  31 -- 32;
+  33 [label="e", xlabel="t", shape="circle"];
+  32 -- 33;
+}
+
+#+end_example
+
+#+BEGIN_SRC dot :file trieset.png :var src=trie :exports results
+$src
+#+END_SRC
+
+#+RESULTS:
+[[file:trieset.png]]

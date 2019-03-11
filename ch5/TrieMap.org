@@ -1,0 +1,110 @@
+# -*- mode: org -*-
+
+#+BEGIN_SRC sh :exports both
+wc -l /usr/share/dict/words
+#+END_SRC
+
+#+RESULTS:
+: 99171 /usr/share/dict/words
+
+#+BEGIN_SRC sh :exports both
+make run CLASS=TrieMap ARGS=/usr/share/dict/words <<EOF
+size
+EOF
+#+END_SRC
+
+#+RESULTS:
+: 99171
+
+#+BEGIN_SRC sh :exports both
+make run CLASS=TrieMap ARGS=/usr/share/dict/words <<EOF
+kwp shell
+EOF
+#+END_SRC
+
+#+RESULTS:
+| shell       |
+| shell's     |
+| shellac     |
+| shellac's   |
+| shellacked  |
+| shellacking |
+| shellacs    |
+| shelled     |
+| sheller     |
+| shellfish   |
+| shellfish's |
+| shellfishes |
+| shelling    |
+| shells      |
+
+#+BEGIN_SRC sh :exports both
+make run CLASS=TrieMap ARGS=/usr/share/dict/words <<EOF
+ktm sh.ll
+EOF
+#+END_SRC
+
+#+RESULTS:
+| shall |
+| shell |
+| shill |
+
+#+NAME: trie
+#+BEGIN_SRC sh :results output :exports both
+make run CLASS=TrieMap ARGS=she-sells.txt <<EOF
+dot
+EOF
+#+END_SRC
+
+#+RESULTS: trie
+#+begin_example
+graph {
+  0 [label="", shape="circle"];
+  1 [label="b", shape="circle"];
+  0 -- 1;
+  2 [label="y", xlabel="4", shape="circle"];
+  1 -- 2;
+  3 [label="s", shape="circle"];
+  0 -- 3;
+  4 [label="e", shape="circle"];
+  3 -- 4;
+  5 [label="a", xlabel="6", shape="circle"];
+  4 -- 5;
+  6 [label="l", shape="circle"];
+  4 -- 6;
+  7 [label="l", shape="circle"];
+  6 -- 7;
+  8 [label="s", xlabel="1", shape="circle"];
+  7 -- 8;
+  9 [label="h", shape="circle"];
+  3 -- 9;
+  10 [label="e", xlabel="0", shape="circle"];
+  9 -- 10;
+  11 [label="l", shape="circle"];
+  10 -- 11;
+  12 [label="l", shape="circle"];
+  11 -- 12;
+  13 [label="s", xlabel="3", shape="circle"];
+  12 -- 13;
+  14 [label="o", shape="circle"];
+  9 -- 14;
+  15 [label="r", shape="circle"];
+  14 -- 15;
+  16 [label="e", xlabel="7", shape="circle"];
+  15 -- 16;
+  17 [label="t", shape="circle"];
+  0 -- 17;
+  18 [label="h", shape="circle"];
+  17 -- 18;
+  19 [label="e", xlabel="5", shape="circle"];
+  18 -- 19;
+}
+
+#+end_example
+
+#+BEGIN_SRC dot :file triemap.png :var src=trie :exports results
+$src
+#+END_SRC
+
+#+RESULTS:
+[[file:triemap.png]]

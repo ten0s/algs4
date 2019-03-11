@@ -5,147 +5,6 @@ import java.util.Iterator;
 
 import edu.princeton.cs.algs4.*;
 
-/*
-#+BEGIN_SRC sh
-wc -l /usr/share/dict/words
-#+END_SRC
-
-#+RESULTS:
-: 99171 /usr/share/dict/words
-
-#+BEGIN_SRC sh
-make run CLASS=TrieSet ARGS=/usr/share/dict/words <<EOF
-size
-EOF
-#+END_SRC
-
-#+RESULTS:
-: 99171
-
-#+BEGIN_SRC sh
-make run CLASS=TrieSet ARGS=/usr/share/dict/words <<EOF
-kwp shell
-EOF
-#+END_SRC
-
-#+RESULTS:
-| shell       |
-| shell's     |
-| shellac     |
-| shellac's   |
-| shellacked  |
-| shellacking |
-| shellacs    |
-| shelled     |
-| sheller     |
-| shellfish   |
-| shellfish's |
-| shellfishes |
-| shelling    |
-| shells      |
-
-#+BEGIN_SRC sh
-make run CLASS=TrieSet ARGS=/usr/share/dict/words <<EOF
-ktm sh.ll
-EOF
-#+END_SRC
-
-#+RESULTS:
-| shall |
-| shell |
-| shill |
-
-#+NAME: trie
-#+BEGIN_SRC sh :results output drawer
-make run CLASS=TrieSet ARGS=../data/shells.txt <<EOF
-dot
-EOF
-#+END_SRC
-
-#+RESULTS: trie
-:RESULTS:
-graph {
-  0 [label=""];
-  1 [label="a"];
-  0 -- 1;
-  2 [label="r"];
-  1 -- 2;
-  3 [label="e" xlabel="t"];
-  2 -- 3;
-  4 [label="b"];
-  0 -- 4;
-  5 [label="y" xlabel="t"];
-  4 -- 5;
-  6 [label="s"];
-  0 -- 6;
-  7 [label="e"];
-  6 -- 7;
-  8 [label="a" xlabel="t"];
-  7 -- 8;
-  9 [label="s"];
-  8 -- 9;
-  10 [label="h"];
-  9 -- 10;
-  11 [label="e"];
-  10 -- 11;
-  12 [label="l"];
-  11 -- 12;
-  13 [label="l"];
-  12 -- 13;
-  14 [label="s" xlabel="t"];
-  13 -- 14;
-  15 [label="l"];
-  7 -- 15;
-  16 [label="l"];
-  15 -- 16;
-  17 [label="s" xlabel="t"];
-  16 -- 17;
-  18 [label="h"];
-  6 -- 18;
-  19 [label="e" xlabel="t"];
-  18 -- 19;
-  20 [label="l"];
-  19 -- 20;
-  21 [label="l"];
-  20 -- 21;
-  22 [label="s" xlabel="t"];
-  21 -- 22;
-  23 [label="o"];
-  18 -- 23;
-  24 [label="r"];
-  23 -- 24;
-  25 [label="e" xlabel="t"];
-  24 -- 25;
-  26 [label="u"];
-  6 -- 26;
-  27 [label="r"];
-  26 -- 27;
-  28 [label="e"];
-  27 -- 28;
-  29 [label="l"];
-  28 -- 29;
-  30 [label="y" xlabel="t"];
-  29 -- 30;
-  31 [label="t"];
-  0 -- 31;
-  32 [label="h"];
-  31 -- 32;
-  33 [label="e" xlabel="t"];
-  32 -- 33;
-}
-
-:END:
-
-#+BEGIN_SRC dot :file trieset.png :var src=trie
-$src
-#+END_SRC
-
-#+RESULTS:
-[[file:trieset.png]]
-
-
-*/
-
 public class TrieSet {
     private final static int R = 256; // extended ASCII
     private Node root = new Node();
@@ -264,7 +123,7 @@ public class TrieSet {
     public String toDot() {
         StringBuilder sb = new StringBuilder();
         sb.append("graph {\n");
-        sb.append("  0 [" + label("") + "];\n");
+        sb.append("  " + 0 + " " + attrs(label(""), shape("circle")) + ";\n");
         toDot(root, 0, 1, sb);
         sb.append("}\n");
         return sb.toString();
@@ -274,7 +133,8 @@ public class TrieSet {
         if (x == null) return id;
         for (char c = 0; c < R; c++) {
             if (x.next[c] != null) {
-                sb.append("  " + id + " " + attrs(label(c), xlabel(x.next[c].end)) + ";\n");
+                sb.append("  " + id + " " + attrs(
+                              label(c), xlabel(x.next[c].end), shape("circle")) + ";\n");
                 sb.append("  " + pid + " -- " + id + ";\n");
                 id = toDot(x.next[c], id, id+1, sb);
             }
@@ -282,8 +142,19 @@ public class TrieSet {
         return id;
     }
 
-    private String attrs(String label, String xlabel) {
-        return "[" + label + (xlabel.equals("") ? "" : " " + xlabel) + "]";
+    private String attrs(String... attrs) {
+        Deque<String> attrs2 = new ArrayDeque<>();
+        for (String attr : attrs) if (attr != null) attrs2.add(attr);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (String attr : attrs2) {
+            sb.append(attr);
+            attrs2.remove();
+            if (attrs2.size() > 0) sb.append(", ");
+        }
+        sb.append("]");
+        return sb.toString();
     }
 
     private String label(Object o) {
@@ -294,8 +165,12 @@ public class TrieSet {
         if (v) {
             return "xlabel=\"t\"";
         } else {
-            return "";
+            return null;
         }
+    }
+
+    private String shape(String s) {
+        return "shape=\"" + s + "\"";
     }
 
     public static void main(String[] args) {

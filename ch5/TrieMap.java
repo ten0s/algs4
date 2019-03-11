@@ -3,147 +3,6 @@ import java.util.ArrayDeque;
 
 import edu.princeton.cs.algs4.*;
 
-/*
-#+BEGIN_SRC sh
-wc -l /usr/share/dict/words
-#+END_SRC
-
-#+RESULTS:
-: 99171 /usr/share/dict/words
-
-#+BEGIN_SRC sh
-make run CLASS=TrieMap ARGS=/usr/share/dict/words <<EOF
-size
-EOF
-#+END_SRC
-
-#+RESULTS:
-: 99171
-
-#+BEGIN_SRC sh
-make run CLASS=TrieMap ARGS=/usr/share/dict/words <<EOF
-kwp shell
-EOF
-#+END_SRC
-
-#+RESULTS:
-| shell       |
-| shell's     |
-| shellac     |
-| shellac's   |
-| shellacked  |
-| shellacking |
-| shellacs    |
-| shelled     |
-| sheller     |
-| shellfish   |
-| shellfish's |
-| shellfishes |
-| shelling    |
-| shells      |
-
-#+BEGIN_SRC sh
-make run CLASS=TrieMap ARGS=/usr/share/dict/words <<EOF
-ktm sh.ll
-EOF
-#+END_SRC
-
-#+RESULTS:
-| shall |
-| shell |
-| shill |
-
-#+NAME: trie
-#+BEGIN_SRC sh :results output drawer
-make run CLASS=TrieMap ARGS=she-sells.txt <<EOF
-dot
-EOF
-#+END_SRC
-
-#+RESULTS: trie
-:RESULTS:
-graph {
-  0 [label=""];
-  1 [label="a"];
-  0 -- 1;
-  2 [label="r"];
-  1 -- 2;
-  3 [label="e" xlabel="11"];
-  2 -- 3;
-  4 [label="b"];
-  0 -- 4;
-  5 [label="y" xlabel="3"];
-  4 -- 5;
-  6 [label="s"];
-  0 -- 6;
-  7 [label="e"];
-  6 -- 7;
-  8 [label="a" xlabel="5"];
-  7 -- 8;
-  9 [label="s"];
-  8 -- 9;
-  10 [label="h"];
-  9 -- 10;
-  11 [label="e"];
-  10 -- 11;
-  12 [label="l"];
-  11 -- 12;
-  13 [label="l"];
-  12 -- 13;
-  14 [label="s" xlabel="13"];
-  13 -- 14;
-  15 [label="l"];
-  7 -- 15;
-  16 [label="l"];
-  15 -- 16;
-  17 [label="s" xlabel="10"];
-  16 -- 17;
-  18 [label="h"];
-  6 -- 18;
-  19 [label="e" xlabel="9"];
-  18 -- 19;
-  20 [label="l"];
-  19 -- 20;
-  21 [label="l"];
-  20 -- 21;
-  22 [label="s" xlabel="8"];
-  21 -- 22;
-  23 [label="o"];
-  18 -- 23;
-  24 [label="r"];
-  23 -- 24;
-  25 [label="e" xlabel="6"];
-  24 -- 25;
-  26 [label="u"];
-  6 -- 26;
-  27 [label="r"];
-  26 -- 27;
-  28 [label="e"];
-  27 -- 28;
-  29 [label="l"];
-  28 -- 29;
-  30 [label="y" xlabel="12"];
-  29 -- 30;
-  31 [label="t"];
-  0 -- 31;
-  32 [label="h"];
-  31 -- 32;
-  33 [label="e" xlabel="7"];
-  32 -- 33;
-}
-
-:END:
-
-#+BEGIN_SRC dot :file triemap.png :var src=trie
-$src
-#+END_SRC
-
-#+RESULTS:
-[[file:triemap.png]]
-
-
-*/
-
 public class TrieMap<Value> {
     private final static int R = 256; // extended ASCII
     private Node root = new Node();
@@ -270,7 +129,7 @@ public class TrieMap<Value> {
     public String toDot() {
         StringBuilder sb = new StringBuilder();
         sb.append("graph {\n");
-        sb.append("  " + 0 + " " + attrs(label("")) + ";\n");
+        sb.append("  " + 0 + " " + attrs(label(""), shape("circle")) + ";\n");
         toDot(root, 0, 1, sb);
         sb.append("}\n");
         return sb.toString();
@@ -280,7 +139,8 @@ public class TrieMap<Value> {
         if (x == null) return id;
         for (char c = 0; c < R; c++) {
             if (x.next[c] != null) {
-                sb.append("  " + id + " " + attrs(label(c), xlabel(x.next[c].val)) + ";\n");
+                sb.append("  " + id + " " + attrs(
+                              label(c), xlabel(x.next[c].val), shape("circle")) + ";\n");
                 sb.append("  " + pid + " -- " + id + ";\n");
                 id = toDot(x.next[c], id, id+1, sb);
             }
@@ -288,12 +148,19 @@ public class TrieMap<Value> {
         return id;
     }
 
-    private String attrs(String attr) {
-        return attrs(attr, "");
-    }
+    private String attrs(String... attrs) {
+        Deque<String> attrs2 = new ArrayDeque<>();
+        for (String attr : attrs) if (attr != null) attrs2.add(attr);
 
-    private String attrs(String label, String xlabel) {
-        return "[" + label + (xlabel.equals("") ? "" : " " + xlabel) + "]";
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (String attr : attrs2) {
+            sb.append(attr);
+            attrs2.remove();
+            if (attrs2.size() > 0) sb.append(", ");
+        }
+        sb.append("]");
+        return sb.toString();
     }
 
     private String label(Object o) {
@@ -304,8 +171,12 @@ public class TrieMap<Value> {
         if (o != null) {
             return "xlabel=\"" + o + "\"";
         } else {
-            return "";
+            return null;
         }
+    }
+
+    private String shape(String s) {
+        return "shape=\"" + s + "\"";
     }
 
     public static void main(String[] args) {
