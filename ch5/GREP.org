@@ -4,8 +4,7 @@
 import edu.princeton.cs.algs4.*;
 #+END_SRC
 
-/*
-#+BEGIN_SRC sh :results output
+#+BEGIN_SRC sh :results output :exports both
 make run CLASS=GREP ARGS='(A(B*|C)D)' <<EOF
 ABD
 ACB
@@ -21,7 +20,7 @@ EOF
 : ABBBD
 
 #+NAME: re1
-#+BEGIN_SRC sh :results output
+#+BEGIN_SRC sh :results output :exports both
 make run CLASS=GREP ARGS='(A(B*|C)*) dot' <<EOF
 EOF
 #+END_SRC
@@ -34,7 +33,7 @@ $src
 [[file:re1.png]]
 
 #+NAME: re2
-#+BEGIN_SRC sh :results output
+#+BEGIN_SRC sh :results output :exports both
 make run CLASS=GREP ARGS='((A*B|AC)D) dot' <<EOF
 EOF
 #+END_SRC
@@ -47,7 +46,7 @@ $src
 [[file:re2.png]]
 
 #+NAME: re3
-#+BEGIN_SRC sh :results output
+#+BEGIN_SRC sh :results output :exports both
 make run CLASS=GREP ARGS='((A|B|C)DE) dot' <<EOF
 EOF
 #+END_SRC
@@ -59,9 +58,7 @@ $src
 #+RESULTS:
 [[file:re3.png]]
 
-*/
-
-#+BEGIN_SRC java
+#+BEGIN_SRC java :exports both
 public class GREP {
     public static void main(String[] args) {
         if (args.length == 0) {
