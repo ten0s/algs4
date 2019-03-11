@@ -1,9 +1,5 @@
 # -*- mode: org -*-
 
-#+BEGIN_SRC java
-import edu.princeton.cs.algs4.*;
-#+END_SRC
-
 #+BEGIN_SRC sh :results output :exports both
 make run CLASS=GREP ARGS='(A(B*|C)D)' <<EOF
 ABD
@@ -20,12 +16,46 @@ EOF
 : ABBBD
 
 #+NAME: re1
-#+BEGIN_SRC sh :results output :exports both
+#+BEGIN_SRC sh :results output drawer :exports both
 make run CLASS=GREP ARGS='(A(B*|C)*) dot' <<EOF
 EOF
 #+END_SRC
 
-#+BEGIN_SRC dot :file re1.png :var src=re1 :exports both
+#+RESULTS: re1
+:RESULTS:
+digraph {
+  rankdir=LR;
+  0 [label="(", xlabel="0", shape="circle"];
+  1 [label="A", xlabel="1", shape="circle"];
+  2 [label="(", xlabel="2", shape="circle"];
+  3 [label="B", xlabel="3", shape="circle"];
+  4 [label="*", xlabel="4", shape="circle"];
+  5 [label="|", xlabel="5", shape="circle"];
+  6 [label="C", xlabel="6", shape="circle"];
+  7 [label=")", xlabel="7", shape="circle"];
+  8 [label="*", xlabel="8", shape="circle"];
+  9 [label=")", xlabel="9", shape="circle"];
+  10 [label=" ", xlabel="10", shape="circle"];
+  1 -> 2 [color="black"];
+  3 -> 4 [color="black"];
+  6 -> 7 [color="black"];
+  0 -> 1 [color="red"];
+  2 -> 3 [color="red"];
+  2 -> 6 [color="red"];
+  2 -> 8 [color="red"];
+  3 -> 4 [color="red"];
+  4 -> 3 [color="red"];
+  4 -> 5 [color="red"];
+  5 -> 7 [color="red"];
+  7 -> 8 [color="red"];
+  8 -> 2 [color="red"];
+  8 -> 9 [color="red"];
+  9 -> 10 [color="red"];
+}
+
+:END:
+
+#+BEGIN_SRC dot :file re1.png :var src=re1 :exports result
 $src
 #+END_SRC
 
@@ -33,12 +63,46 @@ $src
 [[file:re1.png]]
 
 #+NAME: re2
-#+BEGIN_SRC sh :results output :exports both
+#+BEGIN_SRC sh :results output drawer :exports both
 make run CLASS=GREP ARGS='((A*B|AC)D) dot' <<EOF
 EOF
 #+END_SRC
 
-#+BEGIN_SRC dot :file re2.png :var src=re2 :exports both
+#+RESULTS: re2
+:RESULTS:
+digraph {
+  rankdir=LR;
+  0 [label="(", xlabel="0", shape="circle"];
+  1 [label="(", xlabel="1", shape="circle"];
+  2 [label="A", xlabel="2", shape="circle"];
+  3 [label="*", xlabel="3", shape="circle"];
+  4 [label="B", xlabel="4", shape="circle"];
+  5 [label="|", xlabel="5", shape="circle"];
+  6 [label="A", xlabel="6", shape="circle"];
+  7 [label="C", xlabel="7", shape="circle"];
+  8 [label=")", xlabel="8", shape="circle"];
+  9 [label="D", xlabel="9", shape="circle"];
+  10 [label=")", xlabel="10", shape="circle"];
+  11 [label=" ", xlabel="11", shape="circle"];
+  2 -> 3 [color="black"];
+  4 -> 5 [color="black"];
+  6 -> 7 [color="black"];
+  7 -> 8 [color="black"];
+  9 -> 10 [color="black"];
+  0 -> 1 [color="red"];
+  1 -> 2 [color="red"];
+  1 -> 6 [color="red"];
+  2 -> 3 [color="red"];
+  3 -> 2 [color="red"];
+  3 -> 4 [color="red"];
+  5 -> 8 [color="red"];
+  8 -> 9 [color="red"];
+  10 -> 11 [color="red"];
+}
+
+:END:
+
+#+BEGIN_SRC dot :file re2.png :var src=re2 :exports result
 $src
 #+END_SRC
 
@@ -46,39 +110,47 @@ $src
 [[file:re2.png]]
 
 #+NAME: re3
-#+BEGIN_SRC sh :results output :exports both
+#+BEGIN_SRC sh :results output drawer :exports both
 make run CLASS=GREP ARGS='((A|B|C)DE) dot' <<EOF
 EOF
 #+END_SRC
 
-#+BEGIN_SRC dot :file re3.png :var src=re3 :exports both
+#+RESULTS: re3
+:RESULTS:
+digraph {
+  rankdir=LR;
+  0 [label="(", xlabel="0", shape="circle"];
+  1 [label="(", xlabel="1", shape="circle"];
+  2 [label="A", xlabel="2", shape="circle"];
+  3 [label="|", xlabel="3", shape="circle"];
+  4 [label="B", xlabel="4", shape="circle"];
+  5 [label="|", xlabel="5", shape="circle"];
+  6 [label="C", xlabel="6", shape="circle"];
+  7 [label=")", xlabel="7", shape="circle"];
+  8 [label="D", xlabel="8", shape="circle"];
+  9 [label="E", xlabel="9", shape="circle"];
+  10 [label=")", xlabel="10", shape="circle"];
+  11 [label=" ", xlabel="11", shape="circle"];
+  2 -> 3 [color="black"];
+  4 -> 5 [color="black"];
+  6 -> 7 [color="black"];
+  8 -> 9 [color="black"];
+  9 -> 10 [color="black"];
+  0 -> 1 [color="red"];
+  1 -> 2 [color="red"];
+  1 -> 6 [color="red"];
+  1 -> 4 [color="red"];
+  3 -> 7 [color="red"];
+  5 -> 7 [color="red"];
+  7 -> 8 [color="red"];
+  10 -> 11 [color="red"];
+}
+
+:END:
+
+#+BEGIN_SRC dot :file re3.png :var src=re3 :exports result
 $src
 #+END_SRC
 
 #+RESULTS:
 [[file:re3.png]]
-
-#+BEGIN_SRC java :exports both
-public class GREP {
-    public static void main(String[] args) {
-        if (args.length == 0) {
-            StdOut.println("Usage: java GREP <regexp> [dot] -");
-            return;
-        }
-        String regexp = args[0];
-        int M = regexp.length();
-        if (!(regexp.charAt(0) == '(' && regexp.charAt(M-1) == ')'))
-            regexp = "(.*" + regexp + ".*)";
-        RegExp re = new RegExp(regexp);
-        if (args.length > 1 && args[1].equals("dot")) {
-            StdOut.println(re.toDot());
-        }
-        while (!StdIn.isEmpty()) {
-            String txt = StdIn.readLine();
-            if (re.matches(txt)) {
-                StdOut.println(txt);
-            }
-        }
-    }
-}
-#+END_SRC

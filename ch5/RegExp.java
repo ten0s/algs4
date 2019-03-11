@@ -84,7 +84,7 @@ public class RegExp {
 
         for (int v = 0; v < G.V(); v++) {
             char ch = v < re.length ? re[v] : ' ';
-            sb.append("  " + v + " " + attrs(label(ch), xlabel(v)) + ";\n");
+            sb.append("  " + v + " " + attrs(label(ch), xlabel(v), shape("circle")) + ";\n");
         }
 
         for (int v = 0; v < G.V()-1; v++) {
@@ -137,5 +137,9 @@ public class RegExp {
 
     private String color(String c) {
         return "color=\"" + c + "\"";
+    }
+
+    private String shape(String s) {
+        return "shape=\"" + s + "\"";
     }
 }
