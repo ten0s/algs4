@@ -21,11 +21,11 @@ public class RegExp {
             } else if (re[i] == ')') {
                 Deque<Integer> ors = new ArrayDeque<>();
                 while (true) {
-                    int op = ops.pop();
-                    if (re[op] == '|') {
-                        ors.add(op);
+                    int j = ops.pop();
+                    if (re[j] == '|') {
+                        ors.add(j);
                     } else {
-                        lp = op;
+                        lp = j;
                         break;
                     }
                 }
