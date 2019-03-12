@@ -13,6 +13,7 @@ make run CLASS=Prime ARGS="18"
 #+RESULTS:
 : isPrime: false
 : nextPrime: 19
+
 */
 
 public class Prime {

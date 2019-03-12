@@ -1,36 +1,5 @@
 import edu.princeton.cs.algs4.*;
 
-/*
-#+NAME: tiny_cg
-#+BEGIN_SRC sh :results output drawer
-make run CLASS=Digraph ARGS="../data/tinyCG.txt dot"
-#+END_SRC
-
-#+RESULTS: tiny_cg
-:RESULTS:
-digraph {
-  0 -> 2;
-  0 -> 1;
-  0 -> 5;
-  1 -> 2;
-  2 -> 3;
-  2 -> 4;
-  3 -> 5;
-  3 -> 4;
-  // {rank=same 0 1 2 3 4 5};
-}
-
-:END:
-
-#+BEGIN_SRC dot :file tinyCG.png :var dotdesc=tiny_cg
-$dotdesc
-#+END_SRC
-
-#+RESULTS:
-[[file:tinyCG.png]]
-
-*/
-
 public class Digraph {
     private final int V;        // number of vertices
     private int E;              // number of edges
@@ -95,30 +64,31 @@ public class Digraph {
     }
 
     public String toDot() {
-        String s = "digraph {\n";
+        StringBuilder sb = new StringBuilder();
+        sb.append("digraph {\n");
         HashSet<Integer> nodes = new HashSet<>();
         for (int v = 0; v < V; v++) {
             for (int w : adj[v]) {
                 nodes.add(v);
                 nodes.add(w);
-                s += "  " + v + " -> " + w + ";\n";
+                sb.append("  " + v + " -> " + w + "\n");
             }
         }
         for (int v = 0; v < V; v++) {
             if (!nodes.contains(v)) {
-                s += "  " + v + ";\n";
+                sb.append("  " + v + "\n");
             }
         }
         DigraphTopologicalSort ts = new DigraphTopologicalSort(this);
         if (ts.hasOrder()) {
-            s += "  // {rank=same";
+            sb.append("  // {rank=same");
             for (int v : ts.order()) {
-                s += " " + v;
+                sb.append(" " + v);
             }
-            s += "};\n";
+            sb.append("}\n");
         }
-        s += "}\n";
-        return s;
+        sb.append("}\n");
+        return sb.toString();
     }
 
     public static void main(String[] args) {

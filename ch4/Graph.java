@@ -1,20 +1,5 @@
 import edu.princeton.cs.algs4.*;
 
-/*
-#+NAME: tiny_cg
-#+BEGIN_SRC sh :results output drawer
-make run CLASS=Graph ARGS="../data/tinyCG.txt dot"
-#+END_SRC
-
-#+BEGIN_SRC dot :file tinyCG.png :var dotdesc=tiny_cg
-$dotdesc
-#+END_SRC
-
-#+RESULTS:
-[[file:tinyCG.png]]
-
-*/
-
 public class Graph {
     private final int V;        // number of vertices
     private int E;              // number of edges
@@ -70,25 +55,26 @@ public class Graph {
     }
 
     public String toDot() {
-        String s = "graph {\n";
+        StringBuilder sb = new StringBuilder();
+        sb.append("graph {\n");
         HashSet<Integer> nodes = new HashSet<>();
         HashSet<String> pairs = new HashSet<>();
         for (int v = 0; v < V; v++) {
             for (int w : adj[v]) {
                 nodes.add(w);
                 if (!pairs.contains(w + "-" + v)) {
-                    s += "  " + v + " -- " + w + ";\n";
+                    sb.append("  " + v + " -- " + w + "\n");
                     pairs.add(v + "-" + w);
                 }
             }
         }
         for (int v = 0; v < V; v++) {
             if (!nodes.contains(v)) {
-                s += "  " + v + ";\n";
+                sb.append("  " + v + "\n");
             }
         }
-        s += "}\n";
-        return s;
+        sb.append("}\n");
+        return sb.toString();
     }
 
     public static void main(String[] args) {

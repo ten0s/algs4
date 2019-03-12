@@ -52,8 +52,11 @@ make run CLASS=BellmanFordSPs ARGS="../data/tinyEWDnc.txt 0"
 
 NB: Will take 5+ mins
 #+BEGIN_SRC sh :results output
-make run CLASS=BellmanFordSPs ARGS="../data/largeEWD.txt 0 sum"
+#make run CLASS=BellmanFordSPs ARGS="../data/largeEWD.txt 0 sum"
 #+END_SRC
+
+#+RESULTS:
+
 */
 
 public class BellmanFordSPs {

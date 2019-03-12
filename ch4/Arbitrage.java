@@ -1,14 +1,16 @@
 import edu.princeton.cs.algs4.*;
 
 /*
-#+BEGIN_SRC sh :results output
+#+BEGIN_SRC sh :results output drawer
 make run CLASS=Arbitrage < ../data/rates.txt
 #+END_SRC
 
 #+RESULTS:
-: 1000.00000 CAD =  995.00000 USD
-:  995.00000 USD =  737.29500 EUR
-:  737.29500 EUR = 1007.14497 CAD
+:RESULTS:
+1000.00000 CAD =  995.00000 USD
+ 995.00000 USD =  737.29500 EUR
+ 737.29500 EUR = 1007.14497 CAD
+:END:
 */
 
 public class Arbitrage {

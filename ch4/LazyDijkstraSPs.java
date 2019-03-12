@@ -31,8 +31,11 @@ make run CLASS=LazyDijkstraSPs ARGS="../data/tinyEWG.txt 0"
 
 NB: Will take 5+ mins
 #+BEGIN_SRC sh :results output
-make run CLASS=LazyDijkstraSPs ARGS="../data/largeEWD.txt 0 sum"
+#make run CLASS=LazyDijkstraSPs ARGS="../data/largeEWD.txt 0 sum"
 #+END_SRC
+
+#+RESULTS:
+
 Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
 */
 

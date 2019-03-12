@@ -1,82 +1,5 @@
 import edu.princeton.cs.algs4.*;
 
-/*
-#+BEGIN_SRC sh :results output
-make compile CLASS=SymbolGraph
-#+END_SRC
-
-#+RESULTS:
-
-#+BEGIN_SRC sh :results output drawer
-java SymbolGraph ../data/routes.txt " " <<EOF
-JFK
-LAX
-EOF
-#+END_SRC
-
-#+RESULTS:
-:RESULTS:
-JFK
-   ORD
-   ATL
-   MCO
-LAX
-   LAS
-   PHX
-:END:
-
-#+BEGIN_SRC sh :results output
-java SymbolGraph ../data/routes.txt " " dot
-#+END_SRC
-
-#+RESULTS:
-#+begin_example
-graph {
-  0 [label="JFK"];
-  0 -- 2;
-  0 -- 7;
-  0 -- 1;
-  1 [label="MCO"];
-  1 -- 4;
-  1 -- 7;
-  2 [label="ORD"];
-  2 -- 7;
-  2 -- 6;
-  2 -- 5;
-  2 -- 4;
-  2 -- 3;
-  3 [label="DEN"];
-  3 -- 9;
-  3 -- 6;
-  4 [label="HOU"];
-  4 -- 5;
-  4 -- 7;
-  5 [label="DFW"];
-  5 -- 6;
-  6 [label="PHX"];
-  6 -- 9;
-  6 -- 8;
-  7 [label="ATL"];
-  8 [label="LAX"];
-  8 -- 9;
-  9 [label="LAS"];
-}
-#+end_example
-
-#+NAME: graph
-#+BEGIN_SRC sh :results output
-java SymbolGraph ../data/routes.txt " " dot
-#+END_SRC
-
-#+BEGIN_SRC dot :file routes.png :var desc=graph
-$desc
-#+END_SRC
-
-#+RESULTS:
-[[file:routes.png]]
-
-*/
-
 public class SymbolGraph {
     private HashMap<String, Integer> st; // name -> index
     private String[] keys;               // index -> name
@@ -124,19 +47,21 @@ public class SymbolGraph {
         return graph;
     }
 
-    public void printDot() {
-        StdOut.println("graph {");
+    public String toDot() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("graph {\n");
         HashSet<String> set = new HashSet<>();
         for (int v = 0; v < graph.V(); v++) {
-            StdOut.println("  " + v + " [label=\"" + nameOf(v) + "\"];");
+            sb.append("  " + v + " [label=\"" + nameOf(v) + "\"]\n");
             for (int w : graph.adj(v)) {
                 if (!set.contains(w + "-" + v)) {
-                    StdOut.println("  " + v + " -- " + w + ";");
+                    sb.append("  " + v + " -- " + w + "\n");
                     set.add(v + "-" + w);
                 }
             }
         }
-        StdOut.println("}");
+        sb.append("}\n");
+        return sb.toString();
     }
 
     public static void main(String[] args) {
@@ -157,7 +82,7 @@ public class SymbolGraph {
                 }
             }
         } else if (args.length == 3) {
-            sg.printDot();
+            StdOut.println(sg.toDot());
         }
     }
 }

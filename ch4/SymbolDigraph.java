@@ -1,78 +1,5 @@
 import edu.princeton.cs.algs4.*;
 
-/*
-#+BEGIN_SRC sh :results output
-make compile CLASS=SymbolDigraph
-#+END_SRC
-
-#+RESULTS:
-
-#+BEGIN_SRC sh :results output
-java SymbolDigraph ../data/routes.txt " " <<EOF
-JFK
-LAX
-LAS
-EOF
-#+END_SRC
-
-#+RESULTS:
-: JFK
-:    ORD
-:    ATL
-:    MCO
-: LAX
-: LAS
-:    PHX
-:    LAX
-
-#+NAME: diroutes
-#+BEGIN_SRC sh :results output
-java SymbolDigraph ../data/routes.txt " " dot
-#+END_SRC
-
-#+RESULTS: diroutes
-#+begin_example
-digraph {
-  0 [label="JFK"];
-  0 -> 2;
-  0 -> 7;
-  0 -> 1;
-  1 [label="MCO"];
-  2 [label="ORD"];
-  2 -> 7;
-  2 -> 6;
-  2 -> 5;
-  2 -> 4;
-  2 -> 3;
-  3 [label="DEN"];
-  3 -> 9;
-  3 -> 6;
-  4 [label="HOU"];
-  4 -> 1;
-  5 [label="DFW"];
-  5 -> 4;
-  5 -> 6;
-  6 [label="PHX"];
-  6 -> 8;
-  7 [label="ATL"];
-  7 -> 1;
-  7 -> 4;
-  8 [label="LAX"];
-  9 [label="LAS"];
-  9 -> 6;
-  9 -> 8;
-}
-#+end_example
-
-#+BEGIN_SRC dot :file diroutes.png :var desc=diroutes
-$desc
-#+END_SRC
-
-#+RESULTS:
-[[file:diroutes.png]]
-
-*/
-
 public class SymbolDigraph {
     private HashMap<String, Integer> st; // name -> index
     private String[] keys;               // index -> name
@@ -120,15 +47,17 @@ public class SymbolDigraph {
         return digraph;
     }
 
-    public void printDot() {
-        StdOut.println("digraph {");
+    public String toDot() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("digraph {\n");
         for (int v = 0; v < digraph.V(); v++) {
-            StdOut.println("  " + v + " [label=\"" + nameOf(v) + "\"];");
+            sb.append("  " + v + " [label=\"" + nameOf(v) + "\"]\n");
             for (int w : digraph.adj(v)) {
-                StdOut.println("  " + v + " -> " + w + ";");
+                sb.append("  " + v + " -> " + w + "\n");
             }
         }
-        StdOut.println("}");
+        sb.append("}\n");
+        return sb.toString();
     }
 
     public static void main(String[] args) {
@@ -149,7 +78,7 @@ public class SymbolDigraph {
                 }
             }
         } else if (args.length == 3) {
-            sg.printDot();
+            StdOut.println(sg.toDot());
         }
     }
 }

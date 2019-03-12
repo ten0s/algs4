@@ -22,6 +22,7 @@ make run CLASS=EdgeWeightedDAGLPs ARGS="../data/tinyEWDAG.txt 5 sum"
 
 #+RESULTS:
 : 11.759999999999998
+
 */
 
 public class EdgeWeightedDAGLPs {

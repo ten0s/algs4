@@ -1,7 +1,7 @@
 import edu.princeton.cs.algs4.*;
 
 /*
-#+BEGIN_SRC sh :results output
+#+BEGIN_SRC sh :results output drawer
 make run CLASS=KeyIndexedCounting <<EOF
 6
 3 1 4 0 5 2 5 4 3 2 1 0 0 1 2 3 4 5
@@ -9,7 +9,10 @@ EOF
 #+END_SRC
 
 #+RESULTS:
-: 0 0 0 1 1 1 2 2 2 3 3 3 4 4 4 5 5 5
+:RESULTS:
+0 0 0 1 1 1 2 2 2 3 3 3 4 4 4 5 5 5
+:END:
+
 */
 
 public class KeyIndexedCounting {

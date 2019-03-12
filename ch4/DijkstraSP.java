@@ -24,8 +24,11 @@ make run CLASS=DijkstraSP ARGS="../data/tinyEWG.txt 0 6"
 
 NB: Will take 5+ mins
 #+BEGIN_SRC sh :results output
-make run CLASS=DijkstraSP ARGS="../data/largeEWD.txt 0 999812 dist"
+#make run CLASS=DijkstraSP ARGS="../data/largeEWD.txt 0 999812 dist"
 #+END_SRC
+
+#+RESULTS:
+
 */
 
 public class DijkstraSP {

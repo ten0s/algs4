@@ -1,0 +1,28 @@
+
+#+NAME: tiny_cg
+#+BEGIN_SRC sh :results output drawer
+make run CLASS=Digraph ARGS="../data/tinyCG.txt dot"
+#+END_SRC
+
+#+RESULTS: tiny_cg
+:RESULTS:
+digraph {
+  0 -> 2
+  0 -> 1
+  0 -> 5
+  1 -> 2
+  2 -> 3
+  2 -> 4
+  3 -> 5
+  3 -> 4
+  // {rank=same 0 1 2 3 4 5}
+}
+
+:END:
+
+#+BEGIN_SRC dot :file tinyCG.png :var dotdesc=tiny_cg
+$dotdesc
+#+END_SRC
+
+#+RESULTS:
+[[file:tinyCG.png]]

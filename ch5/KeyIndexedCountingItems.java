@@ -1,7 +1,7 @@
 import edu.princeton.cs.algs4.*;
 
 /*
-#+BEGIN_SRC sh :results output
+#+BEGIN_SRC sh :results output drawer
 make run CLASS=KeyIndexedCountingItems <<EOF
 4
 3
@@ -12,9 +12,11 @@ EOF
 #+END_SRC
 
 #+RESULTS:
-: 1 Smith
-: 2 Jones
-: 3 Anderson
+:RESULTS:
+1 Smith
+2 Jones
+3 Anderson
+:END:
 */
 
 class Item {

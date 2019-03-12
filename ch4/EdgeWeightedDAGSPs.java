@@ -18,7 +18,9 @@ make run CLASS=EdgeWeightedDAGSPs ARGS="../data/tinyEWDAG.txt 5"
 #+BEGIN_SRC sh :results output
 make run CLASS=EdgeWeightedDAGSPs ARGS="../data/tinyEWDAG.txt 5 sum"
 #+END_SRC
-4.04
+
+#+RESULTS:
+: 4.04
 
 #+BEGIN_SRC sh :results output
 make run CLASS=DijkstraSPs ARGS="../data/tinyEWDAG.txt 5 sum"
@@ -26,6 +28,7 @@ make run CLASS=DijkstraSPs ARGS="../data/tinyEWDAG.txt 5 sum"
 
 #+RESULTS:
 : 4.04
+
 */
 
 public class EdgeWeightedDAGSPs {
