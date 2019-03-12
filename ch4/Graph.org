@@ -1,6 +1,6 @@
 
 #+NAME: tiny_cg
-#+BEGIN_SRC sh :results output drawer
+#+BEGIN_SRC sh :results output drawer :exports both
 make run CLASS=Graph ARGS="../data/tinyCG.txt dot"
 #+END_SRC
 

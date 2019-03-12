@@ -5,7 +5,7 @@ make compile CLASS=SymbolGraph
 
 #+RESULTS:
 
-#+BEGIN_SRC sh :results output drawer
+#+BEGIN_SRC sh :results output drawer :exports both
 java SymbolGraph ../data/routes.txt " " <<EOF
 JFK
 LAX
@@ -24,7 +24,7 @@ LAX
 :END:
 
 #+NAME: graph
-#+BEGIN_SRC sh :results output
+#+BEGIN_SRC sh :results output :exports both
 java SymbolGraph ../data/routes.txt " " dot
 #+END_SRC
 

@@ -1,5 +1,5 @@
 
-#+BEGIN_SRC sh :results output
+#+BEGIN_SRC sh :results output :exports both
 make run CLASS=LazyPrimMST ARGS="../data/tinyEWG.txt"
 #+END_SRC
 
@@ -14,7 +14,7 @@ make run CLASS=LazyPrimMST ARGS="../data/tinyEWG.txt"
 : 1.81000
 
 #+NAME: lpmst
-#+BEGIN_SRC sh :results output drawer
+#+BEGIN_SRC sh :results output drawer :exports both
 make run CLASS=LazyPrimMST ARGS="../data/tinyEWG.txt dot"
 #+END_SRC
 
