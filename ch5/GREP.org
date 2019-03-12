@@ -154,3 +154,16 @@ $src
 
 #+RESULTS:
 [[file:re3.png]]
+
+#+NAME: re4
+#+BEGIN_SRC sh :results output :exports both
+make run CLASS=GREP ARGS='(.*AB((C|D*E)F)*G) dot' <<EOF
+EOF
+#+END_SRC
+
+#+BEGIN_SRC dot :file re4.png :var src=re4 :exports results
+7$src
+#+END_SRC
+
+#+RESULTS:
+[[file:re4.png]]
