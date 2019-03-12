@@ -3,102 +3,6 @@ import java.util.Iterator;
 
 import edu.princeton.cs.algs4.*;
 
-/*
-$ make run CLASS=HashMap "ARGS=maxword 10 ../data/tale.txt"
-monseigneur 101
-
-$ make run CLASS=HashMap "ARGS=maxword 10 ../data/tale.txt stat"
-monseigneur 101
-size: 2257
-buckets: 557
-min bucket size: 0
-max bucket size: 12
-avg bucket size: 4
-empty buckets: 10
-    x
-   xx
-   xx
-   xxx
-  xxxx
-  xxxxx
-  xxxxx
-  xxxxx
- xxxxxx
- xxxxxxx
- xxxxxxx
-xxxxxxxxx
-xxxxxxxxxxxxx
-
-$ make run CLASS=HashMap ARGS="maxword 1 ../data/tinyTale.txt dot"
-the 10
-digraph {
-  rankdir=LR;
-  node [shape=record];
-  array [label="<0> 0|<1> 1|<2> 2|<3> 3|<4> 4|<5> 5|<6> 6|<7> 7|<8> 8|<9> 9|<10> 10|<11> 11|<12> 12|<13> 13|<14> 14|<15> 15|<16> 16|<17> 17|<18> 18|<19> 19|<20> 20|<21> 21|<22> 22|<23> 23|<24> 24|<25> 25|<26> 26|<27> 27|<28> 28|<29> 29|<30> 30"];
-  array:7 -> node7_0:head;
-  node7_0 [label="{<head> belief | 1 | <next>}"];
-  array:8 -> node8_0:head;
-  node8_0 [label="{<head> hope | 1 | <next>}"];
-  node8_0:next -> node8_1:head;
-  node8_1 [label="{<head> spring | 1 | <next>}"];
-  node8_1:next -> node8_2:head;
-  node8_2 [label="{<head> age | 2 | <next>}"];
-  node8_2:next -> node8_3:head;
-  node8_3 [label="{<head> the | 10 | <next>}"];
-  array:9 -> node9_0:head;
-  node9_0 [label="{<head> of | 10 | <next>}"];
-  array:11 -> node11_0:head;
-  node11_0 [label="{<head> epoch | 2 | <next>}"];
-  array:13 -> node13_0:head;
-  node13_0 [label="{<head> darkness | 1 | <next>}"];
-  array:14 -> node14_0:head;
-  node14_0 [label="{<head> wisdom | 1 | <next>}"];
-  array:15 -> node15_0:head;
-  node15_0 [label="{<head> season | 2 | <next>}"];
-  array:19 -> node19_0:head;
-  node19_0 [label="{<head> winter | 1 | <next>}"];
-  node19_0:next -> node19_1:head;
-  node19_1 [label="{<head> incredulity | 1 | <next>}"];
-  array:22 -> node22_0:head;
-  node22_0 [label="{<head> times | 2 | <next>}"];
-  node22_0:next -> node22_1:head;
-  node22_1 [label="{<head> was | 10 | <next>}"];
-  array:23 -> node23_0:head;
-  node23_0 [label="{<head> light | 1 | <next>}"];
-  node23_0:next -> node23_1:head;
-  node23_1 [label="{<head> worst | 1 | <next>}"];
-  node23_1:next -> node23_2:head;
-  node23_2 [label="{<head> best | 1 | <next>}"];
-  node23_2:next -> node23_3:head;
-  node23_3 [label="{<head> it | 10 | <next>}"];
-  array:29 -> node29_0:head;
-  node29_0 [label="{<head> foolishness | 1 | <next>}"];
-  array:30 -> node30_0:head;
-  node30_0 [label="{<head> despair | 1 | <next>}"];
-}
-
-$ make run CLASS=HashMap ARGS="dot map.txt"
-digraph {
-  rankdir=LR;
-  node [shape=record];
-  array [label="<0> 0|<1> 1|<2> 2|<3> 3|<4> 4|<5> 5|<6> 6|<7> 7|<8> 8|<9> 9|<10> 10|<11> 11|<12> 12|<13> 13|<14> 14|<15> 15|<16> 16|<17> 17|<18> 18|<19> 19|<20> 20|<21> 21|<22> 22|<23> 23|<24> 24|<25> 25|<26> 26|<27> 27|<28> 28|<29> 29|<30> 30"];
-  array:1 -> node1_0:head;
-  node1_0 [label="{<head> 1 | one | <next>}"];
-  array:2 -> node2_0:head;
-  node2_0 [label="{<head> 2 | two | <next>}"];
-  array:3 -> node3_0:head;
-  node3_0 [label="{<head> 3 | three | <next>}"];
-  array:4 -> node4_0:head;
-  node4_0 [label="{<head> 4 | four | <next>}"];
-  array:5 -> node5_0:head;
-  node5_0 [label="{<head> 5 | five | <next>}"];
-  array:6 -> node6_0:head;
-  node6_0 [label="{<head> 6 | six | <next>}"];
-  array:7 -> node7_0:head;
-  node7_0 [label="{<head> 7 | seven | <next>}"];
-}
-*/
-
 public class HashMap<Key , Value> implements MAP<Key, Value> {
     private final static int MIN_CAPACITY = 31;
     private class Node {
@@ -209,25 +113,25 @@ public class HashMap<Key , Value> implements MAP<Key, Value> {
     public String toDot() {
         StringBuilder sb = new StringBuilder();
         sb.append("digraph {\n");
-        sb.append("  rankdir=LR;\n");
-        sb.append("  node [shape=record];\n");
+        sb.append("  rankdir=LR\n");
+        sb.append("  node [shape=record]\n");
 
         sb.append("  array [label=\"");
         for (int i = 0; i < m; i++) {
             sb.append("<" + i + "> " + i);
             if (i != m-1) sb.append("|");
         }
-        sb.append("\"];\n");
+        sb.append("\"]\n");
 
         for (int i = 0; i < m; i++) {
             Node x = a[i];
             if (x != null) {
                 int j = 0;
-                sb.append("  array:" + i + " -> node" + i + "_" + j + ":" + "head;\n");
+                sb.append("  array:" + i + " -> node" + i + "_" + j + ":" + "head\n");
                 while (x != null) {
-                    sb.append("  node" + i + "_" + j + " [label=\"{<head> " + x.key + " | " + x.val + " | <next>}\"];\n");
+                    sb.append("  node" + i + "_" + j + " [label=\"{<head> " + x.key + " | " + x.val + " | <next>}\"]\n");
                     if (x.next != null) {
-                        sb.append("  node" + i + "_" + j + ":next -> node" + i + "_" + (j+1) + ":head;\n");
+                        sb.append("  node" + i + "_" + j + ":next -> node" + i + "_" + (j+1) + ":head\n");
                     }
                     x = x.next;
                     j++;
