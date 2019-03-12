@@ -150,7 +150,7 @@ digraph {
 
 #+end_example
 
-y#+BEGIN_SRC dot :file hashset.png :var src=hashset :exports results
+#+BEGIN_SRC dot :file hashset.png :var src=hashset :exports results
 $src
 #+END_SRC
 
