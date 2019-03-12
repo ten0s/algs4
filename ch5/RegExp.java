@@ -60,7 +60,9 @@ public class RegExp {
         for (int i = 0; i < N; i++) {
             Deque<Integer> matches = new ArrayDeque<>();
             for (int s : states) {
-                if (s == M) return true; //continue;
+                // partial match: for (A(B|C)*D) matches ADD
+                // if (s == M) return true;
+                if (s == M) continue;
 
                 if (re[s] == txt.charAt(i) || re[s] == '.')
                     matches.add(s+1);
@@ -80,22 +82,22 @@ public class RegExp {
     public String toDot() {
         StringBuilder sb = new StringBuilder();
         sb.append("digraph {\n");
-        sb.append("  rankdir=LR;\n");
+        sb.append("  rankdir=LR\n");
 
         for (int v = 0; v < G.V(); v++) {
             char ch = v < re.length ? re[v] : ' ';
-            sb.append("  " + v + " " + attrs(label(ch), xlabel(v), shape("circle")) + ";\n");
+            sb.append("  " + v + " " + attrs(label(ch), xlabel(v), shape("circle")) + "\n");
         }
 
         for (int v = 0; v < G.V()-1; v++) {
             if (!isMetaChar(re[v])) {
-                sb.append("  " + v + " -> " + (v+1) + " " + attrs(color("black")) + ";\n");
+                sb.append("  " + v + " -> " + (v+1) + " " + attrs(color("black")) + "\n");
             }
         }
 
         for (int v = 0; v < G.V(); v++) {
             for (int w : G.adj(v)) {
-                sb.append("  " + v + " -> " + w + " " + attrs(color("red")) + ";\n");
+                sb.append("  " + v + " -> " + w + " " + attrs(color("red")) + "\n");
             }
         }
 
