@@ -27,8 +27,8 @@ digraph {
 
 :END:
 
-#+BEGIN_SRC dot :file tinyEWD.png :var dotdesc=tiny_ewd
-$dotdesc
+#+BEGIN_SRC dot :file tinyEWD.png :var src=tiny_ewd :exports results
+$src
 #+END_SRC
 
 #+RESULTS:

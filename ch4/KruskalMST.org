@@ -41,7 +41,7 @@ graph {
 
 :END:
 
-#+BEGIN_SRC dot :file kmst.png :var src=kmst
+#+BEGIN_SRC dot :file kmst.png :var src=kmst :exports results
 $src
 #+END_SRC
 

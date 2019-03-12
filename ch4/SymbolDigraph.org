@@ -63,8 +63,8 @@ digraph {
 
 #+end_example
 
-#+BEGIN_SRC dot :file diroutes.png :var desc=diroutes
-$desc
+#+BEGIN_SRC dot :file diroutes.png :var src=diroutes :exports results
+$src
 #+END_SRC
 
 #+RESULTS:

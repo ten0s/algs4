@@ -41,7 +41,7 @@ graph {
 
 :END:
 
-#+BEGIN_SRC dot :file lpmst.png :var src=lpmst
+#+BEGIN_SRC dot :file lpmst.png :var src=lpmst :exports results
 $src
 #+END_SRC
 

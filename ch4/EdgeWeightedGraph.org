@@ -27,8 +27,8 @@ graph {
 
 :END:
 
-#+BEGIN_SRC dot :file tinyEWG.png :var dotdesc=tiny_ewg
-$dotdesc
+#+BEGIN_SRC dot :file tinyEWG.png :var src=tiny_ewg :exports results
+$src
 #+END_SRC
 
 #+RESULTS:

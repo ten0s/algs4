@@ -63,8 +63,8 @@ graph {
 
 #+end_example
 
-#+BEGIN_SRC dot :file routes.png :var desc=graph
-$desc
+#+BEGIN_SRC dot :file routes.png :var src=graph :exports results
+$src
 #+END_SRC
 
 #+RESULTS:

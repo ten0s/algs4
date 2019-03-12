@@ -20,8 +20,8 @@ digraph {
 
 :END:
 
-#+BEGIN_SRC dot :file tinyCG.png :var dotdesc=tiny_cg
-$dotdesc
+#+BEGIN_SRC dot :file tinyCG.png :var src=tiny_cg :exports results
+$src
 #+END_SRC
 
 #+RESULTS:
