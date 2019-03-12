@@ -1,0 +1,62 @@
+
+#+BEGIN_SRC sh :results output :exports both
+cat map-sorted.txt
+#+END_SRC
+
+#+RESULTS:
+: 1 one
+: 2 two
+: 3 three
+: 4 four
+: 5 five
+: 6 six
+: 7 seven
+
+#+NAME: rbbstmap
+#+BEGIN_SRC sh :results output :exports both
+make run CLASS=RedBlackBSTMap ARGS=map-sorted.txt
+#+END_SRC
+
+#+RESULTS: rbbstmap
+#+begin_example
+digraph {
+  3 [shape=point]
+  4 [shape=point]
+  2 [label="1/one"]
+  2 -> 3
+  2 -> 4
+  7 [shape=point]
+  8 [shape=point]
+  6 [label="3/three"]
+  6 -> 7
+  6 -> 8
+  1 [label="2/two"]
+  1 -> 2
+  1 -> 6
+  13 [shape=point]
+  14 [shape=point]
+  12 [label="5/five"]
+  12 -> 13
+  12 -> 14
+  17 [shape=point]
+  18 [shape=point]
+  16 [label="7/seven"]
+  16 -> 17
+  16 -> 18
+  11 [label="6/six"]
+  11 -> 12
+  11 -> 16
+  0 [label="4/four"]
+  0 -> 1
+  0 -> 11
+}
+
+#+end_example
+
+
+#+BEGIN_SRC dot :file rbbstmap.png :var src=rbbstmap :exports results
+$src
+#+END_SRC
+
+#+RESULTS:
+[[file:rbbstmap.png]]

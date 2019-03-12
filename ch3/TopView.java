@@ -2,8 +2,13 @@ import java.util.*;
 import java.io.*;
 
 /*
-$ make run CLASS=TopView <topViewInput2.txt
-2 1 14 15 12
+#+BEGIN_SRC sh :results output
+make run CLASS=TopView <topViewInput2.txt
+#+END_SRC
+
+#+RESULTS:
+: 2 1 14 15 12
+
 */
 
 class Node {
