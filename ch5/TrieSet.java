@@ -123,7 +123,7 @@ public class TrieSet {
     public String toDot() {
         StringBuilder sb = new StringBuilder();
         sb.append("graph {\n");
-        sb.append("  " + 0 + " " + attrs(label(""), shape("circle")) + ";\n");
+        sb.append("  " + 0 + " " + attrs(label(""), shape("circle")) + "\n");
         toDot(root, 0, 1, sb);
         sb.append("}\n");
         return sb.toString();
@@ -134,8 +134,8 @@ public class TrieSet {
         for (char c = 0; c < R; c++) {
             if (x.next[c] != null) {
                 sb.append("  " + id + " " + attrs(
-                              label(c), xlabel(x.next[c].end), shape("circle")) + ";\n");
-                sb.append("  " + pid + " -- " + id + ";\n");
+                              label(c), xlabel(x.next[c].end), shape("circle")) + "\n");
+                sb.append("  " + pid + " -- " + id + "\n");
                 id = toDot(x.next[c], id, id+1, sb);
             }
         }
