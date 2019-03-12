@@ -1,11 +1,11 @@
 
 #+NAME: tiny_ewg
-#+BEGIN_SRC sh :results output drawer :exports both
+#+BEGIN_SRC sh :results output :exports both
 make run CLASS=EdgeWeightedGraph ARGS="../data/tinyEWG.txt dot"
 #+END_SRC
 
 #+RESULTS: tiny_ewg
-:RESULTS:
+#+begin_example
 graph {
   5 -- 7 [label="0.28"]
   4 -- 5 [label="0.35"]
@@ -25,7 +25,7 @@ graph {
   6 -- 0 [label="0.58"]
 }
 
-:END:
+#+end_example
 
 #+BEGIN_SRC dot :file tinyEWG.png :var src=tiny_ewg :exports results
 $src

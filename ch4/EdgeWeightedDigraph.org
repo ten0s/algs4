@@ -1,11 +1,11 @@
 
 #+NAME: tiny_ewd
-#+BEGIN_SRC sh :results output drawer :exports both
+#+BEGIN_SRC sh :results output :exports both
 make run CLASS=EdgeWeightedDigraph ARGS="../data/tinyEWG.txt dot"
 #+END_SRC
 
 #+RESULTS: tiny_ewd
-:RESULTS:
+#+begin_example
 digraph {
 6 -> 2 [label="0.4"]
 6 -> 0 [label="0.58"]
@@ -25,7 +25,7 @@ digraph {
 0 -> 2 [label="0.26"]
 }
 
-:END:
+#+end_example
 
 #+BEGIN_SRC dot :file tinyEWD.png :var src=tiny_ewd :exports results
 $src

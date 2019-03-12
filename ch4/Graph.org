@@ -1,11 +1,11 @@
 
 #+NAME: tiny_cg
-#+BEGIN_SRC sh :results output drawer :exports both
+#+BEGIN_SRC sh :results output :exports both
 make run CLASS=Graph ARGS="../data/tinyCG.txt dot"
 #+END_SRC
 
 #+RESULTS: tiny_cg
-:RESULTS:
+#+begin_example
 graph {
   0 -- 2
   0 -- 1
@@ -17,7 +17,7 @@ graph {
   3 -- 4
 }
 
-:END:
+#+end_example
 
 #+BEGIN_SRC dot :file tinyCG.png :var src=tiny_cg :exports results
 $src

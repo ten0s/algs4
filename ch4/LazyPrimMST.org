@@ -14,12 +14,12 @@ make run CLASS=LazyPrimMST ARGS="../data/tinyEWG.txt"
 : 1.81000
 
 #+NAME: lpmst
-#+BEGIN_SRC sh :results output drawer :exports both
+#+BEGIN_SRC sh :results output :exports both
 make run CLASS=LazyPrimMST ARGS="../data/tinyEWG.txt dot"
 #+END_SRC
 
 #+RESULTS: lpmst
-:RESULTS:
+#+begin_example
 graph {
   5 -- 7 [label="0.28", penwidth=3.0]
   4 -- 5 [label="0.35", penwidth=3.0]
@@ -39,7 +39,7 @@ graph {
   6 -- 0 [label="0.58"]
 }
 
-:END:
+#+end_example
 
 #+BEGIN_SRC dot :file lpmst.png :var src=lpmst :exports results
 $src
