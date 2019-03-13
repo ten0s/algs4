@@ -1,25 +1,21 @@
 import edu.princeton.cs.algs4.*;
 
 /*
-#+BEGIN_SRC sh :results output drawer
+#+BEGIN_SRC sh :results output
 make run CLASS=BruteForceSubstringSearch ARGS="abra aaabbbabracadabra"
 #+END_SRC
 
 #+RESULTS:
-:RESULTS:
-text:    aaabbbabracadabra
-pattern:       abra
-:END:
+: text:    aaabbbabracadabra
+: pattern:       abra
 
-#+BEGIN_SRC sh :results output drawer
+#+BEGIN_SRC sh :results output
 make run CLASS=BruteForceSubstringSearch ARGS="abrc aaabbbabracadabra"
 #+END_SRC
 
 #+RESULTS:
-:RESULTS:
-text:    aaabbbabracadabra
-pattern:                  abrc
-:END:
+: text:    aaabbbabracadabra
+: pattern:                  abrc
 
 */
 
