@@ -3,146 +3,6 @@ import java.util.ArrayDeque;
 
 import edu.princeton.cs.algs4.*;
 
-/*
-#+NAME: tst
-#+BEGIN_SRC sh :results output drawer
-make run CLASS=TSTMap ARGS=she-sells.txt <<EOF
-dot
-EOF
-#+END_SRC
-
-#+RESULTS: tst
-:RESULTS:
-graph {
-  2 [shape=point];
-  4 [shape=point];
-  5 [shape=point];
-  6 [shape=point];
-  3 [label="y" xlabel="4"];
-  3 -- 4;
-  3 -- 5;
-  3 -- 6;
-  8 [shape=point];
-  1 [label="b"];
-  1 -- 2;
-  1 -- 3;
-  1 -- 8;
-  12 [shape=point];
-  15 [shape=point];
-  16 [shape=point];
-  17 [shape=point];
-  14 [label="a" xlabel="6"];
-  14 -- 15;
-  14 -- 16;
-  14 -- 17;
-  20 [shape=point];
-  22 [shape=point];
-  23 [shape=point];
-  24 [shape=point];
-  21 [label="s" xlabel="1"];
-  21 -- 22;
-  21 -- 23;
-  21 -- 24;
-  26 [shape=point];
-  19 [label="l"];
-  19 -- 20;
-  19 -- 21;
-  19 -- 26;
-  28 [shape=point];
-  13 [label="l"];
-  13 -- 14;
-  13 -- 19;
-  13 -- 28;
-  30 [shape=point];
-  11 [label="e"];
-  11 -- 12;
-  11 -- 13;
-  11 -- 30;
-  33 [shape=point];
-  35 [shape=point];
-  37 [shape=point];
-  39 [shape=point];
-  40 [shape=point];
-  41 [shape=point];
-  38 [label="s" xlabel="3"];
-  38 -- 39;
-  38 -- 40;
-  38 -- 41;
-  43 [shape=point];
-  36 [label="l"];
-  36 -- 37;
-  36 -- 38;
-  36 -- 43;
-  45 [shape=point];
-  34 [label="l"];
-  34 -- 35;
-  34 -- 36;
-  34 -- 45;
-  48 [shape=point];
-  50 [shape=point];
-  52 [shape=point];
-  53 [shape=point];
-  54 [shape=point];
-  51 [label="e" xlabel="7"];
-  51 -- 52;
-  51 -- 53;
-  51 -- 54;
-  56 [shape=point];
-  49 [label="r"];
-  49 -- 50;
-  49 -- 51;
-  49 -- 56;
-  58 [shape=point];
-  47 [label="o"];
-  47 -- 48;
-  47 -- 49;
-  47 -- 58;
-  32 [label="e" xlabel="0"];
-  32 -- 33;
-  32 -- 34;
-  32 -- 47;
-  61 [shape=point];
-  10 [label="h"];
-  10 -- 11;
-  10 -- 32;
-  10 -- 61;
-  64 [shape=point];
-  66 [shape=point];
-  68 [shape=point];
-  69 [shape=point];
-  70 [shape=point];
-  67 [label="e" xlabel="5"];
-  67 -- 68;
-  67 -- 69;
-  67 -- 70;
-  72 [shape=point];
-  65 [label="h"];
-  65 -- 66;
-  65 -- 67;
-  65 -- 72;
-  74 [shape=point];
-  63 [label="t"];
-  63 -- 64;
-  63 -- 65;
-  63 -- 74;
-  0 [label="s"];
-  0 -- 1;
-  0 -- 10;
-  0 -- 63;
-}
-
-:END:
-
-#+BEGIN_SRC dot :file tstmap.png :var src=tst
-$src
-#+END_SRC
-
-#+RESULTS:
-[[file:tstmap.png]]
-
-
-*/
-
 public class TSTMap<Value> {
     private Node root;
     private int size;
@@ -257,6 +117,7 @@ public class TSTMap<Value> {
     public String toDot() {
         StringBuilder sb = new StringBuilder();
         sb.append("graph {\n");
+        sb.append("  node " + attrs(shape("circle")) + "\n");
         toDot(root, 0, sb);
         sb.append("}\n");
         return sb.toString();
@@ -264,19 +125,19 @@ public class TSTMap<Value> {
 
     private int toDot(Node x, int id, StringBuilder sb) {
         if (x == null) {
-            sb.append("  " + id + " " + attrs(point()) + ";\n");
+            sb.append("  " + id + " " + attrs(shape("point")) + "\n");
             return id+1;
         }
         int idLeft  = toDot(x.left , id+1  , sb);
         int idMid   = toDot(x.mid  , idLeft, sb);
         int idRight = toDot(x.right, idMid , sb);
-        sb.append("  " + id + " " + attrs(label(x.c), xlabel(x.val)) + ";\n");
+        sb.append("  " + id + " " + attrs(label(x.c), xlabel(x.val)) + "\n");
         // link to left subtree
-        sb.append("  " + id + " -- " + (id+1) + ";\n");
+        sb.append("  " + id + " -- " + (id+1) + "\n");
         // link to mid subtree
-        sb.append("  " + id + " -- " + idLeft + ";\n");
+        sb.append("  " + id + " -- " + idLeft + "\n");
         // link to right subtree
-        sb.append("  " + id + " -- " + idMid + ";\n");
+        sb.append("  " + id + " -- " + idMid + "\n");
         return idRight+1;
     }
 
@@ -300,8 +161,8 @@ public class TSTMap<Value> {
         }
     }
 
-    private String point() {
-        return "shape=point";
+    private String shape(String s) {
+        return "shape=\"" + s + "\"";
     }
 
     public static void main(String[] args) {
