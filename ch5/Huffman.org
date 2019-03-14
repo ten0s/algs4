@@ -1,0 +1,149 @@
+#+BEGIN_SRC sh :results output
+make run CLASS=Huffman << EOF
+- abracadabra
+EOF
+#+END_SRC
+
+#+RESULTS:
+: 01a01b01r01c1d:01011001110011110101100
+
+#+BEGIN_SRC sh :results output
+make run CLASS=Huffman << EOF
+-c abracadabra
+EOF
+#+END_SRC
+
+#+RESULTS:
+: a: 0
+: b: 10
+: c: 1110
+: d: 1111
+: r: 110
+
+#+NAME: huffman-encode
+#+BEGIN_SRC sh :results output
+make run CLASS=Huffman << EOF
+-d abracadabra
+EOF
+#+END_SRC
+
+#+RESULTS: huffman-encode
+#+begin_example
+graph {
+  node [shape="circle"]
+  2 [shape="point"]
+  3 [shape="point"]
+  1 [label="a"]
+  1 -- 2 [label="0"]
+  1 -- 3 [label="1"]
+  7 [shape="point"]
+  8 [shape="point"]
+  6 [label="b"]
+  6 -- 7 [label="0"]
+  6 -- 8 [label="1"]
+  12 [shape="point"]
+  13 [shape="point"]
+  11 [label="r"]
+  11 -- 12 [label="0"]
+  11 -- 13 [label="1"]
+  17 [shape="point"]
+  18 [shape="point"]
+  16 [label="c"]
+  16 -- 17 [label="0"]
+  16 -- 18 [label="1"]
+  21 [shape="point"]
+  22 [shape="point"]
+  20 [label="d"]
+  20 -- 21 [label="0"]
+  20 -- 22 [label="1"]
+  15 [label=" "]
+  15 -- 16 [label="0"]
+  15 -- 20 [label="1"]
+  10 [label=" "]
+  10 -- 11 [label="0"]
+  10 -- 15 [label="1"]
+  5 [label=" "]
+  5 -- 6 [label="0"]
+  5 -- 10 [label="1"]
+  0 [label=" "]
+  0 -- 1 [label="0"]
+  0 -- 5 [label="1"]
+}
+
+#+end_example
+
+
+#+BEGIN_SRC dot :file huffmap-encode.png :var src=huffman-encode
+$src
+#+END_SRC
+
+#+RESULTS:
+[[file:huffmap-encode.png]]
+
+#+BEGIN_SRC sh :results output
+make run CLASS=Huffman << EOF
++ 01a01b01r01c1d:01011001110011110101100
+EOF
+#+END_SRC
+
+#+RESULTS:
+: abracadabra
+
+#+NAME: huffman-decode
+#+BEGIN_SRC sh :results output
+make run CLASS=Huffman << EOF
++d 01a01b01r01c1d:01011001110011110101100
+EOF
+#+END_SRC
+
+#+RESULTS: huffman-decode
+#+begin_example
+graph {
+  node [shape="circle"]
+  2 [shape="point"]
+  3 [shape="point"]
+  1 [label="a"]
+  1 -- 2 [label="0"]
+  1 -- 3 [label="1"]
+  7 [shape="point"]
+  8 [shape="point"]
+  6 [label="b"]
+  6 -- 7 [label="0"]
+  6 -- 8 [label="1"]
+  12 [shape="point"]
+  13 [shape="point"]
+  11 [label="r"]
+  11 -- 12 [label="0"]
+  11 -- 13 [label="1"]
+  17 [shape="point"]
+  18 [shape="point"]
+  16 [label="c"]
+  16 -- 17 [label="0"]
+  16 -- 18 [label="1"]
+  21 [shape="point"]
+  22 [shape="point"]
+  20 [label="d"]
+  20 -- 21 [label="0"]
+  20 -- 22 [label="1"]
+  15 [label=" "]
+  15 -- 16 [label="0"]
+  15 -- 20 [label="1"]
+  10 [label=" "]
+  10 -- 11 [label="0"]
+  10 -- 15 [label="1"]
+  5 [label=" "]
+  5 -- 6 [label="0"]
+  5 -- 10 [label="1"]
+  0 [label=" "]
+  0 -- 1 [label="0"]
+  0 -- 5 [label="1"]
+}
+
+#+end_example
+
+#+BEGIN_SRC dot :file huffmap-decode.png :var src=huffman-decode
+$src
+#+END_SRC
+
+#+RESULTS:
+[[file:huffmap-decode.png]]
