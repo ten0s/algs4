@@ -114,21 +114,18 @@ public class Huffman {
         }
 
         private int toDot(Node x, int id, StringBuilder sb) {
-            if (x == null) {
-                sb.append("  " + id + " " + attrs(shape("point")) + "\n");
-                return id+1;
-            }
+            if (x == null) return id;
             int idLeft  = toDot(x.left , id+1  , sb);
             int idRight = toDot(x.right, idLeft , sb);
             if (x.isLeaf()) {
                 sb.append("  " + id + " " + attrs(label(x.ch)) + "\n");
             } else {
                 sb.append("  " + id + " " + attrs(label(' ')) + "\n");
+                // link to left subtree
+                sb.append("  " + id + " -- " + (id+1) + " " + attrs(label('0')) + "\n");
+                // link to right subtree
+                sb.append("  " + id + " -- " + idLeft + " " + attrs(label('1')) + "\n");
             }
-            // link to left subtree
-            sb.append("  " + id + " -- " + (id+1) + " " + attrs(label('0')) + "\n");
-            // link to right subtree
-            sb.append("  " + id + " -- " + idLeft + " " + attrs(label('1')) + "\n");
             return idRight+1;
         }
 
