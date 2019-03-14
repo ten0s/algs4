@@ -1,4 +1,4 @@
-#+BEGIN_SRC sh :results output
+#+BEGIN_SRC sh :results output :exports both
 make run CLASS=Huffman << EOF
 - abracadabra
 EOF
@@ -7,7 +7,7 @@ EOF
 #+RESULTS:
 : 01a01b01r01c1d:01011001110011110101100
 
-#+BEGIN_SRC sh :results output
+#+BEGIN_SRC sh :results output :exports both
 make run CLASS=Huffman << EOF
 -c abracadabra
 EOF
@@ -21,7 +21,7 @@ EOF
 : r: 110
 
 #+NAME: huffman-encode
-#+BEGIN_SRC sh :results output
+#+BEGIN_SRC sh :results output :exports both
 make run CLASS=Huffman << EOF
 -d abracadabra
 EOF
@@ -80,7 +80,7 @@ $src
 #+RESULTS:
 [[file:huffmap-encode.png]]
 
-#+BEGIN_SRC sh :results output
+#+BEGIN_SRC sh :results output :exports both
 make run CLASS=Huffman << EOF
 + 01a01b01r01c1d:01011001110011110101100
 EOF
@@ -90,7 +90,7 @@ EOF
 : abracadabra
 
 #+NAME: huffman-decode
-#+BEGIN_SRC sh :results output
+#+BEGIN_SRC sh :results output :exports both
 make run CLASS=Huffman << EOF
 +d 01a01b01r01c1d:01011001110011110101100
 EOF

@@ -1,6 +1,6 @@
 
 #+NAME: tst
-#+BEGIN_SRC sh :results output
+#+BEGIN_SRC sh :results output :exports both
 make run CLASS=TSTMap ARGS=she-sells.txt <<EOF
 dot
 EOF
