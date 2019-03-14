@@ -129,7 +129,7 @@ graph {
 
 #+end_example
 
-#+BEGIN_SRC dot :file tstmap.png :var src=tst
+#+BEGIN_SRC dot :file tstmap.png :var src=tst :exports results
 $src
 #+END_SRC
 

@@ -73,7 +73,7 @@ graph {
 #+end_example
 
 
-#+BEGIN_SRC dot :file huffmap-encode.png :var src=huffman-encode
+#+BEGIN_SRC dot :file huffmap-encode.png :var src=huffman-encode :exports results
 $src
 #+END_SRC
 
@@ -141,7 +141,7 @@ graph {
 
 #+end_example
 
-#+BEGIN_SRC dot :file huffmap-decode.png :var src=huffman-decode
+#+BEGIN_SRC dot :file huffmap-decode.png :var src=huffman-decode :exports results
 $src
 #+END_SRC
 
