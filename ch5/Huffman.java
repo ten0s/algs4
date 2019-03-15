@@ -148,14 +148,6 @@ public class Huffman {
             return "label=\"" + o + "\"";
         }
 
-        private String xlabel(Object o) {
-            if (o != null) {
-                return "xlabel=\"" + o + "\"";
-            } else {
-                return null;
-            }
-        }
-
         private String shape(String s) {
             return "shape=\"" + s + "\"";
         }
