@@ -26,131 +26,123 @@ public class Huffman {
         }
     }
 
-    private static class Trie {
-        private Node root;
-
-        private Trie(Node root) {
-            this.root = root;
+    public static Node fromText(String text) {
+        int[] freq = new int[R];
+        int n = text.length();
+        for (int i = 0; i < n; i++) {
+            freq[text.charAt(i)]++;
         }
-
-        public static Trie fromText(String text) {
-            int[] freq = new int[R];
-            int n = text.length();
-            for (int i = 0; i < n; i++) {
-                freq[text.charAt(i)]++;
-            }
-            PriorityQueue<Node> pq = new PriorityQueue<>();
-            for (char c = 0; c < R; c++) {
-                if (freq[c] > 0) {
-                    pq.add(new Node(c, freq[c], null, null));
-                }
-            }
-            while (pq.size() > 1) {
-                Node l = pq.remove();
-                Node r = pq.remove();
-                pq.add(new Node('\0', l.freq + r.freq, l, r));
-            }
-            return new Trie(pq.remove());
-        }
-
-        public static Trie fromDump(String dump) {
-            Deque<Character> q = new ArrayDeque<>();
-            int n = dump.length();
-            for (int i = 0; i < n; i++) {
-                q.add(dump.charAt(i));
-            }
-            return new Trie(undump(q));
-        }
-
-        private static Node undump(Deque<Character> q) {
-            char c = q.remove();
-            if (c == '1') {
-                return new Node(q.remove(), 0, null, null);
-            }
-            Node l = undump(q);
-            Node r = undump(q);
-            return new Node('\0', 0, l, r);
-        }
-
-        public String toDump() {
-            StringBuilder sb = new StringBuilder();
-            dump(root, sb);
-            return sb.toString();
-        }
-
-        private void dump(Node x, StringBuilder sb) {
-            if (x.isLeaf()) {
-                sb.append('1');
-                sb.append(x.ch);
-            } else {
-                sb.append('0');
-                dump(x.left, sb);
-                dump(x.right, sb);
+        PriorityQueue<Node> pq = new PriorityQueue<>();
+        for (char c = 0; c < R; c++) {
+            if (freq[c] > 0) {
+                pq.add(new Node(c, freq[c], null, null));
             }
         }
-
-        public String[] codes() {
-            String[] st = new String[R];
-            codes(st, root, "");
-            return st;
+        while (pq.size() > 1) {
+            Node l = pq.remove();
+            Node r = pq.remove();
+            pq.add(new Node('\0', l.freq + r.freq, l, r));
         }
+        return pq.remove();
+    }
 
-        private void codes(String[] st, Node x, String s) {
-            if (x.isLeaf()) {
-                st[x.ch] = s;
-            } else {
-                codes(st, x.left, s + '0');
-                codes(st, x.right, s + '1');
-            }
+    public static Node fromDump(String dump) {
+        Deque<Character> q = new ArrayDeque<>();
+        int n = dump.length();
+        for (int i = 0; i < n; i++) {
+            q.add(dump.charAt(i));
         }
+        return undump(q);
+    }
 
-        public String toDot() {
-            StringBuilder sb = new StringBuilder();
-            sb.append("graph {\n");
-            sb.append("  node " + attrs(shape("circle")) + "\n");
-            toDot(root, 0, sb);
-            sb.append("}\n");
-            return sb.toString();
+    private static Node undump(Deque<Character> q) {
+        char c = q.remove();
+        if (c == '1') {
+            return new Node(q.remove(), 0, null, null);
         }
+        Node l = undump(q);
+        Node r = undump(q);
+        return new Node('\0', 0, l, r);
+    }
 
-        private int toDot(Node x, int id, StringBuilder sb) {
-            if (x == null) return id;
-            int idLeft  = toDot(x.left , id+1  , sb);
-            int idRight = toDot(x.right, idLeft , sb);
-            if (x.isLeaf()) {
-                sb.append("  " + id + " " + attrs(label(x.ch)) + "\n");
-            } else {
-                sb.append("  " + id + " " + attrs(label(' ')) + "\n");
-                // link to left subtree
-                sb.append("  " + id + " -- " + (id+1) + " " + attrs(label('0')) + "\n");
-                // link to right subtree
-                sb.append("  " + id + " -- " + idLeft + " " + attrs(label('1')) + "\n");
-            }
-            return idRight+1;
+    public static String toDump(Node root) {
+        StringBuilder sb = new StringBuilder();
+        dump(root, sb);
+        return sb.toString();
+    }
+
+    private static void dump(Node x, StringBuilder sb) {
+        if (x.isLeaf()) {
+            sb.append('1');
+            sb.append(x.ch);
+        } else {
+            sb.append('0');
+            dump(x.left, sb);
+            dump(x.right, sb);
         }
+    }
 
-        private String attrs(String... attrs) {
-            Deque<String> attrs2 = new ArrayDeque<>();
-            for (String attr : attrs) if (attr != null) attrs2.add(attr);
+    public static String[] codes(Node root) {
+        String[] st = new String[R];
+        codes(root, "", st);
+        return st;
+    }
 
-            StringBuilder sb = new StringBuilder();
-            sb.append("[");
-            for (String attr : attrs2) {
-                sb.append(attr);
-                attrs2.remove();
-                if (attrs2.size() > 0) sb.append(", ");
-            }
-            sb.append("]");
-            return sb.toString();
+    private static void codes(Node x, String prefix, String[] st) {
+        if (x.isLeaf()) {
+            st[x.ch] = prefix;
+        } else {
+            codes(x.left, prefix + '0', st);
+            codes(x.right, prefix + '1', st);
         }
+    }
 
-        private String label(Object o) {
-            return "label=\"" + o + "\"";
-        }
+    public static String toDot(Node root) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("graph {\n");
+        sb.append("  node " + attrs(shape("circle")) + "\n");
+        toDot(root, 0, sb);
+        sb.append("}\n");
+        return sb.toString();
+    }
 
-        private String shape(String s) {
-            return "shape=\"" + s + "\"";
+    private static int toDot(Node x, int id, StringBuilder sb) {
+        if (x == null) return id;
+        int idLeft  = toDot(x.left , id+1  , sb);
+        int idRight = toDot(x.right, idLeft , sb);
+        if (x.isLeaf()) {
+            sb.append("  " + id + " " + attrs(label(x.ch)) + "\n");
+        } else {
+            sb.append("  " + id + " " + attrs(label(' ')) + "\n");
+            // link to left subtree
+            sb.append("  " + id + " -- " + (id+1) + " " + attrs(label('0')) + "\n");
+            // link to right subtree
+            sb.append("  " + id + " -- " + idLeft + " " + attrs(label('1')) + "\n");
         }
+        return idRight+1;
+    }
+
+    private static String attrs(String... attrs) {
+        Deque<String> attrs2 = new ArrayDeque<>();
+        for (String attr : attrs) if (attr != null) attrs2.add(attr);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (String attr : attrs2) {
+            sb.append(attr);
+            attrs2.remove();
+            if (attrs2.size() > 0) sb.append(", ");
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+    private static String label(Object o) {
+        return "label=\"" + o + "\"";
+    }
+
+    private static String shape(String s) {
+        return "shape=\"" + s + "\"";
     }
 
     public static void main(String[] args) {
@@ -171,17 +163,17 @@ public class Huffman {
                 boolean codez = cmd.equals("-c");
                 boolean dot = cmd.equals("-d");
 
-                Trie trie = Trie.fromText(text);
+                Node trie = fromText(text);
 
                 StringBuilder sb = new StringBuilder();
-                String[] codes = trie.codes();
+                String[] codes = codes(trie);
 
                 int n = text.length();
                 for (int i = 0; i < n; i++) {
                     sb.append(codes[text.charAt(i)]);
                 }
 
-                String trieDump = trie.toDump();
+                String trieDump = toDump(trie);
                 String textDump = sb.toString();
 
                 sb = new StringBuilder();
@@ -191,7 +183,8 @@ public class Huffman {
                 String dump = sb.toString();
 
                 if (dot)
-                    StdOut.println(trie.toDot());
+
+                    StdOut.println(toDot(trie));
                 else if (codez)
                     StdOut.print(codesToString(codes));
                 else
@@ -204,13 +197,13 @@ public class Huffman {
                 String trieDump = dump.substring(0, d);
                 String textDump = dump.substring(d+1, dump.length());
 
-                Trie trie = Trie.fromDump(trieDump);
+                Node trie = fromDump(trieDump);
 
                 StringBuilder sb = new StringBuilder();
                 int n = textDump.length();
                 int i = 0;
                 while (i < n) {
-                    Node x = trie.root;
+                    Node x = trie;
                     while (!x.isLeaf()) {
                         if (textDump.charAt(i++) == '0')
                             x = x.left;
@@ -221,7 +214,7 @@ public class Huffman {
                 }
                 String text = sb.toString();
                 if (dot)
-                    StdOut.println(trie.toDot());
+                    StdOut.println(toDot(trie));
                 else
                     StdOut.println(text);
             }
