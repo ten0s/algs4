@@ -34,10 +34,10 @@ public class Huffman {
         }
 
         public static Trie fromText(String text) {
-            char[] input = text.toCharArray();
             int[] freq = new int[R];
-            for (int i = 0; i < input.length; i++) {
-                freq[input[i]]++;
+            int n = text.length();
+            for (int i = 0; i < n; i++) {
+                freq[text.charAt(i)]++;
             }
             PriorityQueue<Node> pq = new PriorityQueue<>();
             for (char c = 0; c < R; c++) {
