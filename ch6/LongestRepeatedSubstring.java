@@ -2,7 +2,7 @@ import edu.princeton.cs.algs4.*;
 
 /*
 #+BEGIN_SRC sh :results output
-make run CLASS=LongestRepeatedSubstring < ../data/tinyTale.txt
+make run CLASS=LongestRepeatedSubstring ARGS=../data/tinyTale.txt
 #+END_SRC
 
 #+RESULTS:
@@ -24,7 +24,17 @@ public class LongestRepeatedSubstring {
     }
 
     public static void main(String[] args) {
-        String text = StdIn.readAll().replaceAll("\\s+", " ");
+        if (args.length == 0) {
+            StdOut.println("usage: javac LongesRepeatedSubstring <FILE | ->");
+            return;
+        }
+        String text = null;
+        if (args[0].equals("-")) {
+            text = StdIn.readString().replaceAll("\\s+", " ");
+        } else {
+            In in = new In(args[0]);
+            text = in.readAll().replaceAll("\\s+", " ");
+        }
         StdOut.println(lrs(text));
     }
 }

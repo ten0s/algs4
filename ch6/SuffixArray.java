@@ -87,7 +87,7 @@ public class SuffixArray {
 
     public static void main(String[] args) {
         if (args.length == 0) {
-            StdOut.println("usage: javac SuffixArray FILE < EOF");
+            StdOut.println("usage: javac SuffixArray <FILE | -> < EOF");
             StdOut.println("index i");
             StdOut.println("length");
             StdOut.println("select i");
@@ -95,9 +95,15 @@ public class SuffixArray {
             StdOut.println("rank key");
             StdOut.println("overall");
             StdOut.println("EOF");
+            return;
         }
-        In in = new In(args[0]);
-        String text = in.readAll().replaceAll("\\s+", " ");
+        String text = null;
+        if (args[0].equals("-")) {
+            text = StdIn.readString().replaceAll("\\s+", " ");
+        } else {
+            In in = new In(args[0]);
+            text = in.readAll().replaceAll("\\s+", " ");
+        }
         SuffixArray sa = new SuffixArray(text);
         while (!StdIn.isEmpty()) {
             String cmd = StdIn.readString();
