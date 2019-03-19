@@ -1,4 +1,5 @@
 import java.util.*;
+import edu.princeton.cs.algs4.*;
 
 public class SuffixArray {
     private class Suffix implements Comparable<Suffix> {
@@ -64,6 +65,47 @@ public class SuffixArray {
     }
 
     public int rank(String key) {
-        return -1;
+        int lo = 0, hi = suffixes.length-1;
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            int cmp = key.compareTo(select(mid));
+            if      (cmp < 0) hi = mid-1;
+            else if (cmp > 0) lo = mid+1;
+            else              return mid;
+        }
+        return lo;
+    }
+
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            StdOut.println("usage: javac SuffixArray FILE < EOF");
+            StdOut.println("index i");
+            StdOut.println("length");
+            StdOut.println("select i");
+            StdOut.println("lcp i");
+            StdOut.println("rank key");
+            StdOut.println("EOF");
+        }
+        In in = new In(args[0]);
+        String text = in.readAll().replaceAll("\\s+", " ");
+        SuffixArray sa = new SuffixArray(text);
+        while (!StdIn.isEmpty()) {
+            String cmd = StdIn.readString();
+            if (cmd.equals("index")) {
+                int i = StdIn.readInt();
+                StdOut.println(sa.index(i));
+            } else if (cmd.equals("length")) {
+                StdOut.println(sa.length());
+            } else if (cmd.equals("select")) {
+                int i = StdIn.readInt();
+                StdOut.println(sa.select(i));
+            } else if (cmd.equals("lcp")) {
+                int i = StdIn.readInt();
+                StdOut.println(sa.lcp(i));
+            } else if (cmd.equals("rank")) {
+                String key = StdIn.readString();
+                StdOut.println(sa.rank(key));
+            }
+        }
     }
 }
