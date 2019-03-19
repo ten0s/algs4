@@ -35,6 +35,6 @@ public class LongestRepeatedSubstring {
             In in = new In(args[0]);
             text = in.readAll().replaceAll("\\s+", " ");
         }
-        StdOut.println(lrs(text));
+        StdOut.println("\"" + lrs(text) + "\"");
     }
 }
