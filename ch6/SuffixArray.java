@@ -93,6 +93,7 @@ public class SuffixArray {
             StdOut.println("select i");
             StdOut.println("lcp i");
             StdOut.println("rank key");
+            StdOut.println("overall");
             StdOut.println("EOF");
         }
         In in = new In(args[0]);
@@ -114,6 +115,25 @@ public class SuffixArray {
             } else if (cmd.equals("rank")) {
                 String key = StdIn.readString();
                 StdOut.println(sa.rank(key));
+            } else if (cmd.equals("overall")) {
+                StdOut.println("  i ind lcp rnk select");
+                StdOut.println("---------------------------");
+                for (int i = 0; i < text.length(); i++) {
+                    int index = sa.index(i);
+                    String ith =
+                        "\"" +
+                        text.substring(index, Math.min(index + 50, text.length()))
+                        + "\"";
+                    assert text.substring(index).equals(sa.select(i));
+                    int rank = sa.rank(text.substring(index));
+                    if (i == 0) {
+                        StdOut.printf("%3d %3d %3s %3d %s\n", i, index, "-", rank, ith);
+                    }
+                    else {
+                        int lcp = sa.lcp(i);
+                        StdOut.printf("%3d %3d %3d %3d %s\n", i, index, lcp, rank, ith);
+                    }
+                }
             }
         }
     }
