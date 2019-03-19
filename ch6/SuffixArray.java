@@ -68,12 +68,21 @@ public class SuffixArray {
         int lo = 0, hi = suffixes.length-1;
         while (lo <= hi) {
             int mid = lo + (hi - lo) / 2;
-            int cmp = key.compareTo(select(mid));
+            int cmp = compare(key, suffixes[mid]);
             if      (cmp < 0) hi = mid-1;
             else if (cmp > 0) lo = mid+1;
             else              return mid;
         }
         return lo;
+    }
+
+    private int compare(String key, Suffix suffix) {
+        int n = Math.min(key.length(), suffix.length());
+        for (int i = 0; i < n; i++) {
+            if (key.charAt(i) < suffix.charAt(i)) return -1;
+            if (key.charAt(i) > suffix.charAt(i)) return +1;
+        }
+        return key.length() - suffix.length();
     }
 
     public static void main(String[] args) {
