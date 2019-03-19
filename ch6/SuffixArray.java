@@ -66,8 +66,4 @@ public class SuffixArray {
     public int rank(String key) {
         return -1;
     }
-
-    public String toString() {
-        return ArrayUtil.toString(suffixes);
-    }
 }
