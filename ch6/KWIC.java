@@ -41,7 +41,7 @@ public class KWIC {
                 int to1   = Math.min(n, sa.index(i) + query.length());
                 if (!query.equals(text.substring(from1, to1))) break;
 
-                // print centex surrounding sorted suffix i
+                // print context surrounding sorted suffix i
                 int from2 = Math.max(0, sa.index(i) - context);
                 int to2   = Math.min(n, sa.index(i) + context + query.length());
                 StdOut.println(text.substring(from2, sa.index(i)) +
