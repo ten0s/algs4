@@ -1,5 +1,23 @@
 import edu.princeton.cs.algs4.*;
 
+/*
+#+BEGIN_SRC sh :results output
+make run CLASS=KWIC ARGS="../data/tale.txt 15" << EOF
+search
+EOF
+#+END_SRC
+
+#+RESULTS:
+: o st giless to [32msearch[0m for contraband
+: her unavailing [32msearch[0m for your fathe
+: le and gone in [32msearch[0m of her husband
+: t provinces in [32msearch[0m of impoverishe
+:  dispersing in [32msearch[0m of other carri
+: n that bed and [32msearch[0m the straw hold
+:
+
+*/
+
 public class KWIC {
     public static void main(String[] args) {
         if (args.length == 0) {
