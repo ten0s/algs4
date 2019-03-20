@@ -21,15 +21,20 @@ EOF
 public class KWIC {
     public static void main(String[] args) {
         if (args.length == 0) {
-            StdOut.println("usage: javac KWIC <FILE> <CONTEXT> << EOF");
+            StdOut.println("usage: javac KWIC <FILE | -> <CONTEXT> << EOF");
             StdOut.println("QUERY");
             StdOut.println("EOF");
             return;
         }
-        In in = new In(args[0]);
+        String text = null;
+        if (args[0].equals("-")) {
+            text = StdIn.readLine().replaceAll("\\s+", " ");
+        } else {
+            In in = new In(args[0]);
+            text = in.readAll().replaceAll("\\s+", " ");
+        }
         int context = Integer.parseInt(args[1]);
 
-        String text = in.readAll().replaceAll("\\s+", " ");
         int n = text.length();
         SuffixArray sa = new SuffixArray(text);
 

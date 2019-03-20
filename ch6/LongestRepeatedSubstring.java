@@ -30,7 +30,7 @@ public class LongestRepeatedSubstring {
         }
         String text = null;
         if (args[0].equals("-")) {
-            text = StdIn.readString().replaceAll("\\s+", " ");
+            text = StdIn.readLine().replaceAll("\\s+", " ");
         } else {
             In in = new In(args[0]);
             text = in.readAll().replaceAll("\\s+", " ");
