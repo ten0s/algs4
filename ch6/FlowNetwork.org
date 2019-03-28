@@ -1,0 +1,28 @@
+
+#+NAME: tiny_fn
+#+BEGIN_SRC sh :results output :exports both
+make run CLASS=FlowNetwork ARGS="../data/tinyFN.txt dot"
+#+END_SRC
+
+#+RESULTS: tiny_fn
+#+begin_example
+digraph {
+   0 -> 1 [label="0.0/2.0"]
+   0 -> 2 [label="0.0/3.0"]
+   1 -> 3 [label="0.0/3.0"]
+   1 -> 4 [label="0.0/1.0"]
+   2 -> 3 [label="0.0/1.0"]
+   2 -> 4 [label="0.0/1.0"]
+   3 -> 5 [label="0.0/2.0"]
+   4 -> 5 [label="0.0/3.0"]
+}
+
+#+end_example
+
+
+#+BEGIN_SRC dot :file tinyFN.png :var src=tiny_fn :exports results
+$src
+#+END_SRC
+
+#+RESULTS:
+[[file:tinyFN.png]]

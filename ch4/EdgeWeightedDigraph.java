@@ -76,7 +76,7 @@ public class EdgeWeightedDigraph {
         for (DirectedEdge e : edges()) {
             int v = e.from(), w = e.to();
             double weight = e.weight();
-            sb.append(v + " -> " + w + " [label=\"" + weight + "\"]\n");
+            sb.append("   " + v + " -> " + w + " [label=\"" + weight + "\"]\n");
         }
         sb.append("}\n");
         return sb.toString();
