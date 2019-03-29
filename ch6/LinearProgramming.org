@@ -1,0 +1,93 @@
+* Farmer's problem
+
+Suppose a farmer has 75 acres on which to plant two crops: wheat and barley.
+To produce these crops, it costs the farmer (for seed, fertilizer, etc.) $120 per acre
+for the wheat and  $210 per acre for the barley. The farmer has $15000 available for expenses.
+But after the harvest, the farmer must store the crops while awaiting favourable market
+conditions. The farmer has storage space for 4000 bushels. Each acre yields an average of
+110 bushels of wheat or 30 bushels of barley.  If the net profit per bushel of
+wheat (after all expenses have been subtracted) is $1.30 and for barley is $2.00,
+how should the farmer plant the 75 acres to maximize profit?
+http://lpsolve.sourceforge.net/5.1/formulate.htm
+
+Let x denote the number of acres allotted to wheat and y the number of acres allotted to barley.
+Then the expression to be maximized, that is the profit, is clearly
+
+P = (110)(1.30)x + (30)(2.00)y = 143x + 60y.
+
+There are three constraint inequalities, specified by the limits on expenses, storage and acreage.
+They are respectively:
+
+120x + 210y <= 15000
+110x + 30y <= 4000
+x + y <= 75
+
+Strictly speaking there are two more constraint inequalities forced by the fact that the farmer
+cannot plant a negative number of acres, namely:
+
+x >= 0, y >= 0.
+
+#+BEGIN_SRC sh :results output drawer :exports both
+lp_solve <<EOF
+
+max: 143 x + 60 y;
+
+120 x + 210 y <= 15000;
+110 x + 30 y <= 4000;
+x + y <= 75;
+x >= 0;
+y >= 0;
+
+EOF
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+
+Value of objective function: 6315.62
+
+Actual values of the variables:
+x                          21.875
+y                          53.125
+:END:
+
+* Brewer's problem
+
+Small brewery produces ale and beer.
+Production limited by scarce resources:
+- corn (480 lbs)
+- hops (160 oz)
+- barley malt (1190 lbs).
+Recipes require different proportions of resources per barrel:
+- ale  (corn  5 lbs, hops 4 oz, malt 35 lbs)
+- beer (corn 15 lbs, hops 4 oz, malt 20 lbs)
+Profit per barrel:
+- ale  ($13)
+- beer ($23)
+Choose product mix to maximize profits.
+
+#+BEGIN_SRC sh :results output drawer :exports both
+lp_solve <<EOF
+
+//    ALE    BEER
+max:  13 A + 23 B;         // profit
+
+corn:  5 A + 15 B <= 480;
+hops:  4 A +  4 B <= 160;
+malt: 35 A + 20 B <= 1190;
+
+A >= 0;
+B >= 0;
+
+EOF
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+
+Value of objective function: 800
+
+Actual values of the variables:
+A                              12
+B                              28
+:END:
