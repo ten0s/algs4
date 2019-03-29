@@ -65,7 +65,7 @@ Profit per barrel:
 - beer ($23)
 Choose product mix to maximize profits.
 
-#+BEGIN_SRC sh :results output drawer :exports both
+#+BEGIN_SRC sh :results output :exports both
 lp_solve <<EOF
 
 //    ALE    BEER
@@ -82,14 +82,12 @@ EOF
 #+END_SRC
 
 #+RESULTS:
-:RESULTS:
-
-Value of objective function: 800
-
-Actual values of the variables:
-A                              12
-B                              28
-:END:
+:
+: Value of objective function: 800
+:
+: Actual values of the variables:
+: A                              12
+: B                              28
 
 * Network Flow
 
@@ -193,7 +191,7 @@ $src
 
 ** Linear Programming Solution
 
-#+BEGIN_SRC sh :results output drawer :exports both
+#+BEGIN_SRC sh :results output :exports both
 lp_solve <<EOF
 
 max: x35 + x45;
@@ -216,7 +214,7 @@ EOF
 #+END_SRC
 
 #+RESULTS:
-:RESULTS:
+#+begin_example
 
 Value of objective function: 4
 
@@ -229,4 +227,4 @@ x13                             1
 x14                             1
 x23                             1
 x24                             1
-:END:
+#+end_example
