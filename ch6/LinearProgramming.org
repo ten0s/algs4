@@ -1,4 +1,4 @@
-* Farmer's problem
+* [[http://lpsolve.sourceforge.net/5.1/formulate.htm][Farmer's problem]]
 
 Suppose a farmer has 75 acres on which to plant two crops: wheat and barley.
 To produce these crops, it costs the farmer (for seed, fertilizer, etc.) $120 per acre
@@ -8,7 +8,6 @@ conditions. The farmer has storage space for 4000 bushels. Each acre yields an a
 110 bushels of wheat or 30 bushels of barley.  If the net profit per bushel of
 wheat (after all expenses have been subtracted) is $1.30 and for barley is $2.00,
 how should the farmer plant the 75 acres to maximize profit?
-http://lpsolve.sourceforge.net/5.1/formulate.htm
 
 Let x denote the number of acres allotted to wheat and y the number of acres allotted to barley.
 Then the expression to be maximized, that is the profit, is clearly
@@ -51,7 +50,7 @@ x                          21.875
 y                          53.125
 :END:
 
-* Brewer's problem
+* [[https://www.coursera.org/learn/algorithms-part2/home/week/6][Brewer's problem]]
 
 Small brewery produces ale and beer.
 Production limited by scarce resources:
