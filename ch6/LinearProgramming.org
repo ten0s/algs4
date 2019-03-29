@@ -26,7 +26,7 @@ cannot plant a negative number of acres, namely:
 
 x >= 0, y >= 0.
 
-#+BEGIN_SRC sh :results output drawer :exports both
+#+BEGIN_SRC sh :results output raw drawer :exports both
 lp_solve <<EOF
 
 max: 143 x + 60 y;
@@ -194,7 +194,7 @@ $src
 
 ** Linear Programming Solution
 
-#+BEGIN_SRC sh :results output drawer :exports both
+#+BEGIN_SRC sh :results output raw drawer :exports both
 lp_solve <<EOF
 
 max: x35 + x45;
@@ -217,7 +217,7 @@ EOF
 #+END_SRC
 
 #+RESULTS:
-#+begin_example
+:RESULTS:
 
 Value of objective function: 4
 
@@ -230,7 +230,7 @@ x13                             1
 x14                             1
 x23                             1
 x24                             1
-#+end_example
+:END:
 
 * [[https://www.coursera.org/learn/algorithms-part2/home/week/3][Bipartite matching problem]]
 
