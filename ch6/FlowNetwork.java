@@ -72,13 +72,28 @@ public class FlowNetwork {
             int v = e.from(), w = e.to();
             double capacity = e.capacity(), flow = e.flow();
             if (flow > 0) {
-                sb.append("   " + v + " -> " + w + " [label=\"" + flow + "/" + capacity + "\", penwidth=3.0]\n");
+                sb.append("   " + v + " -> " + w +
+                          " [label=\"" +
+                          doubleToString(flow) + "/" +
+                          doubleToString(capacity) +
+                          "\", penwidth=3.0]\n");
             } else {
-                sb.append("   " + v + " -> " + w + " [label=\"" + flow + "/" + capacity + "\"]\n");
+                sb.append("   " + v + " -> " + w +
+                          " [label=\"" +
+                          doubleToString(flow) + "/" +
+                          doubleToString(capacity) + "\"]\n");
             }
         }
         sb.append("}\n");
         return sb.toString();
+    }
+
+    private String doubleToString(double val) {
+        if (val == Double.POSITIVE_INFINITY)
+            return "&infin;";
+        if (val == Double.NEGATIVE_INFINITY)
+            return "-&infin;";
+        return "" + val;
     }
 
     public static void main(String[] args) throws Throwable {
