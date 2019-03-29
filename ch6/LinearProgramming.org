@@ -26,7 +26,7 @@ cannot plant a negative number of acres, namely:
 
 x >= 0, y >= 0.
 
-#+BEGIN_SRC sh :results output :exports both
+#+BEGIN_SRC sh :results output drawer :exports both
 lp_solve <<EOF
 
 max: 143 x + 60 y;
@@ -41,19 +41,14 @@ EOF
 #+END_SRC
 
 #+RESULTS:
-:
-: Value of objective function: 6315.62
-:
-: Actual values of the variables:
-: x                          21.875
-: y                          53.125
+:RESULTS:
 
 Value of objective function: 6315.62
 
 Actual values of the variables:
 x                          21.875
 y                          53.125
-
+:END:
 
 * [[https://www.coursera.org/learn/algorithms-part2/home/week/6][Brewer's problem]]
 
