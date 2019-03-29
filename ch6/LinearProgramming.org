@@ -50,6 +50,7 @@ x                          21.875
 y                          53.125
 :END:
 
+
 * [[https://www.coursera.org/learn/algorithms-part2/home/week/6][Brewer's problem]]
 
 Small brewery produces ale and beer.
@@ -65,7 +66,7 @@ Profit per barrel:
 - beer ($23)
 Choose product mix to maximize profits.
 
-#+BEGIN_SRC sh :results output :exports both
+#+BEGIN_SRC sh :results output drawer :exports both
 lp_solve <<EOF
 
 //    ALE    BEER
@@ -82,14 +83,16 @@ EOF
 #+END_SRC
 
 #+RESULTS:
-:
-: Value of objective function: 800
-:
-: Actual values of the variables:
-: A                              12
-: B                              28
+:RESULTS:
 
-* Network Flow
+Value of objective function: 800
+
+Actual values of the variables:
+A                              12
+B                              28
+:END:
+
+* [[https://www.coursera.org/learn/algorithms-part2/home/week/3][Maximum Flow]]
 
 ** Source file
 
@@ -191,7 +194,7 @@ $src
 
 ** Linear Programming Solution
 
-#+BEGIN_SRC sh :results output :exports both
+#+BEGIN_SRC sh :results output drawer :exports both
 lp_solve <<EOF
 
 max: x35 + x45;
@@ -228,3 +231,345 @@ x14                             1
 x23                             1
 x24                             1
 #+end_example
+
+* [[https://www.coursera.org/learn/algorithms-part2/home/week/3][Bipartite matching problem]]
+
+#+BEGIN_SRC dot :file jobsIn.png :exports results
+digraph {
+  1 [label="1 Alice"]
+  2 [label="2 Bob"]
+  3 [label="3 Carol"]
+  4 [label="4 Dave"]
+  5 [label="5 Eliza"]
+
+  6 [label="6 Adobe"]
+  7 [label="7 Amazon"]
+  8 [label="8 Facebook"]
+  9 [label="9 Google"]
+ 10 [label="10 Yahoo"]
+
+  1 -> 6
+  1 -> 7
+  1 -> 9
+  2 -> 6
+  2 -> 7
+  3 -> 6
+  3 -> 8
+  3 -> 9
+  4 -> 7
+  4 -> 10
+  5 -> 7
+  5 -> 10
+  6 -> 1
+  6 -> 2
+  6 -> 3
+  7 -> 1
+  7 -> 2
+  7 -> 4
+  7 -> 5
+  8 -> 3
+  9 -> 1
+  9 -> 3
+ 10 -> 4
+ 10 -> 5
+
+ {rank=same 1 2 3 4 5}
+ {rank=same 6 7 8 9 10}
+}
+#+END_SRC
+
+#+RESULTS:
+[[file:jobsIn.png]]
+
+
+** Network Flow Solution
+
+- Create s, t, one vertex for each student, and one vertex for each job.
+- Add edge from s to each student (capacity 1).
+- Add edge from each job to t (capacity 1).
+- Add edge from student to each job offered (infinite capacity).
+
+#+BEGIN_SRC dot :file jobsFNPretty.png :exports results
+digraph {
+  0 [label="0 s"]
+  1 [label="1 Alice"]
+  2 [label="2 Bob"]
+  3 [label="3 Carol"]
+  4 [label="4 Dave"]
+  5 [label="5 Eliza"]
+  6 [label="6 Adobe"]
+  7 [label="7 Amazon"]
+  8 [label="8 Facebook"]
+  9 [label="9 Google"]
+ 10 [label="10 Yahoo"]
+ 11 [label="11 t"]
+
+  0 -> 1  [label="1"]
+  0 -> 2  [label="1"]
+  0 -> 3  [label="1"]
+  0 -> 4  [label="1"]
+  0 -> 5  [label="1"]
+  1 -> 6  [label="&infin;"]
+  1 -> 7  [label="&infin;"]
+  1 -> 9  [label="&infin;"]
+  2 -> 6  [label="&infin;"]
+  2 -> 7  [label="&infin;"]
+  3 -> 6  [label="&infin;"]
+  3 -> 9  [label="&infin;"]
+  3 -> 8  [label="&infin;"]
+  4 -> 7  [label="&infin;"]
+  4 -> 10 [label="&infin;"]
+  5 -> 7  [label="&infin;"]
+  5 -> 10 [label="&infin;"]
+  6 -> 11 [label="1"]
+  7 -> 11 [label="1"]
+  8 -> 11 [label="1"]
+  9 -> 11 [label="1"]
+ 10 -> 11 [label="1"]
+
+ {rank=same 1 2 3 4 5}
+ {rank=same 6 7 8 9 10}
+}
+#+END_SRC
+
+#+RESULTS:
+[[file:jobsFNPretty.png]]
+
+
+#+BEGIN_SRC sh :results output :exports both
+cat jobsFN.txt
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+12
+22
+0 1 1
+0 2 1
+0 3 1
+0 4 1
+0 5 1
+1 6 1E6000
+1 7 1E6000
+1 9 1E6000
+2 6 1E6000
+2 7 1E6000
+3 6 1E6000
+3 8 1E6000
+3 9 1E6000
+4 7 1E6000
+4 10 1E6000
+5 7 1E6000
+5 10 1E6000
+6 11 1
+7 11 1
+8 11 1
+9 11 1
+10 11 1
+#+end_example
+
+#+NAME: jobs_fn
+#+BEGIN_SRC sh :results output :exports both
+make run CLASS=FlowNetwork ARGS="jobsFN.txt dot"
+#+END_SRC
+
+#+RESULTS: jobs_fn
+#+begin_example
+digraph {
+   0 -> 1 [label="0.0/1.0"]
+   0 -> 2 [label="0.0/1.0"]
+   0 -> 3 [label="0.0/1.0"]
+   0 -> 4 [label="0.0/1.0"]
+   0 -> 5 [label="0.0/1.0"]
+   1 -> 6 [label="0.0/Infinity"]
+   1 -> 7 [label="0.0/Infinity"]
+   1 -> 9 [label="0.0/Infinity"]
+   2 -> 6 [label="0.0/Infinity"]
+   2 -> 7 [label="0.0/Infinity"]
+   3 -> 6 [label="0.0/Infinity"]
+   3 -> 8 [label="0.0/Infinity"]
+   3 -> 9 [label="0.0/Infinity"]
+   4 -> 7 [label="0.0/Infinity"]
+   4 -> 10 [label="0.0/Infinity"]
+   5 -> 7 [label="0.0/Infinity"]
+   5 -> 10 [label="0.0/Infinity"]
+   6 -> 11 [label="0.0/1.0"]
+   7 -> 11 [label="0.0/1.0"]
+   8 -> 11 [label="0.0/1.0"]
+   9 -> 11 [label="0.0/1.0"]
+   10 -> 11 [label="0.0/1.0"]
+}
+
+#+end_example
+
+#+BEGIN_SRC dot :file jobsFN.png :var src=jobs_fn :exports results
+$src
+#+END_SRC
+
+#+RESULTS:
+[[file:jobsFN.png]]
+
+#+BEGIN_SRC sh :results output :exports both
+make run CLASS=FordFulkerson ARGS="jobsFN.txt"
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Max flow from 0 to 11
+   0->1 1.00 1.00
+   0->2 1.00 1.00
+   0->3 1.00 1.00
+   0->4 1.00 1.00
+   0->5 1.00 1.00
+   1->9 Infinity 1.00
+   2->6 Infinity 1.00
+   3->8 Infinity 1.00
+   4->10 Infinity 1.00
+   5->7 Infinity 1.00
+   6->11 1.00 1.00
+   7->11 1.00 1.00
+   8->11 1.00 1.00
+   9->11 1.00 1.00
+   10->11 1.00 1.00
+Max flow value = 5.00
+#+end_example
+
+#+NAME: jobs_maxflow
+#+BEGIN_SRC sh :results output :exports both
+make run CLASS=FordFulkerson ARGS="jobsFN.txt dot"
+#+END_SRC
+
+#+RESULTS: jobs_maxflow
+#+begin_example
+digraph {
+   0 -> 1 [label="1.0/1.0", penwidth=3.0]
+   0 -> 2 [label="1.0/1.0", penwidth=3.0]
+   0 -> 3 [label="1.0/1.0", penwidth=3.0]
+   0 -> 4 [label="1.0/1.0", penwidth=3.0]
+   0 -> 5 [label="1.0/1.0", penwidth=3.0]
+   1 -> 6 [label="0.0/Infinity"]
+   1 -> 7 [label="0.0/Infinity"]
+   1 -> 9 [label="1.0/Infinity", penwidth=3.0]
+   2 -> 6 [label="1.0/Infinity", penwidth=3.0]
+   2 -> 7 [label="0.0/Infinity"]
+   3 -> 6 [label="0.0/Infinity"]
+   3 -> 8 [label="1.0/Infinity", penwidth=3.0]
+   3 -> 9 [label="0.0/Infinity"]
+   4 -> 7 [label="0.0/Infinity"]
+   4 -> 10 [label="1.0/Infinity", penwidth=3.0]
+   5 -> 7 [label="1.0/Infinity", penwidth=3.0]
+   5 -> 10 [label="0.0/Infinity"]
+   6 -> 11 [label="1.0/1.0", penwidth=3.0]
+   7 -> 11 [label="1.0/1.0", penwidth=3.0]
+   8 -> 11 [label="1.0/1.0", penwidth=3.0]
+   9 -> 11 [label="1.0/1.0", penwidth=3.0]
+   10 -> 11 [label="1.0/1.0", penwidth=3.0]
+}
+
+#+end_example
+
+#+BEGIN_SRC dot :file jobsMaxFlow.png :var src=jobs_maxflow :exports results
+$src
+#+END_SRC
+
+#+RESULTS:
+[[file:jobsMaxFlow.png]]
+
+
+** Linear Programming Solution
+
+#+BEGIN_SRC sh :results output drawer :exports both
+lp_solve <<EOF
+
+max: x6_11 + x7_11 + x8_11 + x9_11 + x10_11;
+
+0 <=  x0_1 <= 1;
+0 <=  x0_2 <= 1;
+0 <=  x0_3 <= 1;
+0 <=  x0_4 <= 1;
+0 <=  x0_5 <= 1;
+
+0 <=  x6_11 <= 1;
+0 <=  x7_11 <= 1;
+0 <=  x8_11 <= 1;
+0 <=  x9_11 <= 1;
+0 <= x10_11 <= 1;
+
+ x0_1 = x1_6 + x1_7 + x1_9;
+ x0_2 = x2_6 + x2_7;
+ x0_3 = x3_6 + x3_8 + x3_9;
+ x0_4 = x4_7 + x4_10;
+ x0_5 = x5_7 + x5_10;
+
+ x6_11 = x1_6 + x2_6 + x3_6;
+ x7_11 = x1_7 + x2_7 + x4_7 + x5_7;
+ x8_11 = x3_8;
+ x9_11 = x1_9 + x3_9;
+x10_11 = x4_10 + x5_10;
+
+EOF
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+
+Value of objective function: 5
+
+Actual values of the variables:
+x6_11                           1
+x7_11                           1
+x8_11                           1
+x9_11                           1
+x10_11                          1
+x0_1                            1
+x0_2                            1
+x0_3                            1
+x0_4                            1
+x0_5                            1
+x1_6                            0
+x1_7                            0
+x1_9                            1
+x2_6                            1
+x2_7                            0
+x3_6                            0
+x3_8                            1
+x3_9                            0
+x4_7                            0
+x4_10                           1
+x5_7                            1
+x5_10                           0
+:END:
+
+#+BEGIN_SRC dot :file jobsOut.png :exports results
+digraph {
+  1 [label="1 Alice"]
+  2 [label="2 Bob"]
+  3 [label="3 Carol"]
+  4 [label="4 Dave"]
+  5 [label="5 Eliza"]
+  6 [label="6 Adobe"]
+  7 [label="7 Amazon"]
+  8 [label="8 Facebook"]
+  9 [label="9 Google"]
+ 10 [label="10 Yahoo"]
+
+  1 -> 6
+  1 -> 7
+  1 -> 9  [penwidth=3.0]
+  2 -> 6  [penwidth=3.0]
+  2 -> 7
+  3 -> 6
+  3 -> 9
+  3 -> 8  [penwidth=3.0]
+  4 -> 7
+  4 -> 10 [penwidth=3.0]
+  5 -> 7  [penwidth=3.0]
+  5 -> 10
+
+ {rank=same 1 2 3 4 5}
+ {rank=same 6 7 8 9 10}
+}
+#+END_SRC
+
+#+RESULTS:
+[[file:jobsOut.png]]
