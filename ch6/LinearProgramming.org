@@ -143,7 +143,7 @@ $src
 [[file:tinyFN.png]]
 
 
-** Network flow solution
+** Network Flow Solution
 
 #+BEGIN_SRC sh :results output :exports both
 make run CLASS=FordFulkerson ARGS="../data/tinyFN.txt"
@@ -193,7 +193,7 @@ $src
 
 ** Linear Programming Solution
 
-#+BEGIN_SRC sh :results output raw drawer :exports both
+#+BEGIN_SRC sh :results output drawer :exports both
 lp_solve <<EOF
 
 max: x35 + x45;
