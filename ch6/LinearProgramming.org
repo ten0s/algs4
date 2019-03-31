@@ -572,3 +572,43 @@ digraph {
 
 #+RESULTS:
 [[file:jobsOut.png]]
+
+* [[http://www.mafy.lut.fi/study/DiscreteOpt/DYNKNAP.pdf][Knapsak Problem]]
+
+Selection of n=4 items, capacity of knapsack W=8.
+
++--------+----------+-----------+
+| Item i | Value vi | Weight wi |
++--------+----------+-----------+
+|      1 |       15 |         1 |
++--------+----------+-----------+
+|      2 |       10 |         5 |
++--------+----------+-----------+
+|      3 |        9 |         3 |
++--------+----------+-----------+
+|      4 |        5 |         4 |
++--------+----------+-----------+
+
+#+BEGIN_SRC sh :results output drawer :exports both
+lp_solve <<EOF
+
+max: 15 i1 + 10 i2 + 9 i3 + 5 i4;
+
+1 i1 + 5 i2 + 3 i3 + 4 i4 <= 8;
+
+bin i1, i2, i3, i4;
+
+EOF
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+
+Value of objective function: 29
+
+Actual values of the variables:
+i1                              1
+i2                              0
+i3                              1
+i4                              1
+:END:
